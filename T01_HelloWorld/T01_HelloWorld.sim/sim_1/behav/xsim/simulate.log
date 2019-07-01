@@ -1,4 +1,4 @@
 Vivado Simulator 2019.1
 Time resolution is 1 ps
-Note: Hello Worlds
-Time: 0 ps  Iteration: 0  Process: /T01_HelloWorldTb/line__7  File: D:/V/VHDLwhiz_tutorials/exercises/T01_HelloWorldTb.vhd
+Note: Hello World
+Time: 0 ps  Iteration: 0  Process: /T01_HelloWorldTb/line__7  File: D:/V/VHDL-Projects/T01_HelloWorld/T01_HelloWorld.srcs/sources_1/imports/exercises/T01_HelloWorldTb.vhd

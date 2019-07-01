@@ -1,0 +1,20 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Mon Jul  1 18:18:48 2019
+# Process ID: 11280
+# Current directory: D:/V/VHDL-Projects/T01_HelloWorld
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent15620 D:\V\VHDL-Projects\T01_HelloWorld\T01_HelloWorld.xpr
+# Log file: D:/V/VHDL-Projects/T01_HelloWorld/vivado.log
+# Journal file: D:/V/VHDL-Projects/T01_HelloWorld\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/V/VHDL-Projects/T01_HelloWorld/T01_HelloWorld.xpr
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files D:/V/VHDLwhiz_tutorials/exercises/T01_HelloWorldTb.vhd] -no_script -reset -force -quiet
+remove_files  D:/V/VHDLwhiz_tutorials/exercises/T01_HelloWorldTb.vhd
+import_files -norecurse D:/V/VHDLwhiz_tutorials/exercises/T01_HelloWorldTb.vhd
+launch_simulation
+source T01_HelloWorldTb.tcl
+close_sim
