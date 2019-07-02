@@ -1,5 +1,5 @@
-.cache
-.hw
-.ip
-.sim
-.xpr
+*.cache
+*.hw
+*.ip
+*.sim
+*.xpr
