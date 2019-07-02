@@ -1,6 +1,0 @@
-# compile vhdl design source files
-vhdl xil_defaultlib  \
-"../../../../T01_HelloWorld.srcs/sources_1/imports/exercises/T01_HelloWorldTb.vhd" \
-
-# Do not sort compile order
-nosort

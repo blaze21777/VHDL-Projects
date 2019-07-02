@@ -1,6 +1,0 @@
-# compile vhdl design source files
-vhdl xil_defaultlib  \
-"../../../../T02_WaitFor.srcs/sources_1/imports/exercises/T02_WaitForTb.vhd" \
-
-# Do not sort compile order
-nosort
