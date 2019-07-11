@@ -54,12 +54,10 @@ begin
 
 	-- Test bench process 
 	process is
-
-		variable input : unsigned(2 downto 0) := (others => '0');
-
 	begin
 
 		report "Entered process";
+		
 		wait for 10ns;
 		-- Find oput what this loop is actually doing and how
 		-- Cycles through all possible inputs
