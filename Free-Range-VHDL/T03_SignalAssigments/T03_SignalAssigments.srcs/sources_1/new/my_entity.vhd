@@ -49,6 +49,7 @@ architecture Behavioral of my_entity is
 
 	-- Signals for solution 5
 	signal t_sig  : std_logic_vector(2 downto 0);
+	signal F3_05  : std_logic;
 
 begin
 	-- SOLUTION 1: combinational logic circuit one line implementation 
@@ -73,6 +74,6 @@ begin
 
 	-- SOLUTION 5: selected signal assignment along with concatenation operation
 	t_sig                  <= (L & M & N);                                     -- "&" = concatenation operator 
-	with (t_sig) select F3 <= '1' when "001" | "110" | "111", '0' when others; -- "|" = seperator 
+	with (t_sig) select F3_05 <= '1' when "001" | "110" | "111", '0' when others; -- "|" = seperator 
 
 end Behavioral;
