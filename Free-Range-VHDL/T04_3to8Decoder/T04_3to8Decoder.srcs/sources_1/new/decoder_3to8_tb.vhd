@@ -63,6 +63,9 @@ begin
 		wait for 10ns;       -- To test fail conditions 
 		for i in 0 to 8 loop -- Loop number controls how high the count is
 			-- Still need to work out what the conversion function are doing
+			-- to_unsigned converts "i" to unsinged of size "input'length"
+			-- This is converted to a std_logic_vector
+			-- Then assigned to the input
 			input <= std_logic_vector(to_unsigned(i, input'length));
 			wait for 10ns; -- This statement is require to update signal 
 			-- Maybe a varaible would remove the need for it
