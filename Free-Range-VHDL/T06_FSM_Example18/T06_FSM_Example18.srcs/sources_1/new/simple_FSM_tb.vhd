@@ -77,6 +77,12 @@ begin
 		clr <= '1';
 		wait for 20ns;
 		clr <= '0';
+		wait for 10ns;
+		clr <= '1';
+		tog_en <= '1';
+		wait for 30ns;
+        clr <= '0';
+		tog_en <= '0';
 
 	end process;
 end Behavioral;

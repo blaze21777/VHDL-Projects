@@ -51,13 +51,13 @@ architecture Behavioral of simple_FSM is
 	signal ps, ns : state;
 
 begin
-	sync_proc : process (clk) is
+	sync_proc : process (clk,ns,clr) is
 	begin
 	    -- Asynchronous reset
 		if (clr = '1') then
 			ps <= st0;
 		elsif rising_edge(clk) then
-			ps <= ns;
+			ps <= ns;  -- Allows FSM to change to st1 
 		end if;
 	end process sync_proc;
 
@@ -68,12 +68,14 @@ begin
 				-- Stay in current state if not '1'
 				if (tog_en = '1') then
 					ns <= st1;
+                else ns <= st0;  -- Required to prevent wrong state on clr
 				end if;
 
 			when st1 =>
 				-- Stay in current state if not '1'
 				if (tog_en = '1') then
 					ns <= st0;
+                else ns <= st1;  -- Required to prevent wrong state on clr
 				end if;
 			when others =>
 				ns <= st0;
