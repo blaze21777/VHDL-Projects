@@ -48,7 +48,7 @@ architecture Behavioral of mealy_hybrid is
 
 	type state_type is (A, B, C);
 	attribute enum_encoding               : string;
-	attribute enum_encoding of state_type : type is "100 010 001";
+	attribute enum_encoding of state_type : type is "001 010 100";
 	signal ps, ns                         : state_type;
 	
 	-- Testing if concatenation will work 
@@ -68,26 +68,26 @@ begin
 		case ps is
 			when A =>
 				if (x1 = '1') then
-					z2 <= '1'; -- Mealy output
+					z2 <= '1';  -- Mealy output
 					ns <= B;
 				else
-					z2 <= '1'; -- Mealy output
+					z2 <= '1';  -- Mealy output
 					ns <= C;
 				end if;
 			when B =>
 				if (x2 = '1') then
-					z2 <= '0'; -- Mealy output
+					z2 <= '0';  -- Mealy output
 					ns <= A;
 				else
-					z2 <= '1'; -- Mealy output
+					z2 <= '1';  -- Mealy output
 					ns <= C;
 				end if;
 			when C =>
 				if (x1 = '1') then
-					z2 <= '1'; -- Mealy output
+					z2 <= '1';  -- Mealy output
 					ns <= B;
 				else
-					z2 <= '1'; -- Mealy output
+					z2 <= '1';  -- Mealy output
 					ns <= A;
 				end if;
 		end case;
@@ -96,15 +96,15 @@ begin
 
 	output_decode : process (ps) is
 	begin
-		z1 <= '0'; -- Inital moore output 
-		z2 <= '0'; -- Inital mealy output 
+		z1 <= '0';  -- Inital moore output 
+		-- z2 <= '0';  -- Inital mealy output 
 		case ps is
 			when A =>
-				z1 <= '0'; -- Moore output
+				z1 <= '0';  -- Moore output
 			when B =>
-				z1 <= '1'; -- Moore output
+				z1 <= '1';  -- Moore output
 			when C =>
-				z1 <= '1'; -- Moore output
+				z1 <= '1';  -- Moore output
 		end case;
 
 	end process;
