@@ -143,7 +143,7 @@ begin
     -- Signal assignments 
 	Counter <= Counter + 1;
 	arm <= arm_signal ;
-	detector_choice_quiet <= (arm_signal & pedestrian_button);
+	
 	case ps is
 		when transition1                 =>
 			-- ChangeState(transition2, seconds => 1);  -- Testing only 
@@ -167,7 +167,11 @@ begin
 			ChangeState(transition1, seconds => 1);
 
 		when detection                   =>
-		      
+		      detector_choice_quiet <= (arm_signal & detector);
+		      with(detector_choice_quiet) select
+		       ns <= quiet when "100001100010" | -- Transition 1
+		                        "010001100010",
+		                        detection when others;
 		when busy                        =>
 		when empty                       =>
 		when quiet                       =>
