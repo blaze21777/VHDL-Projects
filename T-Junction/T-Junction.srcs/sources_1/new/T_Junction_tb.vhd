@@ -48,10 +48,12 @@ architecture Behavioral of T_Junction_tb is
 	constant clk_period         : time    := 1000 ms / clock_frequency_Hz;
 	
 	-- Inputs
-	signal clk                  : std_logic;
-	signal reset                : std_logic;                                        -- Original did not have reset 
-	signal dectector            : std_logic_vector(detector_num - 1 downto 0);      -- Detectors(A,B,C)
-	signal pedestrian_button    : std_logic_vector(pedestrian_lights - 1 downto 0); -- slip button(A,B)
+	signal clk                  : std_logic := '1';
+	signal reset                : std_logic := '0';                                        -- Original did not have reset 
+	 -- Detectors(A,B,C)
+	signal detector             : std_logic_vector(detector_num - 1 downto 0) := (others =>'0');     
+	-- slip button(A,B)
+	signal pedestrian_button    : std_logic_vector(pedestrian_lights - 1 downto 0) := (others =>'0'); 
 	
 	-- Outputs
 	signal arm                  : std_logic_vector(arm_lights - 1 downto 0);            -- Traffic lights arm(A,B,C)
@@ -71,7 +73,7 @@ begin
 		port map(
 			clk                  => clk,
 			reset                => reset,
-			dectector            => dectector,
+			detector            => detector,
 			pedestrian_button    => pedestrian_button,
 			arm                  => arm,
 			arm_slip             => arm_slip,
@@ -91,6 +93,8 @@ begin
 	begin
 		wait until rising_edge(Clk);
 		wait until rising_edge(Clk);
-	end process;
+		reset <= '0';
+		detector <= "000";
+		end process;
 
 end Behavioral;
