@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="simple_FSM_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="simple_FSM_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="140800001fs"></ZoomEndTime>
+      <Cursor1Time time="83400000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="197"></NameColumnWidth>
+      <ValueColumnWidth column_width="130"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="7" />
+   <wvobject fp_name="/simple_FSM_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/simple_FSM_tb/clr" type="logic">
+      <obj_property name="ElementShortName">clr</obj_property>
+      <obj_property name="ObjectShortName">clr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/simple_FSM_tb/tog_en" type="logic">
+      <obj_property name="ElementShortName">tog_en</obj_property>
+      <obj_property name="ObjectShortName">tog_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/simple_FSM_tb/Z1" type="logic">
+      <obj_property name="ElementShortName">Z1</obj_property>
+      <obj_property name="ObjectShortName">Z1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/simple_FSM_tb/clk_period" type="other">
+      <obj_property name="ElementShortName">clk_period</obj_property>
+      <obj_property name="ObjectShortName">clk_period</obj_property>
+   </wvobject>
+   <wvobject fp_name="/simple_FSM_tb/i_FSM/ps" type="other">
+      <obj_property name="ElementShortName">ps</obj_property>
+      <obj_property name="ObjectShortName">ps</obj_property>
+   </wvobject>
+   <wvobject fp_name="/simple_FSM_tb/i_FSM/ns" type="other">
+      <obj_property name="ElementShortName">ns</obj_property>
+      <obj_property name="ObjectShortName">ns</obj_property>
+   </wvobject>
+</wave_config>

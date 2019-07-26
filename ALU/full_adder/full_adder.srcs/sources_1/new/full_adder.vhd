@@ -64,12 +64,19 @@ begin
 
 	ha1 : entity work.half_adder
 		port map(
-			i_bit1  => fa_i_carry,
-			i_bit2  => ha0_o_sum,
+			i_bit1  => ha1_i_bit1,
+			i_bit2  => ha1_i_bit2,
 			o_sum   => ha1_o_sum,
 			o_carry => ha1_o_carry
 		);
 
-fa_o_sum <= ha1_o_sum;
-fa_o_carry <= ha0_o_carry or ha1_o_carry;
+	ha0_i_bit1 <= fa_i_bit1;
+	ha0_i_bit2 <= fa_i_bit2;
+
+	ha1_i_bit1 <= ha0_o_sum;
+	ha1_i_bit2 <= fa_i_carry;
+
+	fa_o_sum   <= ha1_o_sum;
+	fa_o_carry <= ha0_o_carry or ha1_o_carry;
+
 end Behavioral;

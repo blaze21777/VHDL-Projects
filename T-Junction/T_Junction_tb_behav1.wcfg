@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="T_Junction_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="T_Junction_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="20000001000000001fs"></ZoomEndTime>
+      <Cursor1Time time="20000001000000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="197"></NameColumnWidth>
+      <ValueColumnWidth column_width="118"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="15" />
+   <wvobject fp_name="/T_Junction_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/T_Junction_tb/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/T_Junction_tb/i_T_Junction/ps" type="other">
+      <obj_property name="ElementShortName">ps</obj_property>
+      <obj_property name="ObjectShortName">ps</obj_property>
+   </wvobject>
+   <wvobject fp_name="/T_Junction_tb/i_T_Junction/ns" type="other">
+      <obj_property name="ElementShortName">ns</obj_property>
+      <obj_property name="ObjectShortName">ns</obj_property>
+   </wvobject>
+   <wvobject fp_name="/T_Junction_tb/dectector" type="array">
+      <obj_property name="ElementShortName">dectector[2:0]</obj_property>
+      <obj_property name="ObjectShortName">dectector[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/T_Junction_tb/pedestrian_button" type="array">
+      <obj_property name="ElementShortName">pedestrian_button[5:0]</obj_property>
+      <obj_property name="ObjectShortName">pedestrian_button[5:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/T_Junction_tb/arm" type="array">
+      <obj_property name="ElementShortName">arm[8:0]</obj_property>
+      <obj_property name="ObjectShortName">arm[8:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/T_Junction_tb/arm_slip" type="array">
+      <obj_property name="ElementShortName">arm_slip[1:0]</obj_property>
+      <obj_property name="ObjectShortName">arm_slip[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/T_Junction_tb/pedestrian_crossings" type="array">
+      <obj_property name="ElementShortName">pedestrian_crossings[5:0]</obj_property>
+      <obj_property name="ObjectShortName">pedestrian_crossings[5:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/T_Junction_tb/clock_frequency_Hz" type="other">
+      <obj_property name="ElementShortName">clock_frequency_Hz</obj_property>
+      <obj_property name="ObjectShortName">clock_frequency_Hz</obj_property>
+   </wvobject>
+   <wvobject fp_name="/T_Junction_tb/arm_lights" type="other">
+      <obj_property name="ElementShortName">arm_lights</obj_property>
+      <obj_property name="ObjectShortName">arm_lights</obj_property>
+   </wvobject>
+   <wvobject fp_name="/T_Junction_tb/slip_lights" type="other">
+      <obj_property name="ElementShortName">slip_lights</obj_property>
+      <obj_property name="ObjectShortName">slip_lights</obj_property>
+   </wvobject>
+   <wvobject fp_name="/T_Junction_tb/pedestrian_lights" type="other">
+      <obj_property name="ElementShortName">pedestrian_lights</obj_property>
+      <obj_property name="ObjectShortName">pedestrian_lights</obj_property>
+   </wvobject>
+   <wvobject fp_name="/T_Junction_tb/detector_num" type="other">
+      <obj_property name="ElementShortName">detector_num</obj_property>
+      <obj_property name="ObjectShortName">detector_num</obj_property>
+   </wvobject>
+   <wvobject fp_name="/T_Junction_tb/clk_period" type="other">
+      <obj_property name="ElementShortName">clk_period</obj_property>
+      <obj_property name="ObjectShortName">clk_period</obj_property>
+   </wvobject>
+</wave_config>
