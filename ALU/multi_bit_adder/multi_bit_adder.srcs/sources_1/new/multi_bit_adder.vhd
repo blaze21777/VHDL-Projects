@@ -5,7 +5,7 @@
 -- Create Date: 26.07.2019 13:00:07
 -- Design Name: 
 -- Module Name: multi_bit_adder - Behavioral
--- Project Name: 
+-- Project Name: Multibit adder with overflow detection 
 -- Target Devices: 
 -- Tool Versions: 
 -- Description: 
@@ -43,12 +43,6 @@ entity multi_bit_adder is
 end multi_bit_adder;
 
 architecture Behavioral of multi_bit_adder is
-	-- Full adder 0 
-	--	signal fa0_i_bit1     : std_logic;
-	--	signal fa0_i_bit2     : std_logic;
-	--	signal fa0_i_carry    : std_logic;
-	--	signal fa0_o_sum      : std_logic;
-	--	signal fa0_o_carry    : std_logic;
 
 	-- Full adder NUM_BITS
 	signal vector_i_bit1  : std_logic_vector (NUM_BITS - 1 downto 0);
