@@ -9,7 +9,7 @@ vcom FPGA2019/Lab04/mux_4to1_tb.vhd
 
 vsim work.and_gate
 vsim work.and_gate_tb
-vsim -voptargs=+acc work.and_gate_tb
+vsim -voptargs=+acc work.mux_4to1_tb
 
 set StdArithNoWarnings 1
 
