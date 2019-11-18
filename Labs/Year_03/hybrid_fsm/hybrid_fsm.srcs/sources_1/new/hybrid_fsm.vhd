@@ -105,7 +105,7 @@ begin
 	outut_decode : process (state, x)
 	begin
 		Z1_moore <= '0';
-		Z2_mealy <= '0';
+		Z2_mealy <= '1';
 		case (state) is
 
 				-- State 0
