@@ -89,6 +89,8 @@ begin
 				parity <= '0';
 			when S1 => 
 				parity <= '1';
+			when others => 
+			    parity <= '0';
 		end case;
 	end process;
 
