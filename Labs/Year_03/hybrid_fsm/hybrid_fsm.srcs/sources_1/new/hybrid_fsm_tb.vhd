@@ -65,14 +65,23 @@ begin
 	end process;
 
 	-- The testing process
-	test_proc :
-	process is
+	test_proc : process is
 	begin
 	    wait for clk_period;
 		x <= '0';
 		wait for clk_period;
 		x <= '1';
 		-- wait for clk_period;
+	end process;
+	
+	-- The reset process 
+	reset : process is 
+	begin 
+        rst <= '0';
+        wait for clk_period * 4;
+        rst <= '1';
+        wait for clk_period;
+        rst <= '0';
 	end process;
 
 end Behavioral;
