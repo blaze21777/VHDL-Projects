@@ -95,7 +95,7 @@ if rising_edge(clk) then
     -- Next state decode 
     next_state_decode : process (state, order_en, cash_en, change_en, cancel_s) 
     begin 
-when _s =>
+when reset_s =>
 next_state <= 
 when _s =>
 next_state <= 
@@ -116,5 +116,23 @@ next_state <=
      end case;
     end process;
     
+    -- Output decode
+    output_decode : process()  
+when reset_s =>
+next_state <= 
+when _s =>
+next_state <= 
+when _s =>
+next_state <= 
+when _s =>
+next_state <= 
+when _s =>
+next_state <= 
+when _s =>
+next_state <= 
+when _s =>
+next_state <= 
+when _s =>
+next_state <= 
 
 end Behavioral;
