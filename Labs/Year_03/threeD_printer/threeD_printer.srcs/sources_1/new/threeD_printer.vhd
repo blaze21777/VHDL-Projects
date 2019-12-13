@@ -17,10 +17,8 @@
 -- Additional Comments:
 -- 
 ----------------------------------------------------------------------------------
-
-
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -31,108 +29,114 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity threeD_printer is
-  Port ( 
-    -- Inputs
-    cash_en : in std_logic;
-    cash : in std_logic_vector(9 downto 0);
-    cancel : in std_logic;
-    order_en : in std_logic; 
-    order : in std_logic_vector(3 downto 0); 
-    reset : in std_logic; 
-    clock: in std_logic; 
-    -- Outputs
-    check_balance : out std_logic;
-    printing : out std_logic;
-    ready : out std_logic;
-    order_cancelled : out std_logic;
-    change_en : out std_logic;
-    change : out std_logic);
-    end threeD_printer;
+ENTITY threeD_printer IS
+    PORT (
+        -- Inputs
+        cash_en : IN std_logic;
+        cash : IN std_logic_vector(9 DOWNTO 0);
+        cancel : IN std_logic;
+        order_en : IN std_logic;
+        order : IN std_logic_vector(3 DOWNTO 0);
+        reset : IN std_logic;
+        clock : IN std_logic;
+        -- Outputs
+        check_balance : OUT std_logic;
+        printing : OUT std_logic;
+        ready : OUT std_logic;
+        order_cancelled : OUT std_logic;
+        change_en : OUT std_logic;
+        change : OUT std_logic);
+END threeD_printer;
 
-architecture Behavioral of threeD_printer is
-    
+ARCHITECTURE Behavioral OF threeD_printer IS
+
     -- Decalare states that can be taken
-    type state_type is (
-        reset_s, 
+    TYPE state_type IS (
+        reset_s,
         order_s,
         cancel_s,
         cash_s,
         printing_s,
         ready_s,
         check_balance_s);
-    signal state, next_state : state_type;
-    
-    -- Outputs as signals 
-    signal check_balance_s : std_logic;  
-    signal printing_s : std_logic;
-    signal ready_s : std_logic;
-    signal order_cancelled_s : std_logic;
-    signal change_en_s : std_logic;
-    signal change_s : std_logic);
+    SIGNAL state, next_state : state_type;
 
-begin
-    -- Assigning outputs to signals (change "_s" to "_sig")
-    check_balance_s <=  check_balance;
-    printing_s <= printing;
-    ready_s <=  ready;
-    order_cancelled_s <= order_cancelled;
-    change_en_s <=  change;
-    change_s <=  change;       
+    -- Outputs as signals 
+    SIGNAL check_balance_s : std_logic;
+    SIGNAL printing_s : std_logic;
+    SIGNAL ready_s : std_logic;
+    SIGNAL order_cancelled_s : std_logic;
+    SIGNAL change_en_s : std_logic;
+    SIGNAL change_s : std_logic);
+
+BEGIN
+    -- Assigning outputs to signals 
+    check_balance_sig <= check_balance;
+    printing_sig <= printing;
+    ready_sig <= ready;
+    order_cancelled_sig <= order_cancelled;
+    change_en_sig <= change;
+    change_sig <= change;
 
     -- The clock process
-    sync_proc : process (clk) 
-begin 
-if rising_edge(clk) then 
-    if (rst = '1') then 
-    state <= S0;
-    else 
-    state <= next_state;
-    end if;
-    end if;
-    end process;
+    sync_proc : PROCESS (clk)
+    BEGIN
+        IF rising_edge(clk) THEN
+            IF (reset = '1') THEN
+                state <= S0;
+            ELSE
+                state <= next_state;
+            END IF;
+        END IF;
+    END PROCESS;
 
     -- Next state decode 
-    next_state_decode : process (state, order_en, cash_en, change_en, cancel_s) 
-    begin 
-when reset_s =>
-next_state <= 
-when _s =>
-next_state <= 
-when _s =>
-next_state <= 
-when _s =>
-next_state <= 
-when _s =>
-next_state <= 
-when _s =>
-next_state <= 
-when _s =>
-next_state <= 
-when _s =>
-next_state <=  
-     when others => 
-     next_state <= reset;
-     end case;
-    end process;
-    
-    -- Output decode
-    output_decode : process()  
-when reset_s =>
-next_state <= 
-when _s =>
-next_state <= 
-when _s =>
-next_state <= 
-when _s =>
-next_state <= 
-when _s =>
-next_state <= 
-when _s =>
-next_state <= 
-when _s =>
-next_state <= 
-when _s =>
-next_state <= 
+    next_state_decode : PROCESS (state, order_en, cash_en, change_en, cancel_s)
+    BEGIN
+        WHEN reset_s =>
+        check_balance <= '0';
+        printing <= '0';
+        ready <= '0';
+        order_cancelled <= '0';
+        change_en <= '0';
+        change <= '0';
+        next_state <=
+            WHEN _s =>
+            next_state <=
+            WHEN _s =>
+            next_state <=
+            WHEN _s =>
+            next_state <=
+            WHEN _s =>
+            next_state <=
+            WHEN _s =>
+            next_state <=
+            WHEN _s =>
+            next_state <=
+            WHEN _s =>
+            next_state <=
+            WHEN OTHERS =>
+            next_state <= reset;
+    END CASE;
+END PROCESS;
 
-end Behavioral;
+-- Output decode
+output_decode : PROCESS ()
+    WHEN reset_s =>
+    next_state <=
+        WHEN _s =>
+        next_state <=
+        WHEN _s =>
+        next_state <=
+        WHEN _s =>
+        next_state <=
+        WHEN _s =>
+        next_state <=
+        WHEN _s =>
+        next_state <=
+        WHEN _s =>
+        next_state <=
+        WHEN _s =>
+        next_state <=
+
+    END Behavioral;
