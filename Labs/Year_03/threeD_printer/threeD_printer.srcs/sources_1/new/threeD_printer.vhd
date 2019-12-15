@@ -38,7 +38,7 @@ ENTITY threeD_printer IS
         order_en : IN std_logic;
         order : IN std_logic_vector(3 DOWNTO 0);
         reset : IN std_logic;
-        clock : IN std_logic;
+        clk : IN std_logic;
         -- Outputs
         check_balance : OUT std_logic;
         printing : OUT std_logic;
@@ -62,28 +62,28 @@ ARCHITECTURE Behavioral OF threeD_printer IS
     SIGNAL state, next_state : state_type;
 
     -- Outputs as signals 
-    SIGNAL check_balance_s : std_logic;
-    SIGNAL printing_s : std_logic;
-    SIGNAL ready_s : std_logic;
-    SIGNAL order_cancelled_s : std_logic;
-    SIGNAL change_en_s : std_logic;
-    SIGNAL change_s : std_logic);
+--    SIGNAL check_balance_s : std_logic;
+--    SIGNAL printing_s : std_logic;
+--    SIGNAL ready_s : std_logic;
+--    SIGNAL order_cancelled_s : std_logic;
+--    SIGNAL change_en_s : std_logic;
+--    SIGNAL change_s : std_logic);
 
 BEGIN
     -- Assigning outputs to signals 
-    check_balance_sig <= check_balance;
-    printing_sig <= printing;
-    ready_sig <= ready;
-    order_cancelled_sig <= order_cancelled;
-    change_en_sig <= change;
-    change_sig <= change;
+--    check_balance_sig <= check_balance;
+--    printing_sig <= printing;
+--    ready_sig <= ready;
+--    order_cancelled_sig <= order_cancelled;
+--    change_en_sig <= change;
+--    change_sig <= change;
 
     -- The clock process
     sync_proc : PROCESS (clk)
     BEGIN
         IF rising_edge(clk) THEN
             IF (reset = '1') THEN
-                state <= S0;
+                state <= reset_s;
             ELSE
                 state <= next_state;
             END IF;
@@ -91,52 +91,66 @@ BEGIN
     END PROCESS;
 
     -- Next state decode 
-    next_state_decode : PROCESS (state, order_en, cash_en, change_en, cancel_s)
+    next_state_decode : PROCESS (state, order_en, cash_en) is
     BEGIN
-        WHEN reset_s =>
+        CASE state is 
+        -- Reset state --
+        WHEN reset_s =>        
+        if (order_en = '1') then 
+        next_state <= order_s;
+        end if;
+        
+--            WHEN _s =>
+--            next_state <=
+--            WHEN _s =>
+--            next_state <=
+--            WHEN _s =>
+--            next_state <=
+--            WHEN _s =>
+--            next_state <=
+--            WHEN _s =>
+--            next_state <=
+--            WHEN _s =>
+--            next_state <=
+--            WHEN _s =>
+--            next_state <=
+            WHEN OTHERS =>
+            next_state <= reset_s;
+    END CASE;
+END PROCESS;
+
+-- Output decode
+output_decode : PROCESS (order_en,state) is
+begin
+    case state is
+    WHEN reset_s =>
+    -- Set all outputs to 0
         check_balance <= '0';
         printing <= '0';
         ready <= '0';
         order_cancelled <= '0';
         change_en <= '0';
         change <= '0';
-        next_state <=
-            WHEN _s =>
-            next_state <=
-            WHEN _s =>
-            next_state <=
-            WHEN _s =>
-            next_state <=
-            WHEN _s =>
-            next_state <=
-            WHEN _s =>
-            next_state <=
-            WHEN _s =>
-            next_state <=
-            WHEN _s =>
-            next_state <=
-            WHEN OTHERS =>
-            next_state <= reset;
-    END CASE;
-END PROCESS;
-
--- Output decode
-output_decode : PROCESS ()
-    WHEN reset_s =>
-    next_state <=
-        WHEN _s =>
-        next_state <=
-        WHEN _s =>
-        next_state <=
-        WHEN _s =>
-        next_state <=
-        WHEN _s =>
-        next_state <=
-        WHEN _s =>
-        next_state <=
-        WHEN _s =>
-        next_state <=
-        WHEN _s =>
-        next_state <=
-
+        
+    -- Mealy output    
+    if (order_en = '1') then 
+        printing <= '0';
+        
+--        WHEN _s =>
+--        next_state <=
+--        WHEN _s =>
+--        next_state <=
+--        WHEN _s =>
+--        next_state <=
+--        WHEN _s =>
+--        next_state <=
+--        WHEN _s =>
+--        next_state <=
+--        WHEN _s =>
+--        next_state <=
+--        WHEN _s =>
+--        next_state <=
+    end if;
+    end case;
+    end process;
     END Behavioral;
