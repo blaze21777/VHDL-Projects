@@ -80,7 +80,7 @@ BEGIN
     
     -- Setting clock and reset default values
     reset <= '1', '0' after 3 ns;  
-    clk <= not clk after 5 ns; 
+   -- clk <= not clk after 5 ns; 
 
     -- The unit under test
 	printer : entity work.threeD_printer(Behavioral)
@@ -103,13 +103,13 @@ BEGIN
     );
     
     -- The clock process 
---clk_proc : process is 
---begin
---    clk <= '1';
---    wait for clk_period/2;
---    clk <= '0';
---    wait for clk_period/2;
---end process;
+clk_proc : process is 
+begin
+    clk <= '1';
+    wait for clk_period/2;
+    clk <= '0';
+    wait for clk_period/2;
+end process;
 
     process --- read the stimulus
   begin

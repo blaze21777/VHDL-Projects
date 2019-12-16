@@ -151,6 +151,8 @@ begin
 --        WHEN _s =>
 --        next_state <=
     end if;
+    
+    WHEN OTHERS =>
     end case;
     end process;
     END Behavioral;

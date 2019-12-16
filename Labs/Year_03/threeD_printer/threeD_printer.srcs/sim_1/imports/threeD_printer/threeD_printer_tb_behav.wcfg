@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="threeD_printer_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="threeD_printer_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="300000001fs"></ZoomEndTime>
+      <Cursor1Time time="75207000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="146"></NameColumnWidth>
+      <ValueColumnWidth column_width="159"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="17" />
+   <wvobject fp_name="/threeD_printer_tb/clk_period" type="other">
+      <obj_property name="ElementShortName">clk_period</obj_property>
+      <obj_property name="ObjectShortName">clk_period</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/cash_en" type="logic">
+      <obj_property name="ElementShortName">cash_en</obj_property>
+      <obj_property name="ObjectShortName">cash_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/cash" type="array">
+      <obj_property name="ElementShortName">cash[9:0]</obj_property>
+      <obj_property name="ObjectShortName">cash[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/cancel" type="logic">
+      <obj_property name="ElementShortName">cancel</obj_property>
+      <obj_property name="ObjectShortName">cancel</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/order_en" type="logic">
+      <obj_property name="ElementShortName">order_en</obj_property>
+      <obj_property name="ObjectShortName">order_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/order" type="array">
+      <obj_property name="ElementShortName">order[3:0]</obj_property>
+      <obj_property name="ObjectShortName">order[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/check_balance" type="logic">
+      <obj_property name="ElementShortName">check_balance</obj_property>
+      <obj_property name="ObjectShortName">check_balance</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/printing" type="logic">
+      <obj_property name="ElementShortName">printing</obj_property>
+      <obj_property name="ObjectShortName">printing</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/ready" type="logic">
+      <obj_property name="ElementShortName">ready</obj_property>
+      <obj_property name="ObjectShortName">ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/order_cancelled" type="logic">
+      <obj_property name="ElementShortName">order_cancelled</obj_property>
+      <obj_property name="ObjectShortName">order_cancelled</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/change_en" type="logic">
+      <obj_property name="ElementShortName">change_en</obj_property>
+      <obj_property name="ObjectShortName">change_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/change" type="logic">
+      <obj_property name="ElementShortName">change</obj_property>
+      <obj_property name="ObjectShortName">change</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/order_1" type="array">
+      <obj_property name="ElementShortName">order_1[0:8]</obj_property>
+      <obj_property name="ObjectShortName">order_1[0:8]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/printer/state" type="other">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/printer/next_state" type="other">
+      <obj_property name="ElementShortName">next_state</obj_property>
+      <obj_property name="ObjectShortName">next_state</obj_property>
+   </wvobject>
+</wave_config>
