@@ -19,6 +19,7 @@
 ----------------------------------------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
+use IEEE.std_logic_arith.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -37,6 +38,7 @@ ARCHITECTURE Behavioral OF threeD_printer_tb IS
     -- Clock signal 
     signal clk_period : time := 10ns;
 	-- Component signal declaration
+	
 	SIGNAL cash_en         : std_logic;
 	SIGNAL cash            : std_logic_vector(9 DOWNTO 0);
 	SIGNAL cancel          : std_logic;
@@ -51,8 +53,34 @@ ARCHITECTURE Behavioral OF threeD_printer_tb IS
 	SIGNAL order_cancelled : std_logic;
 	SIGNAL change_en       : std_logic;
 	SIGNAL change          : std_logic;
+	
+	type data is record
+    cancel   : std_logic;
+    cash_en  : std_logic;
+    cash     : std_logic_vector(9 downto 0);
+    order_en : std_logic;
+    order    : std_logic_vector(3 downto 0);
+    end record;
+    
+     type input_data is array (natural range <>) of data;
+
+  constant order_1 : input_data := 
+  ( ('0', '1', conv_std_logic_vector(1000, 10), '0', "0000"),
+    ('0', '1', conv_std_logic_vector(1000, 10), '0', "0000"),
+    ('0', '1', conv_std_logic_vector(1000, 10), '0', "0000"),
+    ('0', '0', conv_std_logic_vector(   0, 10), '0', "0000"),
+    ('0', '1', conv_std_logic_vector( 500, 10), '0', "0000"),
+    ('0', '1', conv_std_logic_vector( 200, 10), '0', "0000"),
+    ('0', '1', conv_std_logic_vector(  50, 10), '0', "0000"),
+    ('0', '0', conv_std_logic_vector(   0, 10), '1', "0101"), --  balance = £37,50 => order: Yoda + lightsaber (£24,50)
+    ('0', '0', conv_std_logic_vector(   0, 10), '0', "0000")  --  In this case, the machine must return XXX and deliver the item. 
+  );
 
 BEGIN
+    
+    -- Setting clock and reset default values
+    reset <= '1', '0' after 3 ns;  
+    clk <= not clk after 5 ns; 
 
     -- The unit under test
 	printer : entity work.threeD_printer(Behavioral)
@@ -75,12 +103,34 @@ BEGIN
     );
     
     -- The clock process 
-clk_proc : process is 
-begin
-    clk <= '1';
-    wait for clk_period/2;
-    clk <= '0';
-    wait for clk_period/2;
-end process;
+--clk_proc : process is 
+--begin
+--    clk <= '1';
+--    wait for clk_period/2;
+--    clk <= '0';
+--    wait for clk_period/2;
+--end process;
+
+    process --- read the stimulus
+  begin
+
+    wait for 10 ns; 
+
+    -- order #1
+    for i in 0 to order_1'high loop
+      cancel   <= order_1(i).cancel;
+      cash_en  <= order_1(i).cash_en;
+      cash     <= order_1(i).cash;
+      order_en <= order_1(i).order_en;
+      order    <= order_1(i).order;
+      wait for 10 ns;
+    end loop;
+    wait for 200 ns; -- wait to finalize the order 1
+
+    assert false
+      report "End of Simulation"
+      severity failure;
+  
+   end process;
 
 END Behavioral;
