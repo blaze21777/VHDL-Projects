@@ -22,7 +22,7 @@ USE IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
@@ -60,7 +60,13 @@ ARCHITECTURE Behavioral OF threeD_printer IS
         ready_s,
         check_balance_s);
     SIGNAL state, next_state : state_type;
-
+    
+    --ALU signals to check adder and subtractor
+	SIGNAL alu_in1        : std_logic_vector(3 DOWNTO 0) := (OTHERS => '0');
+	SIGNAL alu_in2        : std_logic_vector(3 DOWNTO 0) := (OTHERS => '0');
+	SIGNAL alu_out        : std_logic_vector(3 DOWNTO 0) := (OTHERS => '0');  
+	SIGNAL Total_Coin     : std_logic_vector(3 DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
+    
     -- Outputs as signals 
 --    SIGNAL check_balance_s : std_logic;
 --    SIGNAL printing_s : std_logic;
@@ -96,7 +102,8 @@ BEGIN
         CASE state is 
         -- Reset state --
         WHEN reset_s =>        
-        if (order_en = '1') then 
+        if (cash_en = '1') then 
+  		alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
         next_state <= order_s;
         end if;
         
