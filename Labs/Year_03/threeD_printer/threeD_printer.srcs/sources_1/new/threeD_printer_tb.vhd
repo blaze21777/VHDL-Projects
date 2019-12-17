@@ -34,9 +34,9 @@ ENTITY threeD_printer_tb IS
 	--  Port ( );
 END threeD_printer_tb;
 
-ARCHITECTURE Behavioral OF threeD_printer_tb IS
+ARCHITECTURE tb OF threeD_printer_tb IS
     -- Clock signal 
-    signal clk_period : time := 30ns;
+    signal clk_period : time := 5ns;
 	-- Component signal declaration
 	
 	SIGNAL cash_en         : std_logic;
@@ -52,7 +52,7 @@ ARCHITECTURE Behavioral OF threeD_printer_tb IS
 	SIGNAL ready           : std_logic;
 	SIGNAL order_cancelled : std_logic;
 	SIGNAL change_en       : std_logic;
-	SIGNAL change          : std_logic;
+	SIGNAL change          : std_logic_vector(9 DOWNTO 0);
 	
 	type data is record
     cancel   : std_logic;
@@ -76,25 +76,26 @@ ARCHITECTURE Behavioral OF threeD_printer_tb IS
     ('0', '1', conv_std_logic_vector( 200, 10), '0', "0000"),
     ('0', '1', conv_std_logic_vector(  50, 10), '0', "0000"),
     ('0', '0', conv_std_logic_vector(   0, 10), '1', "0101"), --  balance = £37,50 => order: Yoda + lightsaber (£24,50)
-    ('0', '0', conv_std_logic_vector(   0, 10), '0', "0000")  --  In this case, the machine must return XXX and deliver the item. 
+    ('1', '0', conv_std_logic_vector(   0, 10), '0', "0000")  --  In this case, the machine must return XXX and deliver the item. 
   );
   
-  constant order_2 : input_data := 
-  ( ('0', '1', conv_std_logic_vector( 500, 10), '0', "0000"),
-    ('0', '1', conv_std_logic_vector( 200, 10), '0', "0000"),
-    ('0', '0', conv_std_logic_vector(   0, 10), '0', "0000"),
-    ('0', '0', conv_std_logic_vector(   0, 10), '1', "1111"), -- balance = £7,00 => order: Darth Vader + lightsaber + cloak (£40,00)
-    ('0', '0', conv_std_logic_vector(   0, 10), '0', "0000")  -- insufficient £, order canceled 
-  );
+--  constant order_2 : input_data := 
+--  ( ('0', '1', conv_std_logic_vector( 500, 10), '0', "0000"),
+--    ('0', '1', conv_std_logic_vector( 200, 10), '0', "0000"),
+--    ('0', '0', conv_std_logic_vector(   0, 10), '0', "0000"),
+--    ('0', '0', conv_std_logic_vector(   0, 10), '1', "1111"), -- balance = £7,00 => order: Darth Vader + lightsaber + cloak (£40,00)
+--    ('0', '0', conv_std_logic_vector(   0, 10), '0', "0000")  -- insufficient £, order canceled 
+--  );
 
 BEGIN
     
     -- Setting clock and reset default values
     reset <= '1', '0' after 3 ns;  
    -- clk <= not clk after 5 ns; 
+       -- The clock process 
 
     -- The unit under test
-	printer : entity work.threeD_printer(Behavioral)
+	UUT_printer : entity work.threeD_printer(Behavioral)
 	PORT MAP(
         -- Inputs 
 		cash_en         => cash_en,
@@ -113,7 +114,6 @@ BEGIN
 		change          => change
     );
     
-    -- The clock process 
 clk_proc : process is 
 begin
     clk <= '1';
@@ -128,26 +128,27 @@ end process;
     wait for 10 ns; 
 
     -- order #1
+    -- 'high = the highest array index possible (9 for order_1)
     for i in 0 to order_1'high loop
       cancel   <= order_1(i).cancel;
       cash_en  <= order_1(i).cash_en;
-      cash     <= order_1(i).cash;
-      order_en <= order_1(i).order_en;
-      order    <= order_1(i).order;
+--      cash     <= order_1(i).cash;
+--      order_en <= order_1(i).order_en;
+--      order    <= order_1(i).order;
       wait for 10 ns;
     end loop;
     wait for 200 ns; -- wait to finalize the order 1
     
-     -- order #2
-    for i in 0 to order_2'high loop
-      cancel   <= order_2(i).cancel;
-      cash_en  <= order_2(i).cash_en;
-      cash     <= order_2(i).cash;
-      order_en <= order_2(i).order_en;
-      order    <= order_2(i).order;
-      wait for 10 ns;
-    end loop;
-    wait for 200 ns; -- wait to finalize the order 2
+--     -- order #2
+--    for i in 0 to order_2'high loop
+--      cancel   <= order_2(i).cancel;
+--      cash_en  <= order_2(i).cash_en;
+--      cash     <= order_2(i).cash;
+--      order_en <= order_2(i).order_en;
+--      order    <= order_2(i).order;
+--      wait for 10 ns;
+--    end loop;
+--    wait for 200 ns; -- wait to finalize the order 2
 
 
     assert false
@@ -156,4 +157,4 @@ end process;
   
    end process;
 
-END Behavioral;
+END tb;

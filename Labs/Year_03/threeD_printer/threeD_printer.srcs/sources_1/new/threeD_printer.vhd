@@ -46,7 +46,7 @@ ENTITY threeD_printer IS
         ready : OUT std_logic;
         order_cancelled : OUT std_logic;
         change_en : OUT std_logic;
-        change : OUT std_logic);
+        change : OUT std_logic_vector(num_bits DOWNTO 0));
 END threeD_printer;
 
 ARCHITECTURE Behavioral OF threeD_printer IS
@@ -63,10 +63,10 @@ ARCHITECTURE Behavioral OF threeD_printer IS
     SIGNAL state, next_state : state_type;
     
     --ALU signals to check adder and subtractor
-	SIGNAL alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
-	SIGNAL alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
-	SIGNAL alu_out        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');  
-	SIGNAL total_coin     : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
+--	SIGNAL alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
+--	SIGNAL alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
+--	SIGNAL alu_out        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');  
+--	SIGNAL total_coin     : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
     
     -- Outputs as signals 
 --    SIGNAL check_balance_s : std_logic;
@@ -99,19 +99,27 @@ BEGIN
 
     -- Next state decode 
     next_state_decode : PROCESS (state, order_en, cash_en) is
+    
+    variable alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
+	variable alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
+	variable alu_out        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');  
+	variable total_coin     : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
+    
     BEGIN
+    
         CASE state is 
         -- Reset state --
         WHEN reset_s =>   
         
         -- While loop
-        while cash_en = '1' loop
-            alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
-        end loop;
+--        while cash_en = '1' loop
+--            alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
+--        end loop;
              
         if (cash_en = '1') then 
-        -- next_state <= order_s;
-  		alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
+        
+         next_state <= order_s;
+  		alu_out := std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
   		-- Need condition to get it to change state after accepting all money 
 --  		if (cash_en = '0') then
 --        next_state <= order_s;
@@ -119,6 +127,7 @@ BEGIN
   		end if;
   		
             WHEN order_s =>
+            
 --            next_state <=
 --            WHEN _s =>
 --            next_state <=
@@ -139,6 +148,13 @@ END PROCESS;
 
 -- Output decode
 output_decode : PROCESS (order_en,state) is
+
+ variable alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
+	variable alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
+	variable alu_out        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');  
+	variable total_coin     : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
+    
+
 begin
     case state is
     WHEN reset_s =>
@@ -148,10 +164,10 @@ begin
         ready <= '0';
         order_cancelled <= '0';
         change_en <= '0';
-        change <= '0';
-        Total_Coin  <= "0000000000";
-        alu_in1     <= cash;
-        alu_in2     <= total_coin;
+        change <= "0000000000";
+        Total_Coin  := "0000000000";
+        alu_in1     := cash;
+        alu_in2     := total_coin;
         
     -- Mealy output    
     if (order_en = '1') then 
