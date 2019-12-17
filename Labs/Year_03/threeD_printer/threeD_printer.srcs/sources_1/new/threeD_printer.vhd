@@ -30,10 +30,11 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 ENTITY threeD_printer IS
+    GENERIC (num_bits : INTEGER := 9);
     PORT (
         -- Inputs
         cash_en : IN std_logic;
-        cash : IN std_logic_vector(9 DOWNTO 0);
+        cash : IN std_logic_vector(num_bits DOWNTO 0);
         cancel : IN std_logic;
         order_en : IN std_logic;
         order : IN std_logic_vector(3 DOWNTO 0);
@@ -62,10 +63,10 @@ ARCHITECTURE Behavioral OF threeD_printer IS
     SIGNAL state, next_state : state_type;
     
     --ALU signals to check adder and subtractor
-	SIGNAL alu_in1        : std_logic_vector(3 DOWNTO 0) := (OTHERS => '0');
-	SIGNAL alu_in2        : std_logic_vector(3 DOWNTO 0) := (OTHERS => '0');
-	SIGNAL alu_out        : std_logic_vector(3 DOWNTO 0) := (OTHERS => '0');  
-	SIGNAL Total_Coin     : std_logic_vector(3 DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
+	SIGNAL alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
+	SIGNAL alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
+	SIGNAL alu_out        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');  
+	SIGNAL total_coin     : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
     
     -- Outputs as signals 
 --    SIGNAL check_balance_s : std_logic;
@@ -101,13 +102,23 @@ BEGIN
     BEGIN
         CASE state is 
         -- Reset state --
-        WHEN reset_s =>        
-        if (cash_en = '1') then 
-  		alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
-        next_state <= order_s;
-        end if;
+        WHEN reset_s =>   
         
---            WHEN _s =>
+        -- While loop
+        while cash_en = '1' loop
+            alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
+        end loop;
+             
+        if (cash_en = '1') then 
+        -- next_state <= order_s;
+  		alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
+  		-- Need condition to get it to change state after accepting all money 
+--  		if (cash_en = '0') then
+--        next_state <= order_s;
+--        end if;
+  		end if;
+  		
+            WHEN order_s =>
 --            next_state <=
 --            WHEN _s =>
 --            next_state <=
@@ -138,6 +149,9 @@ begin
         order_cancelled <= '0';
         change_en <= '0';
         change <= '0';
+        Total_Coin  <= "0000000000";
+        alu_in1     <= cash;
+        alu_in2     <= total_coin;
         
     -- Mealy output    
     if (order_en = '1') then 

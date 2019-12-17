@@ -36,7 +36,7 @@ END threeD_printer_tb;
 
 ARCHITECTURE Behavioral OF threeD_printer_tb IS
     -- Clock signal 
-    signal clk_period : time := 10ns;
+    signal clk_period : time := 30ns;
 	-- Component signal declaration
 	
 	SIGNAL cash_en         : std_logic;
@@ -132,7 +132,6 @@ end process;
       cancel   <= order_1(i).cancel;
       cash_en  <= order_1(i).cash_en;
       cash     <= order_1(i).cash;
-      alu_in1  <= order_1(i).cash;
       order_en <= order_1(i).order_en;
       order    <= order_1(i).order;
       wait for 10 ns;
