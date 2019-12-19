@@ -54,6 +54,7 @@ ARCHITECTURE Behavioral OF threeD_printer IS
     -- Decalare states that can be taken
     TYPE state_type IS (
         reset_s,
+        pre_order_s,
         order_s,
         cancel_s,
         cash_s,
@@ -61,6 +62,9 @@ ARCHITECTURE Behavioral OF threeD_printer IS
         ready_s,
         check_balance_s);
     SIGNAL state, next_state : state_type;
+    
+    SIGNAL order_price : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
+    SIGNAL printing_time : time;
     
     --ALU signals to check adder and subtractor
 --	SIGNAL alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
@@ -116,9 +120,9 @@ BEGIN
 --            alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
 --        end loop;
              
-        if (cash_en = '1') then 
-        
-         next_state <= order_s;
+        if (order_en = '1') then 
+        -- Maybe an array to hold all the cahs values until next state
+         next_state <= pre_order_s;
   		alu_out := std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
   		-- Need condition to get it to change state after accepting all money 
 --  		if (cash_en = '0') then
@@ -126,12 +130,22 @@ BEGIN
 --        end if;
   		end if;
   		
-            WHEN order_s =>
-            
+            WHEN pre_order_s =>
+              if (cancel = '1') then 
+              next_state <= cancel_s;
+              else
+              next_state <= order_s;
+              end if;
+              
+              -- Order state
+              WHEN order_s =>
+             -- If balance = order price, then proceed with the order
+             -- If balance => order price, then execute the order and give the change back
+             -- If balance =< order price, then cancel the order and give the current balance back
+
 --            next_state <=
---            WHEN _s =>
---            next_state <=
---            WHEN _s =>
+              WHEN cancel_s =>
+              
 --            next_state <=
 --            WHEN _s =>
 --            next_state <=
@@ -172,7 +186,69 @@ begin
     -- Mealy output    
     if (order_en = '1') then 
         printing <= '0';
+        end if;
         
+        -- Pre order state 
+        -- printing time should be assigned here
+          WHEN pre_order_s =>
+          CASE order IS
+					WHEN "0000" => -- No order
+						order_price <= x"000";
+                        
+					WHEN "0001" => -- Gun
+						order_price <= x"0C8";
+
+					WHEN "0010" => -- Capes or cloaks
+						order_price <= x"258";
+						
+					WHEN "0011" => -- Gun + cape or cloak
+						order_price <= x"258";	
+						
+					WHEN "0100" => -- Yoda
+						order_price <= x"8CA";
+						
+					WHEN "0101" => -- Yoda + lightsaber
+						order_price <= x"992";
+						
+					WHEN "0110" => -- Yoda + cloak
+						order_price <= x"B22";
+						
+					WHEN "0111" => -- Yoda + cloak + lightsaber
+						order_price <= x"BEA";
+						
+					WHEN "1000" => -- Leia
+						order_price <= x"AF0";
+					
+					WHEN "1001" => -- Leia + rifle
+						order_price <= x"BB8";
+					
+					WHEN "1010" => -- Leia + cape
+						order_price <= x"D48";	
+						
+					WHEN "1011" => -- Leia + cloak + lightsaber
+						order_price <= x"E10";	
+						
+					WHEN "1100" => -- Darth Vader
+						order_price <= x"C80";		
+						
+					WHEN "1101" => -- Darth Vader + lightsaber
+						order_price <= x"D48";
+						
+					WHEN "1110" => -- Darth Vader + cloak
+						order_price <= x"ED8";
+						
+					WHEN "1111" => -- Darth Vader + lightsaber + cloak
+						order_price <= x"FA0";					
+					
+					WHEN OTHERS => 
+					   order_price <= x"000";
+				END CASE;
+				
+          WHEN order_s =>
+          -- set output to some value 
+
+          WHEN cancel_s =>
+            
 --        WHEN _s =>
 --        next_state <=
 --        WHEN _s =>
@@ -181,13 +257,7 @@ begin
 --        next_state <=
 --        WHEN _s =>
 --        next_state <=
---        WHEN _s =>
---        next_state <=
---        WHEN _s =>
---        next_state <=
---        WHEN _s =>
---        next_state <=
-    end if;
+
     
     WHEN OTHERS =>
     end case;
