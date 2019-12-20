@@ -66,11 +66,12 @@ ARCHITECTURE Behavioral OF threeD_printer IS
     SIGNAL order_price : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
     SIGNAL printing_time : time;
     
+    
     --ALU signals to check adder and subtractor
---	SIGNAL alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
---	SIGNAL alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
---	SIGNAL alu_out        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');  
---	SIGNAL total_coin     : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
+	SIGNAL alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
+	SIGNAL alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
+	SIGNAL alu_out        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');  
+	SIGNAL total_coin     : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
     
     -- Outputs as signals 
     SIGNAL check_balance_buf : std_logic;
@@ -103,27 +104,19 @@ BEGIN
 
     -- Next state decode 
     next_state_decode : PROCESS (state, order_en, cash_en) is
-    
---    variable alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
---	variable alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
---	variable alu_out        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');  
---	variable total_coin     : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
-    
+   
     BEGIN
     
         CASE state is 
         -- Reset state --
         WHEN reset_s =>   
-        
-        -- While loop
---        while cash_en = '1' loop
---            alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
---        end loop;
+          
+         alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2)); 
              
         if (order_en = '1') then 
         -- Maybe an array to hold all the cahs values until next state
          next_state <= pre_order_s;
-  		alu_out := std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
+  		--alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
   		-- Need condition to get it to change state after accepting all money 
 --  		if (cash_en = '0') then
 --        next_state <= order_s;
@@ -163,10 +156,10 @@ END PROCESS;
 -- Output decode
 output_decode : PROCESS (order_en,state) is
 
- variable alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
-	variable alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
-	variable alu_out        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');  
-	variable total_coin     : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
+-- variable alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
+--	variable alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
+--	variable alu_out        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');  
+--	variable total_coin     : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
     
 
 begin
@@ -179,9 +172,12 @@ begin
         order_cancelled <= '0';
         change_en <= '0';
         change <= "0000000000";
-        Total_Coin  := "0000000000";
-        alu_in1     := cash;
-        alu_in2     := total_coin;
+        total_coin  <= alu_out;
+        alu_in1     <= cash;
+        alu_in2     <= total_coin;
+--        Total_Coin  := "0000000000";
+--        alu_in1     := cash;
+--        alu_in2     := total_coin;
         
     -- Mealy output    
     if (order_en = '1') then 
@@ -191,58 +187,58 @@ begin
         -- Pre order state 
         -- printing time should be assigned here
           WHEN pre_order_s =>
-          CASE order IS
-					WHEN "0000" => -- No order
-						order_price <= x"000";
+--          CASE order IS
+--					WHEN "0000" => -- No order
+--						order_price <= x"000";
                         
-					WHEN "0001" => -- Gun
-						order_price <= x"0C8";
+--					WHEN "0001" => -- Gun
+--						order_price <= x"0C8";
 
-					WHEN "0010" => -- Capes or cloaks
-						order_price <= x"258";
+--					WHEN "0010" => -- Capes or cloaks
+--						order_price <= x"258";
 						
-					WHEN "0011" => -- Gun + cape or cloak
-						order_price <= x"258";	
+--					WHEN "0011" => -- Gun + cape or cloak
+--						order_price <= x"258";	
 						
-					WHEN "0100" => -- Yoda
-						order_price <= x"8CA";
+--					WHEN "0100" => -- Yoda
+--						order_price <= x"8CA";
 						
-					WHEN "0101" => -- Yoda + lightsaber
-						order_price <= x"992";
+--					WHEN "0101" => -- Yoda + lightsaber
+--						order_price <= x"992";
 						
-					WHEN "0110" => -- Yoda + cloak
-						order_price <= x"B22";
+--					WHEN "0110" => -- Yoda + cloak
+--						order_price <= x"B22";
 						
-					WHEN "0111" => -- Yoda + cloak + lightsaber
-						order_price <= x"BEA";
+--					WHEN "0111" => -- Yoda + cloak + lightsaber
+--						order_price <= x"BEA";
 						
-					WHEN "1000" => -- Leia
-						order_price <= x"AF0";
+--					WHEN "1000" => -- Leia
+--						order_price <= x"AF0";
 					
-					WHEN "1001" => -- Leia + rifle
-						order_price <= x"BB8";
+--					WHEN "1001" => -- Leia + rifle
+--						order_price <= x"BB8";
 					
-					WHEN "1010" => -- Leia + cape
-						order_price <= x"D48";	
+--					WHEN "1010" => -- Leia + cape
+--						order_price <= x"D48";	
 						
-					WHEN "1011" => -- Leia + cloak + lightsaber
-						order_price <= x"E10";	
+--					WHEN "1011" => -- Leia + cloak + lightsaber
+--						order_price <= x"E10";	
 						
-					WHEN "1100" => -- Darth Vader
-						order_price <= x"C80";		
+--					WHEN "1100" => -- Darth Vader
+--						order_price <= x"C80";		
 						
-					WHEN "1101" => -- Darth Vader + lightsaber
-						order_price <= x"D48";
+--					WHEN "1101" => -- Darth Vader + lightsaber
+--						order_price <= x"D48";
 						
-					WHEN "1110" => -- Darth Vader + cloak
-						order_price <= x"ED8";
+--					WHEN "1110" => -- Darth Vader + cloak
+--						order_price <= x"ED8";
 						
-					WHEN "1111" => -- Darth Vader + lightsaber + cloak
-						order_price <= x"FA0";					
+--					WHEN "1111" => -- Darth Vader + lightsaber + cloak
+--						order_price <= x"FA0";					
 					
-					WHEN OTHERS => 
-					   order_price <= x"000";
-				END CASE;
+--					WHEN OTHERS => 
+--					   order_price <= x"000";
+--				END CASE;
 				
           WHEN order_s =>
           -- set output to some value 
