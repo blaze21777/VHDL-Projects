@@ -73,21 +73,21 @@ ARCHITECTURE Behavioral OF threeD_printer IS
 --	SIGNAL total_coin     : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
     
     -- Outputs as signals 
---    SIGNAL check_balance_s : std_logic;
---    SIGNAL printing_s : std_logic;
---    SIGNAL ready_s : std_logic;
---    SIGNAL order_cancelled_s : std_logic;
---    SIGNAL change_en_s : std_logic;
---    SIGNAL change_s : std_logic);
+    SIGNAL check_balance_buf : std_logic;
+    SIGNAL printing_buf : std_logic;
+    SIGNAL ready_buf : std_logic;
+    SIGNAL order_cancelled_buf : std_logic;
+    SIGNAL change_en_buf : std_logic;
+    SIGNAL change_buf : std_logic_vector(num_bits downto 0);
 
 BEGIN
-    -- Assigning outputs to signals 
---    check_balance_sig <= check_balance;
---    printing_sig <= printing;
---    ready_sig <= ready;
---    order_cancelled_sig <= order_cancelled;
---    change_en_sig <= change;
---    change_sig <= change;
+    -- Buffering outputs to signals 
+    check_balance <= check_balance_buf;
+    printing <= printing_buf;
+    ready <= ready_buf;
+    order_cancelled <= order_cancelled_buf;
+    change_en <= change_en_buf;
+    change <= change_buf;
 
     -- The clock process
     sync_proc : PROCESS (clk)
