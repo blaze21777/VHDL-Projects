@@ -104,10 +104,10 @@ BEGIN
     -- Next state decode 
     next_state_decode : PROCESS (state, order_en, cash_en) is
     
-    variable alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
-	variable alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
-	variable alu_out        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');  
-	variable total_coin     : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
+--    variable alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
+--	variable alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
+--	variable alu_out        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');  
+--	variable total_coin     : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
     
     BEGIN
     
