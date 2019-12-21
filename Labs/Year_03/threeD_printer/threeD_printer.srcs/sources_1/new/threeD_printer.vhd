@@ -84,6 +84,13 @@ ARCHITECTURE Behavioral OF threeD_printer IS
     SIGNAL order_cancelled_buf : std_logic := '0';
     SIGNAL change_en_buf : std_logic := '0';
     SIGNAL change_buf : std_logic_vector(num_bits downto 0) := (OTHERS => '0');
+    
+    -- Delay signals 
+   -- signal Clk : std_logic := '0';
+    signal valid_data : std_logic := '0';
+    signal data_in,data_out : std_logic := '0';
+    constant Clk_period : time := 5 ns;
+    signal d : integer := 0; --number of clock cycles by which input should be delayed.
 
 BEGIN
     -- Buffering outputs to signals 
@@ -94,13 +101,22 @@ BEGIN
     change_en <= change_en_buf;
     change <= change_buf;
     
+    -- Adder instatiation 
     adder : entity work.add_module(Behavior)
     port map(
     pr_in1 =>  pr_in1,  
     pr_in2 =>  pr_in2, 
     pr_out =>  pr_out   
   );
-
+  
+    -- dealay instatiation
+    delay: entity work.delay PORT MAP (
+          Clk => Clk,
+          valid_data => valid_data,
+          data_in => data_in,
+          data_out => data_out,
+          d => d
+        );
     -- The clock process
     sync_proc : PROCESS (clk)
     BEGIN
@@ -146,8 +162,12 @@ BEGIN
              -- If balance = order price, then proceed with the order
              -- If balance => order price, then execute the order and give the change back
              -- If balance =< order price, then cancel the order and give the current balance back
-
---            next_state <=
+             
+             
+             -- Printing test
+             if (data_out = '1') then
+              next_state <= cancel_s;
+              end if;
               WHEN cancel_s =>
               
 --            next_state <=
@@ -221,7 +241,7 @@ begin
 						
 					WHEN "0101" => -- Yoda + lightsaber
 						order_price <= x"992";
-						
+						d <= 5;
 					WHEN "0110" => -- Yoda + cloak
 						order_price <= x"B22";
 						

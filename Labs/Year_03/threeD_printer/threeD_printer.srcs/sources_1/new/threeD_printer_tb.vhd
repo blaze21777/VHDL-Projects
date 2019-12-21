@@ -54,6 +54,10 @@ ARCHITECTURE tb OF threeD_printer_tb IS
 	SIGNAL change_en       : std_logic;
 	SIGNAL change          : std_logic_vector(9 DOWNTO 0);
 	
+	-- Delay 
+	signal valid_data : std_logic := '0';
+    signal data_in,data_out : std_logic := '0';
+	
 	type data is record
     cancel   : std_logic;
     cash_en  : std_logic;
@@ -126,6 +130,9 @@ end process;
   begin
 
     wait for 10 ns; 
+    
+    valid_data <= '1';
+    data_in <= '1';
 
     -- order #1
     -- 'high = the highest array index possible (9 for order_1)
