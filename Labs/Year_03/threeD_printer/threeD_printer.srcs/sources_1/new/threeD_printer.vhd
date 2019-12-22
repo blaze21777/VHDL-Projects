@@ -33,6 +33,8 @@ ENTITY threeD_printer IS
     GENERIC (num_bits : INTEGER := 9);
     PORT (
         -- Inputs
+        
+        -- REMOVE ASSIGNMENTS THEY DON'T WORK!! ---
         cash_en : IN std_logic := '0';
         cash : IN std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
         cancel : IN std_logic := '0';
@@ -64,6 +66,7 @@ ARCHITECTURE Behavioral OF threeD_printer IS
     SIGNAL state, next_state : state_type;
     
     SIGNAL order_price : std_logic_vector(num_bits + 2 DOWNTO 0) := (OTHERS => '0');
+    SIGNAL order_save  : std_logic_vector(3 DOWNTO 0) := (OTHERS => '0');
     
     --ALU signals to check adder and subtractor
 	SIGNAL alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
@@ -128,7 +131,7 @@ BEGIN
     END PROCESS;
 
     -- Next state decode 
-    next_state_decode : PROCESS (state, order_en, cash_en) is
+    next_state_decode : PROCESS (state, order_en, cash_en, d, data_out) is
    
     BEGIN
     
@@ -149,7 +152,7 @@ BEGIN
   		end if;
   		
             WHEN pre_order_s =>
-              if (cancel = '1') then 
+              if (cancel = '1') then --- MIGHT BE POINTLESS 
               next_state <= cancel_s;
               else
               next_state <= order_s;
@@ -157,20 +160,21 @@ BEGIN
               
               -- Order state
               WHEN order_s =>
+              -- NEED TO GET ADDER WORKING FIRST!!
              -- If balance = order price, then proceed with the order
+             next_state <= printing_s;
              -- If balance => order price, then execute the order and give the change back
              -- If balance =< order price, then cancel the order and give the current balance back
-             
-             
-             -- Printing test
-             if (data_out = '1') then
-              next_state <= cancel_s;
-              end if;
+              
               WHEN cancel_s =>
               
 --            next_state <=
---            WHEN _s =>
---            next_state <=
+              WHEN printing_s =>
+              -- Printing test
+              if (data_out = '1') then
+              next_state <= ready_s;
+              end if;
+              
 --            WHEN _s =>
 --            next_state <=
 --            WHEN _s =>
@@ -183,7 +187,7 @@ BEGIN
 END PROCESS;
 
 -- Output decode
-output_decode : PROCESS (order_en,state) is
+output_decode : PROCESS (order_en,state,d, order_save,data_out) is
 
 -- variable alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
 --	variable alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
@@ -214,7 +218,8 @@ begin
 --        alu_in2     := total_coin;
         
     -- Mealy output    
-    if (order_en = '1') then 
+    if (order_en = '1') then
+        order_save <= order;
         printing <= '0';
         end if;
         
@@ -222,6 +227,66 @@ begin
         -- printing time should be assigned here
           WHEN pre_order_s =>
           CASE order IS
+					WHEN "0000" => -- No order
+						order_price <= x"000";
+                        
+					WHEN "0001" => -- Gun
+						order_price <= x"0C8";
+
+					WHEN "0010" => -- Capes or cloaks
+						order_price <= x"258";
+						
+					WHEN "0011" => -- Gun + cape or cloak
+						order_price <= x"258";	
+						
+					WHEN "0100" => -- Yoda
+						order_price <= x"8CA";
+						
+					WHEN "0101" => -- Yoda + lightsaber
+						order_price <= x"992";
+		
+					WHEN "0110" => -- Yoda + cloak
+						order_price <= x"B22";
+						
+					WHEN "0111" => -- Yoda + cloak + lightsaber
+						order_price <= x"BEA";
+						
+					WHEN "1000" => -- Leia
+						order_price <= x"AF0";
+					
+					WHEN "1001" => -- Leia + rifle
+						order_price <= x"BB8";
+					
+					WHEN "1010" => -- Leia + cape
+						order_price <= x"D48";	
+						
+					WHEN "1011" => -- Leia + cloak + lightsaber
+						order_price <= x"E10";	
+						
+					WHEN "1100" => -- Darth Vader
+						order_price <= x"C80";		
+						
+					WHEN "1101" => -- Darth Vader + lightsaber
+						order_price <= x"D48";
+						
+					WHEN "1110" => -- Darth Vader + cloak
+						order_price <= x"ED8";
+						
+					WHEN "1111" => -- Darth Vader + lightsaber + cloak
+						order_price <= x"FA0";					
+					
+					WHEN OTHERS => 
+					   order_price <= x"000";
+				END CASE;
+				
+          WHEN order_s =>
+          -- set output to some value 
+
+          WHEN cancel_s =>
+            
+          WHEN printing_s =>
+          printing <= '1';
+          CASE order_save IS
 					WHEN "0000" => -- No order
 						order_price <= x"000";
                         
@@ -275,18 +340,13 @@ begin
 					WHEN OTHERS => 
 					   order_price <= x"000";
 				END CASE;
-				
-          WHEN order_s =>
-          -- set output to some value 
 
-          WHEN cancel_s =>
-            
+          WHEN ready_s =>
+          -- NEED TO CHANGE POSITION INTO PREVIOUS STATE IF TO MAKE MEALY   
+          printing <= '0';
+          ready <= '1'; 
 --        WHEN _s =>
---        next_state <=
---        WHEN _s =>
---        next_state <=
---        WHEN _s =>
---        next_state <=
+
 --        WHEN _s =>
 --        next_state <=
 

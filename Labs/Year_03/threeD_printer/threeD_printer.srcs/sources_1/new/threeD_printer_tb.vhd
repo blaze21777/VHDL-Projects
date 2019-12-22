@@ -130,9 +130,6 @@ end process;
   begin
 
     wait for 10 ns; 
-    
---    valid_data <= '1';
---    data_in <= '1';
 
     -- order #1
     -- 'high = the highest array index possible (9 for order_1)
