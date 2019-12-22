@@ -33,20 +33,20 @@ ENTITY threeD_printer IS
     GENERIC (num_bits : INTEGER := 9);
     PORT (
         -- Inputs
-        cash_en : IN std_logic;
-        cash : IN std_logic_vector(num_bits DOWNTO 0);
-        cancel : IN std_logic;
-        order_en : IN std_logic;
-        order : IN std_logic_vector(3 DOWNTO 0);
-        reset : IN std_logic;
-        clk : IN std_logic;
+        cash_en : IN std_logic := '0';
+        cash : IN std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
+        cancel : IN std_logic := '0';
+        order_en : IN std_logic := '0';
+        order : IN std_logic_vector(3 DOWNTO 0) := (OTHERS => '0');
+        reset : IN std_logic := '0';
+        clk : IN std_logic := '0';
         -- Outputs
-        check_balance : OUT std_logic;
-        printing : OUT std_logic;
-        ready : OUT std_logic;
-        order_cancelled : OUT std_logic;
-        change_en : OUT std_logic;
-        change : OUT std_logic_vector(num_bits DOWNTO 0));
+        check_balance : OUT std_logic := '0';
+        printing : OUT std_logic := '0';
+        ready : OUT std_logic := '0';
+        order_cancelled : OUT std_logic := '0';
+        change_en : OUT std_logic := '0';
+        change : OUT std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'));
 END threeD_printer;
 
 ARCHITECTURE Behavioral OF threeD_printer IS
@@ -64,8 +64,6 @@ ARCHITECTURE Behavioral OF threeD_printer IS
     SIGNAL state, next_state : state_type;
     
     SIGNAL order_price : std_logic_vector(num_bits + 2 DOWNTO 0) := (OTHERS => '0');
-    SIGNAL printing_time : time;
-    
     
     --ALU signals to check adder and subtractor
 	SIGNAL alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
@@ -241,6 +239,8 @@ begin
 						
 					WHEN "0101" => -- Yoda + lightsaber
 						order_price <= x"992";
+						valid_data <= '1';
+                        data_in <= '1';
 						d <= 5;
 					WHEN "0110" => -- Yoda + cloak
 						order_price <= x"B22";
