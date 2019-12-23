@@ -56,6 +56,8 @@ ARCHITECTURE Behavioral OF threeD_printer IS
     -- Decalare states that can be taken
     TYPE state_type IS (
         reset_s,
+        pre_add_s,
+        add_s,
         pre_order_s,
         order_s,
         cancel_s,
@@ -131,15 +133,16 @@ BEGIN
     END PROCESS;
 
     -- Next state decode 
-    next_state_decode : PROCESS (state, order_en, cash_en, d, data_out) is
+    next_state_decode : PROCESS (state, order_en, cash_en, d, data_out,total_coin) is
    
     BEGIN
     
         CASE state is 
         -- Reset state --
-        WHEN reset_s =>   
-          
-         alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2)); 
+        WHEN reset_s => 
+       -- next_state <= pre_add_s;
+       
+           alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2)); 
              
         if (order_en = '1') then 
         -- Maybe an array to hold all the cahs values until next state
@@ -150,6 +153,27 @@ BEGIN
 --        next_state <= order_s;
 --        end if;
   		end if;
+  		
+--  		WHEN pre_add_s =>  
+          
+--        -- alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2)); 
+--        -- alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
+--         if (cash_en = '1') then
+--         next_state <= add_s;    
+--        end if;
+  		
+--  		WHEN add_s =>
+--  		 if (order_en = '1') then 
+--        -- Maybe an array to hold all the cahs values until next state
+--         next_state <= pre_order_s;
+--  		--alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
+--  		-- Need condition to get it to change state after accepting all money 
+----  		if (cash_en = '0') then
+----        next_state <= order_s;
+----        end if;
+--        else 
+--        next_state <= pre_add_s;
+--  		end if;
   		
             WHEN pre_order_s =>
               if (cancel = '1') then --- MIGHT BE POINTLESS 
@@ -187,12 +211,12 @@ BEGIN
 END PROCESS;
 
 -- Output decode
-output_decode : PROCESS (order_en,state,d, order_save,data_out) is
+output_decode : PROCESS (order_en,state,d, order_save,data_out, total_coin) is
 
 -- variable alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
 --	variable alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
 --	variable alu_out        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');  
---	variable total_coin     : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
+	variable total_cash     : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
     
 
 begin
@@ -209,9 +233,12 @@ begin
         alu_in1     <= cash;
         alu_in2     <= total_coin;
         
-        total_coin  <= pr_out;
+        -- Adder signals 
+        if (cash_en = '1') then 
         pr_in1 <= cash;
-        pr_in2 <= cash;
+        pr_in2 <= total_cash;
+        total_cash  := pr_out;
+        end if;
         
 --        Total_Coin  := "0000000000";
 --        alu_in1     := cash;
@@ -223,6 +250,17 @@ begin
         printing <= '0';
         end if;
         
+--        WHEN pre_add_s =>
+--        -- Stop it from adding everything!
+--        if (cash_en = '1') then 
+--        pr_in1 <= cash;
+--        pr_in2 <= total_coin;
+--        end if;
+        
+--        WHEN add_s =>
+--        -- Update total coin
+--       total_coin <= pr_out;
+ 
         -- Pre order state 
         -- printing time should be assigned here
           WHEN pre_order_s =>
@@ -285,7 +323,7 @@ begin
           WHEN cancel_s =>
             
           WHEN printing_s =>
-          printing <= '1';
+        --  printing <= '1';
           CASE order_save IS
 					WHEN "0000" => -- No order
 						order_price <= x"000";
