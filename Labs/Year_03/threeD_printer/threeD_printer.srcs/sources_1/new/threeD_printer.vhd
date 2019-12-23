@@ -239,7 +239,7 @@ begin
         pr_in2 <= total_cash;
         total_cash  := pr_out;
         end if;
-        
+        --
 --        Total_Coin  := "0000000000";
 --        alu_in1     := cash;
 --        alu_in2     := total_coin;
