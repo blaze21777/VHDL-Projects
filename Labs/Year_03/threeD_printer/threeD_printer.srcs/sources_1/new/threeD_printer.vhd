@@ -70,15 +70,21 @@ ARCHITECTURE Behavioral OF threeD_printer IS
     SIGNAL order_price : std_logic_vector(num_bits + 2 DOWNTO 0) := (OTHERS => '0');
     SIGNAL order_save  : std_logic_vector(3 DOWNTO 0) := (OTHERS => '0');
     
-    --ALU signals to check adder and subtractor
+    --ALU signals 
 	SIGNAL alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
 	SIGNAL alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
 	SIGNAL alu_out        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');  
 	SIGNAL total_coin     : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
-
+   
+    -- adder 1
     signal pr_in1 : std_logic_vector(9 downto 0) := (OTHERS => '0');
     signal pr_in2 : std_logic_vector(9 downto 0) := (OTHERS => '0');
     signal pr_out : std_logic_vector(9 downto 0) := (OTHERS => '0');
+    
+    -- Adder 2
+    signal pr_in1_1 : std_logic_vector(9 downto 0) := (OTHERS => '0');
+    signal pr_in2_2 : std_logic_vector(9 downto 0) := (OTHERS => '0');
+    signal pr_out2 : std_logic_vector(9 downto 0) := (OTHERS => '0');
     
     -- Outputs as signals 
     SIGNAL check_balance_buf : std_logic := '0';
@@ -105,12 +111,22 @@ BEGIN
     change <= change_buf;
     
     -- Adder instatiation 
-    adder : entity work.add_module(Behavior)
+    adder1 : entity work.add_module(Behavior)
     port map(
-    pr_in1 =>  pr_in1,  
-    pr_in2 =>  pr_in2, 
+    pr_in1 =>  cash,  
+    pr_in2 =>  total_coin, 
     pr_out =>  pr_out   
   );
+  
+   adder2 : entity work.add_module(Behavior)
+    port map(
+    pr_in1 =>  pr_out,  
+    pr_in2 =>  "0000000000", 
+    pr_out =>  pr_out2   
+  );
+  
+    -- Serial adder instatiation
+    serial_adder entity work.serial_adder()
   
     -- dealay instatiation
     delay: entity work.delay PORT MAP (
@@ -133,7 +149,7 @@ BEGIN
     END PROCESS;
 
     -- Next state decode 
-    next_state_decode : PROCESS (state, order_en, cash_en, d, data_out,total_coin) is
+    next_state_decode : PROCESS (state, order_en, cash_en, d, data_out,total_coin, alu_out) is
    
     BEGIN
     
@@ -142,7 +158,7 @@ BEGIN
         WHEN reset_s => 
        -- next_state <= pre_add_s;
        
-           alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2)); 
+          -- alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(total_coin)); 
              
         if (order_en = '1') then 
         -- Maybe an array to hold all the cahs values until next state
@@ -230,14 +246,16 @@ begin
         change_en <= '0';
         change <= "0000000000";
        -- total_coin  <= alu_out;
-        alu_in1     <= cash;
-        alu_in2     <= total_coin;
+        --alu_in1     <= cash;
+        --alu_in2     <= total_coin;
         
         -- Adder signals 
-        if (cash_en = '1') then 
-        pr_in1 <= cash;
-        pr_in2 <= total_cash;
-        total_cash  := pr_out;
+        if (cash_en = '1') then
+        total_coin <= pr_out2; 
+       -- pr_in1 <= cash;
+        --pr_in2 <= total_cash;
+       -- pr_in2_2 <= cash;
+        --total_cash  := pr_out;
         end if;
         --
 --        Total_Coin  := "0000000000";
