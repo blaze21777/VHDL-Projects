@@ -36,7 +36,7 @@ END threeD_printer_tb;
 
 ARCHITECTURE tb OF threeD_printer_tb IS
     -- Clock signal 
-    signal clk_period : time := 5ns;
+    signal clk_period : time := 10ns;
 	-- Component signal declaration
 	
 	SIGNAL cash_en         : std_logic;
