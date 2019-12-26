@@ -70,6 +70,11 @@ ARCHITECTURE Behavioral OF threeD_printer IS
     SIGNAL order_price : std_logic_vector(num_bits + 2 DOWNTO 0) := (OTHERS => '0');
     SIGNAL order_save  : std_logic_vector(3 DOWNTO 0) := (OTHERS => '0');
     
+    -- Serial adder signals 
+   signal a,b : std_logic_vector(9 downto 0) := (OTHERS => '0');
+    --Outputs
+   signal s : std_logic_vector(9 downto 0) := (OTHERS => '0');
+    
     --ALU signals 
 	SIGNAL alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
 	SIGNAL alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
@@ -126,7 +131,9 @@ BEGIN
   );
   
     -- Serial adder instatiation
-    serial_adder entity work.serial_adder()
+    -- NEED TO CREATE EXPLICIT PORT MAPPING!
+    serial_adder: entity work.serial_adder(behav)
+     PORT MAP (Clk,reset,a,b,s);
   
     -- dealay instatiation
     delay: entity work.delay PORT MAP (
