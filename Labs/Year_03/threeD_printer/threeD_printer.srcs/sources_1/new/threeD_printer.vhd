@@ -125,6 +125,9 @@ BEGIN
     pr_out =>  pr_out2   
   );
   
+    -- Serial adder instatiation
+    serial_adder entity work.serial_adder()
+  
     -- dealay instatiation
     delay: entity work.delay PORT MAP (
           Clk => Clk,
