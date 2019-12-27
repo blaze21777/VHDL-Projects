@@ -62,6 +62,7 @@ ARCHITECTURE Behavioral OF threeD_printer IS
 		order_s,
 		cancel_s,
 		cash_s,
+		change_s,
 		printing_s,
 		ready_s,
 		check_balance_s);
@@ -80,6 +81,11 @@ ARCHITECTURE Behavioral OF threeD_printer IS
 	SIGNAL alu_in2             : std_logic_vector(num_bits DOWNTO 0)     := (OTHERS => '0');
 	SIGNAL alu_out             : std_logic_vector(num_bits DOWNTO 0)     := (OTHERS => '0');
 	SIGNAL total_coin          : std_logic_vector(num_bits DOWNTO 0)     := (OTHERS => '0'); -- Sum of coins inserted ALU
+  
+    -- Subtraction
+    SIGNAL sub_in1              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
+	SIGNAL sub_in2              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
+	SIGNAL sub_out              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
 
 	-- adder 1
 	SIGNAL pr_in1              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
@@ -215,9 +221,13 @@ BEGIN
 				IF (total_coin < order_price) THEN
 					next_state <= cancel_s;
 				ELSE
-					next_state <= printing_s;
+					next_state <= change_s;
 				END IF;
-				
+			
+			-- Change state --
+			WHEN change_s =>
+			next_state <= reset_s;
+			
 		    -- Cancel state --
 			WHEN cancel_s =>
 
@@ -355,13 +365,18 @@ BEGIN
 					WHEN OTHERS =>
 						order_price <= x"000";
 				END CASE;
+				
             -- Order state --
 			WHEN order_s    =>
 				-- set output to some value 
             
+            -- Change state --
+            WHEN change_s =>
+            change_buf <= std_logic_vector(unsigned(total_coin) - unsigned(order_price)); 
+            
             -- Cancel state --
 			WHEN cancel_s   =>
-            change_buf <= total_coin; -- CHANGE BUFF IS BASICALL TOTOAL COIN, RENAME?
+            change_buf <= total_coin; -- CHANGE BUFF IS BASICALLY TOTOAL COIN, RENAME?
             
             -- Printing state --
 			WHEN printing_s =>
