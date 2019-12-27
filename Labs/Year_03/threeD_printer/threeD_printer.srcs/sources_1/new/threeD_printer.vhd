@@ -226,7 +226,7 @@ BEGIN
 			
 			-- Change state --
 			WHEN change_s =>
-			next_state <= reset_s;
+			next_state <= printing_s;
 			
 		    -- Cancel state --
 			WHEN cancel_s =>
@@ -253,7 +253,7 @@ BEGIN
 	END PROCESS;
 
 	-- Output decode
-	output_decode : PROCESS (order_en, state, d, order_save, data_out, total_coin, cash, cash_en) IS
+	output_decode : PROCESS (order_en, state, d, order_save, data_out, total_coin, cash, cash_en, order_price) IS
 
 		-- variable alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
 		--	variable alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
@@ -271,6 +271,7 @@ BEGIN
 				order_cancelled <= '0';
 				change_en       <= '0';
 				change          <= "0000000000";
+				-- s <= "0000000000"; -- Reset adder tally
 				-- total_coin  <= alu_out;
 				--alu_in1     <= cash;
 				--alu_in2     <= total_coin;
@@ -369,11 +370,13 @@ BEGIN
             -- Order state --
 			WHEN order_s    =>
 				-- set output to some value 
-            
+              sub_in1 <= s; -- SHOULD BE TOTAL COIN BUT THATS BROKEN NOW.
+              sub_in2 <= "0000000001"; -- ORDER PRICE HAS 12 ELEMENTS NEED TO FIX!
             -- Change state --
             WHEN change_s =>
-            change_buf <= std_logic_vector(unsigned(total_coin) - unsigned(order_price)); 
-            
+   --         change_buf <= std_logic_vector(unsigned(total_coin) - unsigned(order_price)); 
+          
+            sub_out <= std_logic_vector(unsigned(sub_in1) - unsigned(sub_in2)); 
             -- Cancel state --
 			WHEN cancel_s   =>
             change_buf <= total_coin; -- CHANGE BUFF IS BASICALLY TOTOAL COIN, RENAME?
