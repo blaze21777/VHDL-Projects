@@ -81,16 +81,6 @@ ARCHITECTURE Behavioral OF threeD_printer IS
 	SIGNAL sub_in2              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
 	SIGNAL sub_out              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
 
-	-- adder 1
---	SIGNAL pr_in1              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
---	SIGNAL pr_in2              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
---	SIGNAL pr_out              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
-
---	-- Adder 2
---	SIGNAL pr_in1_1            : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
---	SIGNAL pr_in2_2            : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
---	SIGNAL pr_out2             : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
-
 	-- Outputs as signals 
 	SIGNAL check_balance_buf   : std_logic                               := '0';
 	SIGNAL printing_buf        : std_logic                               := '0';
@@ -114,21 +104,6 @@ BEGIN
 	order_cancelled <= order_cancelled_buf;
 	change_en       <= change_en_buf;
 	change          <= change_buf;
-
-	-- Adder instatiation 
---	adder1 : ENTITY work.add_module(Behavior)
---		PORT MAP(
---			pr_in1 => cash,
---			pr_in2 => total_coin,
---			pr_out => pr_out
---		);
-
---	adder2 : ENTITY work.add_module(Behavior)
---		PORT MAP(
---			pr_in1 => pr_out,
---			pr_in2 => "0000000000",
---			pr_out => pr_out2
---		);
 
 	-- Serial adder instatiation
 	-- NEED TO CREATE EXPLICIT PORT MAPPING!
@@ -163,40 +138,15 @@ BEGIN
 		CASE state IS
 			-- Reset state --
 			WHEN reset_s =>
-				-- next_state <= pre_add_s;
-
-				-- alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(total_coin)); 
 
 				IF (order_en = '1') THEN
 					-- Maybe an array to hold all the cahs values until next state
 					next_state <= pre_order_s;
-					--alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
 					-- Need condition to get it to change state after accepting all money 
 					--  		if (cash_en = '0') then
 					--        next_state <= order_s;
 					--        end if;
 				END IF;
-
-				--  		WHEN pre_add_s =>  
-
-				--        -- alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2)); 
-				--        -- alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
-				--         if (cash_en = '1') then
-				--         next_state <= add_s;    
-				--        end if;
-
-				--  		WHEN add_s =>
-				--  		 if (order_en = '1') then 
-				--        -- Maybe an array to hold all the cahs values until next state
-				--         next_state <= pre_order_s;
-				--  		--alu_out <= std_logic_vector(unsigned(alu_in1) + unsigned(alu_in2));
-				--  		-- Need condition to get it to change state after accepting all money 
-				----  		if (cash_en = '0') then
-				----        next_state <= order_s;
-				----        end if;
-				--        else 
-				--        next_state <= pre_add_s;
-				--  		end if;
 				
             -- Pre order state --
 			WHEN pre_order_s =>
@@ -234,13 +184,8 @@ BEGIN
 					next_state <= ready_s;
 				END IF;
 
-	         WHEN check_balance_s =>
-	         
-				--            next_state <=
-				--            WHEN _s =>
-				--            next_state <=
-				--            WHEN _s =>
-				--            next_state <=
+	        WHEN check_balance_s =>
+	        
 			WHEN OTHERS =>
 				next_state <= reset_s;
 		END CASE;
@@ -249,10 +194,6 @@ BEGIN
 	-- Output decode
 	output_decode : PROCESS (order_en, state, d, order_save, data_out, total_coin, cash, cash_en, order_price) IS
 
-		-- variable alu_in1        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
-		--	variable alu_in2        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');
-		--	variable alu_out        : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0');  
-		VARIABLE total_cash : std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'); -- Sum of coins inserted ALU
 	BEGIN
 		CASE state IS
 		
@@ -265,10 +206,6 @@ BEGIN
 				order_cancelled <= '0';
 				change_en       <= '0';
 				change          <= "0000000000";
-				-- s <= "0000000000"; -- Reset adder tally
-				-- total_coin  <= alu_out;
-				--alu_in1     <= cash;
-				--alu_in2     <= total_coin;
 
 				-- Adder signals 
 				IF (cash_en = '1') THEN
@@ -277,33 +214,14 @@ BEGIN
 					total_coin <= s;
 				ELSE
 					a <= "0000000000";
-					-- total_coin <= pr_out2; 
-					-- pr_in1 <= cash;
-					--pr_in2 <= total_cash;
-					-- pr_in2_2 <= cash;
-					--total_cash  := pr_out;
+		
 				END IF;
-				--
-				--        Total_Coin  := "0000000000";
-				--        alu_in1     := cash;
-				--        alu_in2     := total_coin;
 
 				-- Mealy output    
 				IF (order_en = '1') THEN
 					order_save <= order;
 					printing   <= '0';
 				END IF;
-
-				--        WHEN pre_add_s =>
-				--        -- Stop it from adding everything!
-				--        if (cash_en = '1') then 
-				--        pr_in1 <= cash;
-				--        pr_in2 <= total_coin;
-				--        end if;
-
-				--        WHEN add_s =>
-				--        -- Update total coin
-				--       total_coin <= pr_out;
 
 				-- Pre order state -- 
 				-- printing time should be assigned here
@@ -437,6 +355,7 @@ BEGIN
 				-- NEED TO CHANGE POSITION INTO PREVIOUS STATE IF TO MAKE MEALY   
 				printing <= '0';
 				ready    <= '1';
+				
 				--        WHEN _s =>
 
 				--        WHEN _s =>
