@@ -68,13 +68,14 @@ ARCHITECTURE Behavioral OF threeD_printer IS
 	SIGNAL order_save          : std_logic_vector(3 DOWNTO 0)            := (OTHERS => '0');
 
 	-- Serial adder signals 
-	SIGNAL a, b                : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
-	SIGNAL s                   : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
+	SIGNAL a, b                : std_logic_vector(11 DOWNTO 0)            := (OTHERS => '0');
+	SIGNAL s                   : std_logic_vector(11 DOWNTO 0)            := (OTHERS => '0');
 
 	--ALU signals 
-	SIGNAL total_cash          : std_logic_vector(num_bits DOWNTO 0)     := (OTHERS => '0'); -- Sum of coins inserted ALU
+	SIGNAL total_cash          : std_logic_vector(num_bits +2 DOWNTO 0)     := (OTHERS => '0'); -- Sum of coins inserted ALU
   
     -- Subtraction
+    -- NEED TO FIX 12 BIT SUBTRACTION
     SIGNAL sub_in1              : std_logic_vector(11 DOWNTO 0)            := (OTHERS => '0');
 	SIGNAL sub_in2              : std_logic_vector(11 DOWNTO 0)            := (OTHERS => '0');
 	SIGNAL sub_out              : std_logic_vector(11 DOWNTO 0)            := (OTHERS => '0');
@@ -184,12 +185,13 @@ BEGIN
 				change          <= "0000000000";
 
 				-- Adder signals 
+				-- NEED TO ADD OVERFLOW COMPENSAION 
 				IF (cash_en = '1') THEN
-					a          <= cash;
-					b          <= "0000000000";
+					a          <= "00" & cash; -- 12-bit assignment 
+					b          <= "000000000000";
 					total_cash <= s;
 				ELSE
-					a <= "0000000000";
+					a <= "000000000000";
 		
 				END IF;
 
@@ -202,7 +204,7 @@ BEGIN
 				-- Pre order state -- 
 				-- printing time should be assigned here
 			WHEN pre_order_s =>
-				CASE order IS
+				CASE order_save IS
 					WHEN "0000" => -- No order
 						order_price <= x"000";
 
@@ -258,7 +260,7 @@ BEGIN
             -- Order state --
 			WHEN order_s    =>
 				-- set output to some value 
-              sub_in1 <= "11" & s; -- SHOULD BE TOTAL COIN BUT THATS BROKEN NOW.
+              sub_in1 <= s; -- SHOULD BE TOTAL COIN BUT THATS BROKEN NOW.
               sub_in2 <= order_price; -- ORDER PRICE HAS 12 ELEMENTS NEED TO FIX!
             -- Change state --                                                                                                            
             WHEN change_s => 
@@ -266,7 +268,7 @@ BEGIN
             sub_out <= std_logic_vector(unsigned(sub_in1) - unsigned(sub_in2)); 
             -- Cancel state --
 			WHEN cancel_s   =>
-            change <= total_cash; 
+           -- change <= total_cash; 
             
             -- Printing state --
 			WHEN printing_s =>

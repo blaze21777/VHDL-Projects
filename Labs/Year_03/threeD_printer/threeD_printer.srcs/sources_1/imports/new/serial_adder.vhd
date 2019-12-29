@@ -34,7 +34,7 @@ use IEEE.NUMERIC_STD.ALL;
 --serial adder for N bits. Note that we dont have to mention N here.
 -- https://vhdlguru.blogspot.com/2017/11/vhdl-code-for-n-bit-serial-adder-with.html 
 entity serial_adder is
-    generic (num_bits : integer := 9);
+    generic (num_bits : integer := 11);
     port(Clk,reset : in std_logic; --clock and reset signal
           --  cin : in std_logic;  --note that cin is used for only first iteration.
             a,b : in std_logic_vector(num_bits downto 0);
@@ -55,7 +55,7 @@ process(clk,reset)
 variable s_buf : std_logic_vector(num_bits downto 0) := (OTHERS => '0'); 
 begin
 if(reset = '1') then --active high reset
-    s_buf := "0000000000";
+    s_buf := "000000000000";
     --cout <= c;
     flag <= '0';
 elsif(rising_edge(clk)) then
