@@ -54,18 +54,16 @@ ARCHITECTURE Behavioral OF threeD_printer IS
 	-- Decalare states that can be taken
 	TYPE state_type IS (
 		reset_s,
-		pre_add_s,
-		add_s,
 		pre_order_s,
 		order_s,
 		cancel_s,
-		cash_s,
 		change_s,
 		printing_s,
 		ready_s,
 		check_balance_s);
 	SIGNAL state, next_state   : state_type;
-
+    
+    -- Order signals
 	SIGNAL order_price         : std_logic_vector(num_bits + 2 DOWNTO 0) := (OTHERS => '0');
 	SIGNAL order_save          : std_logic_vector(3 DOWNTO 0)            := (OTHERS => '0');
 
@@ -74,39 +72,23 @@ ARCHITECTURE Behavioral OF threeD_printer IS
 	SIGNAL s                   : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
 
 	--ALU signals 
-	SIGNAL total_coin          : std_logic_vector(num_bits DOWNTO 0)     := (OTHERS => '0'); -- Sum of coins inserted ALU
+	SIGNAL total_cash          : std_logic_vector(num_bits DOWNTO 0)     := (OTHERS => '0'); -- Sum of coins inserted ALU
   
     -- Subtraction
-    SIGNAL sub_in1              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
-	SIGNAL sub_in2              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
-	SIGNAL sub_out              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
-
-	-- Outputs as signals 
-	SIGNAL check_balance_buf   : std_logic                               := '0';
-	SIGNAL printing_buf        : std_logic                               := '0';
-	SIGNAL ready_buf           : std_logic                               := '0';
-	SIGNAL order_cancelled_buf : std_logic                               := '0';
-	SIGNAL change_en_buf       : std_logic                               := '0';
-	SIGNAL change_buf          : std_logic_vector(num_bits DOWNTO 0)     := (OTHERS => '0');
+    SIGNAL sub_in1              : std_logic_vector(11 DOWNTO 0)            := (OTHERS => '0');
+	SIGNAL sub_in2              : std_logic_vector(11 DOWNTO 0)            := (OTHERS => '0');
+	SIGNAL sub_out              : std_logic_vector(11 DOWNTO 0)            := (OTHERS => '0');
 
 	-- Delay signals 
-	-- signal Clk : std_logic := '0';
 	SIGNAL valid_data          : std_logic                               := '0';
 	SIGNAL data_in, data_out   : std_logic                               := '0';
-	CONSTANT Clk_period        : TIME                                    := 5 ns;
 	SIGNAL d                   : INTEGER                                 := 0; --number of clock cycles by which input should be delayed.
 
 BEGIN
-	-- Buffering outputs to signals 
-	check_balance   <= check_balance_buf;
-	printing        <= printing_buf;
-	ready           <= ready_buf;
-	order_cancelled <= order_cancelled_buf;
-	change_en       <= change_en_buf;
-	change          <= change_buf;
 
 	-- Serial adder instatiation
 	-- NEED TO CREATE EXPLICIT PORT MAPPING!
+	-- https://stackoverflow.com/questions/21163915/how-does-vhdl-deal-with-overflow
 	serial_adder : ENTITY work.serial_adder(behav)
 		PORT MAP(Clk, reset, a, b, s);
 
@@ -131,21 +113,15 @@ BEGIN
 	END PROCESS;
 
 	-- Next state decode 
-	next_state_decode : PROCESS (state, order_en, cash_en, d, data_out, total_coin) IS
+	next_state_decode : PROCESS (state, order_en, cash_en, d, data_out, total_cash) IS
 
 	BEGIN
 
 		CASE state IS
 			-- Reset state --
 			WHEN reset_s =>
-
 				IF (order_en = '1') THEN
-					-- Maybe an array to hold all the cahs values until next state
 					next_state <= pre_order_s;
-					-- Need condition to get it to change state after accepting all money 
-					--  		if (cash_en = '0') then
-					--        next_state <= order_s;
-					--        end if;
 				END IF;
 				
             -- Pre order state --
@@ -162,7 +138,7 @@ BEGIN
 				-- If balance => order price, then execute the order and give the change back
 				-- If balance =< order price, then cancel the order and give the current balance back
 
-				IF (total_coin < order_price) THEN
+				IF (total_cash < order_price) THEN
 					next_state <= cancel_s;
 				ELSE
 					next_state <= change_s;
@@ -192,7 +168,7 @@ BEGIN
 	END PROCESS;
 
 	-- Output decode
-	output_decode : PROCESS (order_en, state, d, order_save, data_out, total_coin, cash, cash_en, order_price) IS
+	output_decode : PROCESS (order_en, state, d, order_save, data_out, total_cash, cash, cash_en, order_price) IS
 
 	BEGIN
 		CASE state IS
@@ -211,7 +187,7 @@ BEGIN
 				IF (cash_en = '1') THEN
 					a          <= cash;
 					b          <= "0000000000";
-					total_coin <= s;
+					total_cash <= s;
 				ELSE
 					a <= "0000000000";
 		
@@ -282,84 +258,77 @@ BEGIN
             -- Order state --
 			WHEN order_s    =>
 				-- set output to some value 
-              sub_in1 <= s; -- SHOULD BE TOTAL COIN BUT THATS BROKEN NOW.
-              sub_in2 <= "0000000001"; -- ORDER PRICE HAS 12 ELEMENTS NEED TO FIX!
-            -- Change state --
-            WHEN change_s =>
-   --         change_buf <= std_logic_vector(unsigned(total_coin) - unsigned(order_price)); 
+              sub_in1 <= "11" & s; -- SHOULD BE TOTAL COIN BUT THATS BROKEN NOW.
+              sub_in2 <= order_price; -- ORDER PRICE HAS 12 ELEMENTS NEED TO FIX!
+            -- Change state --                                                                                                            
+            WHEN change_s => 
           
             sub_out <= std_logic_vector(unsigned(sub_in1) - unsigned(sub_in2)); 
             -- Cancel state --
 			WHEN cancel_s   =>
-            change_buf <= total_coin; -- CHANGE BUFF IS BASICALLY TOTOAL COIN, RENAME?
+            change <= total_cash; 
             
             -- Printing state --
 			WHEN printing_s =>
 				--  printing <= '1';
 				CASE order_save IS
 					WHEN "0000" => -- No order
-						order_price <= x"000";
 
 					WHEN "0001" => -- Gun
-						order_price <= x"0C8";
+						
 
 					WHEN "0010" => -- Capes or cloaks
-						order_price <= x"258";
+						
 
 					WHEN "0011" => -- Gun + cape or cloak
-						order_price <= x"258";
+						
 
 					WHEN "0100" => -- Yoda
-						order_price <= x"8CA";
+						
 
 					WHEN "0101" => -- Yoda + lightsaber
-						order_price <= x"992";
 						valid_data  <= '1';
 						data_in     <= '1';
 						d           <= 5;
 					WHEN "0110" => -- Yoda + cloak
-						order_price <= x"B22";
+						
 
 					WHEN "0111" => -- Yoda + cloak + lightsaber
-						order_price <= x"BEA";
+						
 
 					WHEN "1000" => -- Leia
-						order_price <= x"AF0";
+						
 
 					WHEN "1001" => -- Leia + rifle
-						order_price <= x"BB8";
+						
 
 					WHEN "1010" => -- Leia + cape
-						order_price <= x"D48";
+						
 
 					WHEN "1011" => -- Leia + cloak + lightsaber
-						order_price <= x"E10";
+						
 
 					WHEN "1100" => -- Darth Vader
-						order_price <= x"C80";
+						
 
 					WHEN "1101" => -- Darth Vader + lightsaber
-						order_price <= x"D48";
+						
 
 					WHEN "1110" => -- Darth Vader + cloak
-						order_price <= x"ED8";
+						
 
 					WHEN "1111" => -- Darth Vader + lightsaber + cloak
-						order_price <= x"FA0";
+						
 
 					WHEN OTHERS =>
-						order_price <= x"000";
+						
 				END CASE;
 
 			WHEN ready_s =>
 				-- NEED TO CHANGE POSITION INTO PREVIOUS STATE IF TO MAKE MEALY   
 				printing <= '0';
 				ready    <= '1';
-				
-				--        WHEN _s =>
 
-				--        WHEN _s =>
-				--        next_state <=
 			WHEN OTHERS =>
 		END CASE;
 	END PROCESS;
