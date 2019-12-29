@@ -57,6 +57,7 @@ ARCHITECTURE Behavioral OF threeD_printer IS
 		pre_order_s,
 		order_s,
 		cancel_s,
+		subtract_s,
 		change_s,
 		printing_s,
 		ready_s,
@@ -142,8 +143,12 @@ BEGIN
 				IF (total_cash < order_price) THEN
 					next_state <= cancel_s;
 				ELSE
-					next_state <= change_s;
+					next_state <= subtract_s;
 				END IF;
+				
+			-- Subtract state --
+			WHEN subtract_s => 
+			next_state <= change_s;
 			
 			-- Change state --
 			WHEN change_s =>
@@ -262,13 +267,19 @@ BEGIN
 				-- set output to some value 
               sub_in1 <= s; -- SHOULD BE TOTAL COIN BUT THATS BROKEN NOW.
               sub_in2 <= order_price; -- ORDER PRICE HAS 12 ELEMENTS NEED TO FIX!
+              
+            -- Subtract state
+            when subtract_s =>
+            sub_out <= std_logic_vector(unsigned(sub_in1) - unsigned(sub_in2));
+            
             -- Change state --                                                                                                            
             WHEN change_s => 
-          
-            sub_out <= std_logic_vector(unsigned(sub_in1) - unsigned(sub_in2)); 
+            change_en <= '1';
+            change <= sub_out(num_bits downto 0);
+            
             -- Cancel state --
 			WHEN cancel_s   =>
-           -- change <= total_cash; 
+           -- change <= total_cash; THIS IS DUMB, TOTAL CASH CAN BE HIGHER THAN 10 BITS!! 
             
             -- Printing state --
 			WHEN printing_s =>
