@@ -33,22 +33,20 @@ ENTITY threeD_printer IS
 	GENERIC (num_bits : INTEGER := 9);
 	PORT (
 		-- Inputs
-
-		-- REMOVE ASSIGNMENTS THEY DON'T WORK!! ---
-		cash_en         : IN std_logic                            := '0';
-		cash            : IN std_logic_vector(num_bits DOWNTO 0)  := (OTHERS => '0');
-		cancel          : IN std_logic                            := '0';
-		order_en        : IN std_logic                            := '0';
-		order           : IN std_logic_vector(3 DOWNTO 0)         := (OTHERS => '0');
-		reset           : IN std_logic                            := '0';
-		clk             : IN std_logic                            := '0';
+		cash_en         : IN std_logic;
+		cash            : IN std_logic_vector(num_bits DOWNTO 0);
+		cancel          : IN std_logic;
+		order_en        : IN std_logic;                           
+		order           : IN std_logic_vector(3 DOWNTO 0);
+		reset           : IN std_logic;
+		clk             : IN std_logic;
 		-- Outputs
-		check_balance   : OUT std_logic                           := '0';
-		printing        : OUT std_logic                           := '0';
-		ready           : OUT std_logic                           := '0';
-		order_cancelled : OUT std_logic                           := '0';
-		change_en       : OUT std_logic                           := '0';
-		change          : OUT std_logic_vector(num_bits DOWNTO 0) := (OTHERS => '0'));
+		check_balance   : OUT std_logic;
+		printing        : OUT std_logic;
+		ready           : OUT std_logic; 
+		order_cancelled : OUT std_logic;
+		change_en       : OUT std_logic;
+		change          : OUT std_logic_vector(num_bits DOWNTO 0));
 END threeD_printer;
 
 ARCHITECTURE Behavioral OF threeD_printer IS
@@ -73,13 +71,9 @@ ARCHITECTURE Behavioral OF threeD_printer IS
 
 	-- Serial adder signals 
 	SIGNAL a, b                : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
-	--Outputs
 	SIGNAL s                   : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
 
 	--ALU signals 
-	SIGNAL alu_in1             : std_logic_vector(num_bits DOWNTO 0)     := (OTHERS => '0');
-	SIGNAL alu_in2             : std_logic_vector(num_bits DOWNTO 0)     := (OTHERS => '0');
-	SIGNAL alu_out             : std_logic_vector(num_bits DOWNTO 0)     := (OTHERS => '0');
 	SIGNAL total_coin          : std_logic_vector(num_bits DOWNTO 0)     := (OTHERS => '0'); -- Sum of coins inserted ALU
   
     -- Subtraction
@@ -88,14 +82,14 @@ ARCHITECTURE Behavioral OF threeD_printer IS
 	SIGNAL sub_out              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
 
 	-- adder 1
-	SIGNAL pr_in1              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
-	SIGNAL pr_in2              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
-	SIGNAL pr_out              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
+--	SIGNAL pr_in1              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
+--	SIGNAL pr_in2              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
+--	SIGNAL pr_out              : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
 
-	-- Adder 2
-	SIGNAL pr_in1_1            : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
-	SIGNAL pr_in2_2            : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
-	SIGNAL pr_out2             : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
+--	-- Adder 2
+--	SIGNAL pr_in1_1            : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
+--	SIGNAL pr_in2_2            : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
+--	SIGNAL pr_out2             : std_logic_vector(9 DOWNTO 0)            := (OTHERS => '0');
 
 	-- Outputs as signals 
 	SIGNAL check_balance_buf   : std_logic                               := '0';
@@ -122,19 +116,19 @@ BEGIN
 	change          <= change_buf;
 
 	-- Adder instatiation 
-	adder1 : ENTITY work.add_module(Behavior)
-		PORT MAP(
-			pr_in1 => cash,
-			pr_in2 => total_coin,
-			pr_out => pr_out
-		);
+--	adder1 : ENTITY work.add_module(Behavior)
+--		PORT MAP(
+--			pr_in1 => cash,
+--			pr_in2 => total_coin,
+--			pr_out => pr_out
+--		);
 
-	adder2 : ENTITY work.add_module(Behavior)
-		PORT MAP(
-			pr_in1 => pr_out,
-			pr_in2 => "0000000000",
-			pr_out => pr_out2
-		);
+--	adder2 : ENTITY work.add_module(Behavior)
+--		PORT MAP(
+--			pr_in1 => pr_out,
+--			pr_in2 => "0000000000",
+--			pr_out => pr_out2
+--		);
 
 	-- Serial adder instatiation
 	-- NEED TO CREATE EXPLICIT PORT MAPPING!
@@ -162,7 +156,7 @@ BEGIN
 	END PROCESS;
 
 	-- Next state decode 
-	next_state_decode : PROCESS (state, order_en, cash_en, d, data_out, total_coin, alu_out) IS
+	next_state_decode : PROCESS (state, order_en, cash_en, d, data_out, total_coin) IS
 
 	BEGIN
 
