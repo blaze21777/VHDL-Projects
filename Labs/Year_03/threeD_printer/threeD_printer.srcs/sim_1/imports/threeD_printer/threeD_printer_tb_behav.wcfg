@@ -10,13 +10,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="289575000fs"></ZoomStartTime>
-      <ZoomEndTime time="368975001fs"></ZoomEndTime>
-      <Cursor1Time time="350000000fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="79800001fs"></ZoomEndTime>
+      <Cursor1Time time="3600000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="146"></NameColumnWidth>
-      <ValueColumnWidth column_width="91"></ValueColumnWidth>
+      <ValueColumnWidth column_width="87"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="30" />
    <wvobject fp_name="/threeD_printer_tb/clk" type="logic">
@@ -75,6 +75,7 @@
    <wvobject fp_name="/threeD_printer_tb/change" type="array">
       <obj_property name="ElementShortName">change[9:0]</obj_property>
       <obj_property name="ObjectShortName">change[9:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/threeD_printer_tb/UUT_printer/sub_in1" type="array">
       <obj_property name="ElementShortName">sub_in1[11:0]</obj_property>
@@ -89,11 +90,12 @@
    <wvobject fp_name="/threeD_printer_tb/UUT_printer/sub_out" type="array">
       <obj_property name="ElementShortName">sub_out[11:0]</obj_property>
       <obj_property name="ObjectShortName">sub_out[11:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/threeD_printer_tb/UUT_printer/order_price" type="array">
       <obj_property name="ElementShortName">order_price[11:0]</obj_property>
       <obj_property name="ObjectShortName">order_price[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/threeD_printer_tb/order_1" type="array">
       <obj_property name="ElementShortName">order_1[0:8]</obj_property>

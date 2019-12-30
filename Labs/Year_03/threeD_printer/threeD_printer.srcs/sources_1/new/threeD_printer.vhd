@@ -70,9 +70,8 @@ ARCHITECTURE Behavioral OF threeD_printer IS
 
 	-- Serial adder signals 
 	SIGNAL a, b                : std_logic_vector(11 DOWNTO 0)            := (OTHERS => '0');
-	SIGNAL s                   : std_logic_vector(11 DOWNTO 0)            := (OTHERS => '0');
-
-	--ALU signals 
+	SIGNAL s                   : std_logic_vector(11 DOWNTO 0)            := (OTHERS => '0'); 
+	SIGNAL reset_adder         : std_logic := '0';
 	SIGNAL total_cash          : std_logic_vector(num_bits +2 DOWNTO 0)     := (OTHERS => '0'); -- Sum of coins inserted ALU
   
     -- Subtraction
@@ -92,7 +91,12 @@ BEGIN
 	-- NEED TO CREATE EXPLICIT PORT MAPPING!
 	-- https://stackoverflow.com/questions/21163915/how-does-vhdl-deal-with-overflow
 	serial_adder : ENTITY work.serial_adder(behav)
-		PORT MAP(Clk, reset, a, b, s);
+		PORT MAP(
+		clk => clk, 
+		reset => reset_adder, 
+		a => a,
+		b => b,
+		s => s);
 
 	-- dealay instatiation
 	delay : ENTITY work.delay PORT MAP (
@@ -181,15 +185,18 @@ BEGIN
 		
 		    -- Reset state --
 			WHEN reset_s =>
-				-- Set all outputs to 0
+				-- Set all FSM outputs to 0
 				check_balance   <= '0';
 				printing        <= '0';
 				ready           <= '0';
 				order_cancelled <= '0';
 				change_en       <= '0';
 				change          <= "0000000000";
-
+				
+		        -- Delay signals
+		       -- data_out <= '0';      
 				-- Adder signals 
+				 reset_adder <= '0'; -- Reset in ready state
 				-- NEED TO ADD OVERFLOW COMPENSAION 
 				IF (cash_en = '1') THEN
 					a          <= "00" & cash; -- 12-bit assignment 
@@ -268,17 +275,20 @@ BEGIN
               sub_in1 <= s; -- SHOULD BE TOTAL COIN BUT THATS BROKEN NOW.
               sub_in2 <= order_price; -- ORDER PRICE HAS 12 ELEMENTS NEED TO FIX!
               
-            -- Subtract state
+            -- Subtract state --
             when subtract_s =>
             sub_out <= std_logic_vector(unsigned(sub_in1) - unsigned(sub_in2));
             
-            -- Change state --                                                                                                            
+            -- Change state --     
+            -- CHANGE TAKES MULTIPLE CLOCK CYCLES, SPLIT TOTAL CASH TO 10-BIT PARTS
+            -- MULTIPLE IF STATEMETNS TO CHECK IF HIGHEST DENOMINATION CAN BE TAKEN OUT                                                                                                  
             WHEN change_s => 
             change_en <= '1';
-            change <= sub_out(num_bits downto 0);
+            change <= sub_out(num_bits downto 0); -- QUICK CHANGE FIX (DOESN'T GIVE ACTUAL CHANGE)
             
             -- Cancel state --
 			WHEN cancel_s   =>
+			-- NEEDS TO USE SAME IF STATEMENTS AS CHANGE_S
            -- change <= total_cash; THIS IS DUMB, TOTAL CASH CAN BE HIGHER THAN 10 BITS!! 
             
             -- Printing state --
@@ -341,7 +351,11 @@ BEGIN
 				-- NEED TO CHANGE POSITION INTO PREVIOUS STATE IF TO MAKE MEALY   
 				printing <= '0';
 				ready    <= '1';
-
+                reset_adder <= '1';
+                -- Turn off delay 
+                valid_data  <= '1';  --POBABLY POINTLESS SIGNAL, REMOVE?
+				data_in     <= '1';  --POBABLY POINTLESS SIGNAL, REMOVE?
+				d           <= 0;
 			WHEN OTHERS =>
 		END CASE;
 	END PROCESS;
