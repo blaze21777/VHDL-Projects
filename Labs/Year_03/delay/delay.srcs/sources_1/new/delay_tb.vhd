@@ -47,6 +47,7 @@ BEGIN
     -- Instantiate the Unit Under Test (UUT)
    uut: entity work.delay PORT MAP (
           Clk => Clk,
+          --reset => reset,
           valid_data => valid_data,
           data_in => data_in,
           data_out => data_out,
@@ -64,10 +65,14 @@ BEGIN
    -- Stimulus process
    stim_proc: process
    begin       
-      wait for 100 ns; 
+      wait for 10 ns; 
         valid_data <= '1';
-        data_in <= '1';
-        d <= 1;
+        data_in <= '0';
+        d <= 0;
+--       wait for 20 ns;
+--        valid_data <= '1';
+--        data_in <= '1';
+--        d <= 5;
       wait;
    end process;
 

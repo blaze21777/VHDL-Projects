@@ -45,7 +45,7 @@ architecture Behavioral of delay is
 signal c : integer := 0;
 -- constant d : integer := 100; --number of clock cycles by which input should be delayed.
 signal data_temp : std_logic := '0';
-type state_type is (idle,delay_c); --defintion of state machine type
+type state_type is (idle,delay_c,reset); --defintion of state machine type
 signal next_s : state_type; --declare the state machine signal.
 
 begin
