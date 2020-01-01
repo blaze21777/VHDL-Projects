@@ -84,7 +84,12 @@ ARCHITECTURE Behavioral OF threeD_printer IS
 	SIGNAL valid_data          : std_logic                               := '0';
 	SIGNAL data_in, data_out   : std_logic                               := '0';
 	SIGNAL d                   : INTEGER                                 := 0; --number of clock cycles by which input should be delayed.
-
+    
+    -- Counter signals 
+    signal count_rst  : std_logic;
+    signal count_en   : std_logic;
+	signal max_count  : integer;
+	signal done       : std_logic;
 BEGIN
 
 	-- Serial adder instatiation
@@ -106,6 +111,15 @@ BEGIN
 		data_out   => data_out,
 		d          => d
 		);
+		
+    counter : entity work.loop_counter(Behavioral)
+    port map(
+        clk       => clk,
+        reset     => count_rst,
+        count_en  => count_en,
+        max_count => max_count,
+        done      => done);
+        
 	-- The clock process
 	sync_proc : PROCESS (clk)
 	BEGIN
@@ -119,7 +133,7 @@ BEGIN
 	END PROCESS;
 
 	-- Next state decode 
-	next_state_decode : PROCESS (state, order_en, cash_en, d, data_out, total_cash) IS
+	next_state_decode : PROCESS (state, order_en, cash_en, d, data_out, total_cash,done) IS -- NEED TO REMOVE DATA OUT!!
 
 	BEGIN
 
@@ -128,6 +142,8 @@ BEGIN
 			WHEN reset_s =>
 				IF (order_en = '1') THEN
 					next_state <= pre_order_s;
+				elsif (cancel = '1') then 
+			        next_state <= cancel_s;
 				END IF;
 				
             -- Pre order state --
@@ -143,8 +159,9 @@ BEGIN
 				-- NEED TO GET ADDER WORKING FIRST!!
 				-- If balance => order price, then execute the order and give the change back
 				-- If balance =< order price, then cancel the order and give the current balance back
-
-				IF (total_cash < order_price) THEN
+                if ( s = order_price) then 
+                    next_state <= subtract_s;
+				elsIF (total_cash < order_price) THEN
 					next_state <= cancel_s;
 				ELSE
 					next_state <= subtract_s;
@@ -166,7 +183,7 @@ BEGIN
             -- Printing state --
 			WHEN printing_s =>
 				-- Printing test
-				IF (data_out = '1') THEN
+				IF (done = '1') THEN
 					next_state <= ready_s;
 				END IF;
 
@@ -193,11 +210,16 @@ BEGIN
 				change_en       <= '0';
 				change          <= "0000000000";
 				
+				-- Counter signals 
+				count_rst <= '1'; -- Reset counter 
+				count_en <= '0';
+				max_count <= 0;
+				
 		        -- Delay signals
 		       -- data_out <= '0';      
 				-- Adder signals 
 				 reset_adder <= '0'; -- Reset in ready state
-				-- NEED TO ADD OVERFLOW COMPENSAION 
+				-- NEED TO ADD OVERFLOW COMPENSAION 	
 				IF (cash_en = '1') THEN
 					a          <= "00" & cash; -- 12-bit assignment 
 					b          <= "000000000000";
@@ -286,62 +308,121 @@ BEGIN
             change_en <= '1';
             change <= sub_out(num_bits downto 0); -- QUICK CHANGE FIX (DOESN'T GIVE ACTUAL CHANGE)
             
+            count_rst <= '0'; -- Preparing counter to count
             -- Cancel state --
 			WHEN cancel_s   =>
 			-- NEEDS TO USE SAME IF STATEMENTS AS CHANGE_S
            -- change <= total_cash; THIS IS DUMB, TOTAL CASH CAN BE HIGHER THAN 10 BITS!! 
             
-            -- Printing state --
+            -- Printing state -- NEED TO REMOVE ALL DELAY SIGNAL, USELESS
 			WHEN printing_s =>
 				--  printing <= '1';
 				CASE order_save IS
 					WHEN "0000" => -- No order
 
 					WHEN "0001" => -- Gun
-						
+						valid_data  <= '1';
+						data_in     <= '1';
+						d           <= 1;
+						max_count <= 1;
+		                count_en <= '1';
 
 					WHEN "0010" => -- Capes or cloaks
-						
+						valid_data  <= '1';
+						data_in     <= '1';
+						d           <= 2;
+						max_count <= 2;
+		                count_en <= '1';
 
 					WHEN "0011" => -- Gun + cape or cloak
-						
+						valid_data  <= '1';
+						data_in     <= '1';
+						d           <= 3;
+						max_count <= 3;
+		                count_en <= '1';
 
 					WHEN "0100" => -- Yoda
-						
+						valid_data  <= '1';
+						data_in     <= '1';
+						d           <= 4;
+						max_count <= 4;
+		                count_en <= '1';
 
 					WHEN "0101" => -- Yoda + lightsaber
 						valid_data  <= '1';
 						data_in     <= '1';
 						d           <= 5;
+						max_count <= 5;
+		                count_en <= '1';
 					WHEN "0110" => -- Yoda + cloak
-						
+						valid_data  <= '1';
+						data_in     <= '1';
+						d           <= 6;
+						max_count <= 6;
+		                count_en <= '1';
 
 					WHEN "0111" => -- Yoda + cloak + lightsaber
-						
+						valid_data  <= '1';
+						data_in     <= '1';
+						d           <= 7;
+						max_count <= 7;
+		                count_en <= '1';
 
 					WHEN "1000" => -- Leia
-						
+						valid_data  <= '1';
+						data_in     <= '1';
+						d           <= 8;
+						max_count <= 8;
+		                count_en <= '1';
 
 					WHEN "1001" => -- Leia + rifle
-						
+						valid_data  <= '1';
+						data_in     <= '1';
+						d           <= 9;
+						max_count <= 9;
+		                count_en <= '1';
 
 					WHEN "1010" => -- Leia + cape
-						
+						valid_data  <= '1';
+						data_in     <= '1';
+						d           <= 10;
+						max_count <= 10;
+		                count_en <= '1';
 
 					WHEN "1011" => -- Leia + cloak + lightsaber
-						
+						valid_data  <= '1';
+						data_in     <= '1';
+						d           <= 11;
+						max_count <= 11;
+		                count_en <= '1';
 
 					WHEN "1100" => -- Darth Vader
-						
+						valid_data  <= '1';
+						data_in     <= '1';
+						d           <= 12;
+						max_count <= 12;
+		                count_en <= '1';
 
 					WHEN "1101" => -- Darth Vader + lightsaber
-						
+						valid_data  <= '1';
+						data_in     <= '1';
+						d           <= 13;
+						max_count <= 13;
+		                count_en <= '1';
 
 					WHEN "1110" => -- Darth Vader + cloak
-						
+						valid_data  <= '1';
+						data_in     <= '1';
+						d           <= 14;
+						max_count <= 14;
+		                count_en <= '1';
 
 					WHEN "1111" => -- Darth Vader + lightsaber + cloak
-						
+						valid_data  <= '1';
+						data_in     <= '1';
+						d           <= 15;
+						max_count <= 15;
+		                count_en <= '1';
 
 					WHEN OTHERS =>
 						
@@ -352,10 +433,11 @@ BEGIN
 				printing <= '0';
 				ready    <= '1';
                 reset_adder <= '1';
-                -- Turn off delay 
+                -- Turn off delay and counter!!!!
                 valid_data  <= '1';  --POBABLY POINTLESS SIGNAL, REMOVE?
 				data_in     <= '1';  --POBABLY POINTLESS SIGNAL, REMOVE?
 				d           <= 0;
+				count_en <= '0';
 			WHEN OTHERS =>
 		END CASE;
 	END PROCESS;
