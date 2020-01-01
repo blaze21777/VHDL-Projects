@@ -171,27 +171,27 @@ end process;
 --    end loop;
 --    wait for 200 ns; -- wait to finalize the order 2
 
-    -- order #3
-    for i in 0 to order_3'high loop
-      cancel   <= order_3(i).cancel;
-      cash_en  <= order_3(i).cash_en;
-      cash     <= order_3(i).cash;
-      order_en <= order_3(i).order_en;
-      order    <= order_3(i).order;
-      wait for 10 ns;
-    end loop;
-    wait for 200 ns; -- wait to finalize the order 3
+--    -- order #3
+--    for i in 0 to order_3'high loop
+--      cancel   <= order_3(i).cancel;
+--      cash_en  <= order_3(i).cash_en;
+--      cash     <= order_3(i).cash;
+--      order_en <= order_3(i).order_en;
+--      order    <= order_3(i).order;
+--      wait for 10 ns;
+--    end loop;
+--    wait for 200 ns; -- wait to finalize the order 3
 
-    -- order #4
-    for i in 0 to order_4'high loop
-      cancel   <= order_4(i).cancel;
-      cash_en  <= order_4(i).cash_en;
-      cash     <= order_4(i).cash;
-      order_en <= order_4(i).order_en;
-      order    <= order_4(i).order;
-      wait for 10 ns;
-    end loop;
-    wait for 200 ns; -- wait to finalize the order 4
+--    -- order #4
+--    for i in 0 to order_4'high loop
+--      cancel   <= order_4(i).cancel;
+--      cash_en  <= order_4(i).cash_en;
+--      cash     <= order_4(i).cash;
+--      order_en <= order_4(i).order_en;
+--      order    <= order_4(i).order;
+--      wait for 10 ns;
+--    end loop;
+--    wait for 200 ns; -- wait to finalize the order 4
 
     assert false
       report "End of Simulation"
