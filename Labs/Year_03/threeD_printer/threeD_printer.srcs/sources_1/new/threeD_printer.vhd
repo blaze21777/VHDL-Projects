@@ -67,6 +67,9 @@ architecture Behavioral of threeD_printer is
 	-- Order signals
 	signal order_price       : std_logic_vector(num_bits + 2 downto 0) := (others => '0');
 	signal order_save        : std_logic_vector(3 downto 0)            := (others => '0');
+	
+	-- Cancel signal
+	signal cancel_save       : std_logic                               := '0';
 
 	-- Serial adder signals 
 	signal a, b              : std_logic_vector(11 downto 0)           := (others => '0');
@@ -160,7 +163,6 @@ begin
 
 				-- Order state --
 			when order_s =>
-				-- NEED TO GET ADDER WORKING FIRST!!
 				-- If balance => order price, then execute the order and give the change back
 				-- If balance =< order price, then cancel the order and give the current balance back
 				if (s = order_price) then
@@ -188,14 +190,18 @@ begin
 					next_state <= subtract_s;
 				elsif (sub_out > "000000000000" and sub_out <= one_pound) then -- Greater than 50p
 					next_state <= subtract_s;
-				elsif (sub_out = "000000000000") then -- Greater than 50p	
+				elsif (sub_out = "000000000000") then -- Greater than 50p
+				    if (cancel_save = '1') then 
+				    next_state <= reset_s;
+				    else	
 				    next_state <= printing_s;
+				    end if;
 				end if;
 
 				-- Cancel state --
 			when cancel_s =>
 
-				next_state <= reset_s;
+				next_state <= subtract_s;
 
 				-- Printing state --
 			when printing_s =>
@@ -357,9 +363,10 @@ begin
 
 				-- Cancel state --
 			when cancel_s   =>
-				-- NEEDS TO USE SAME IF STATEMENTS AS CHANGE_S
-				-- change <= total_cash; THIS IS DUMB, TOTAL CASH CAN BE HIGHER THAN 10 BITS!! 
-
+				sub_in1 <= s;           -- SHOULD BE TOTAL COIN BUT THATS BROKEN NOW.
+				sub_in2 <= "000000000000"; 
+                cancel_save <= '1';
+                
 				-- Printing state -- NEED TO REMOVE ALL DELAY SIGNAL, USELESS
 			when printing_s =>
 				--  printing <= '1';

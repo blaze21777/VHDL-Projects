@@ -79,16 +79,16 @@ ARCHITECTURE tb OF threeD_printer_tb IS
     ('0', '1', conv_std_logic_vector( 500, 10), '0', "0000"),
     ('0', '1', conv_std_logic_vector( 200, 10), '0', "0000"),
     ('0', '1', conv_std_logic_vector(  50, 10), '0', "0000"),
-    ('0', '0', conv_std_logic_vector(   0, 10), '1', "0101"), --  balance = ï¿½37,50 => order: Yoda + lightsaber (ï¿½24,50)
-    ('0', '0', conv_std_logic_vector(   0, 10), '0', "0000")  --  In this case, the machine must return XXX and deliver the item. 
+    ('0', '0', conv_std_logic_vector(   0, 10), '1', "0101"), --  balance = £37,50 => order: Yoda + lightsaber (£24,50)
+    ('0', '0', conv_std_logic_vector(   0, 10), '0', "0000")  --  In this case, the machine must return XXX and deliver the item.  
   );
   
   constant order_2 : input_data := 
   ( ('0', '1', conv_std_logic_vector( 500, 10), '0', "0000"),
     ('0', '1', conv_std_logic_vector( 200, 10), '0', "0000"),
     ('0', '0', conv_std_logic_vector(   0, 10), '0', "0000"),
-    ('0', '0', conv_std_logic_vector(   0, 10), '1', "1111"), -- balance = ï¿½7,00 => order: Darth Vader + lightsaber + cloak (ï¿½40,00)
-    ('0', '0', conv_std_logic_vector(   0, 10), '0', "0000")  -- insufficient ï¿½, order canceled 
+    ('0', '0', conv_std_logic_vector(   0, 10), '1', "1111"), -- balance = £7,00 => order: Darth Vader + lightsaber + cloak (£40,00)
+    ('0', '0', conv_std_logic_vector(   0, 10), '0', "0000")  -- insufficient £, order canceled  
   );
   
   constant order_3 : input_data := 
@@ -160,16 +160,16 @@ end process;
     end loop;
     wait for 200 ns; -- wait to finalize the order 1
     
---     -- order #2
---    for i in 0 to order_2'high loop
---      cancel   <= order_2(i).cancel;
---      cash_en  <= order_2(i).cash_en;
---      cash     <= order_2(i).cash;
---      order_en <= order_2(i).order_en;
---      order    <= order_2(i).order;
---      wait for 10 ns;
---    end loop;
---    wait for 200 ns; -- wait to finalize the order 2
+     -- order #2
+    for i in 0 to order_2'high loop
+      cancel   <= order_2(i).cancel;
+      cash_en  <= order_2(i).cash_en;
+      cash     <= order_2(i).cash;
+      order_en <= order_2(i).order_en;
+      order    <= order_2(i).order;
+      wait for 10 ns;
+    end loop;
+    wait for 200 ns; -- wait to finalize the order 2
 
 --    -- order #3
 --    for i in 0 to order_3'high loop
