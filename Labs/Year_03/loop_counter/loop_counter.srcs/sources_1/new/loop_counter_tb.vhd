@@ -37,6 +37,7 @@ architecture Behavioral of loop_counter_tb is
 
 	signal clk        : std_logic;
 	signal reset      : std_logic;
+	signal count_en   : std_logic;
 	signal max_count  : integer;
 	signal done       : std_logic;
 	signal clk_period : time := 10ns;
@@ -47,6 +48,7 @@ begin
 		port map(
 			clk       => clk,
 			reset     => reset,
+			count_en  => count_en,
 			max_count => max_count,
 			done      => done);
 
@@ -66,14 +68,17 @@ begin
 	    reset <= '1';
 	    wait for 9ns;
 	    reset <= '0';
-		wait for 10ns;
+		wait for 20ns;
 		max_count <= 7;
---		wait for 50ns;
---		reset <= '1';
---		wait for 10ns;
---		reset <= '0';
---		wait for 60ns;
---		max_count <= 2;
+		count_en <= '1';
+		wait for 50ns;
+		reset <= '1';
+		wait for 10ns;
+		reset <= '0';
+		count_en <= '0';
+		max_count <= 2;
+		wait for 30ns;
+        count_en <= '1';
 		wait;
 	end process;
 
