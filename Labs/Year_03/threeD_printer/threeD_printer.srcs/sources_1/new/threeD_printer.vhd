@@ -165,9 +165,9 @@ begin
 			when order_s =>
 				-- If balance => order price, then execute the order and give the change back
 				-- If balance =< order price, then cancel the order and give the current balance back
-				if (s = order_price) then
+				if (s >= order_price) then
 					next_state <= subtract_s;
-				elsif (total_cash < order_price) then
+				elsif (s < order_price) then -- WAS TOTAL_CASH
 					next_state <= cancel_s;
 				else
 					next_state <= subtract_s;
@@ -232,7 +232,12 @@ begin
 				order_cancelled <= '0';
 				change_en       <= '0';
 				change          <= "0000000000";
-
+				
+				-- Reset buffer signals
+                cancel_save <= '0';
+                order_cancelled <= '0';
+               -- order_save <= "0000";
+                
 				-- Counter signals 
 				count_rst       <= '1'; -- Reset counter 
 				count_en        <= '0';
@@ -329,6 +334,8 @@ begin
 				-- MULTIPLE IF STATEMETNS TO CHECK IF HIGHEST DENOMINATION CAN BE TAKEN OUT                                                                                                  
 			when change_s =>
 				change_en <= '1';
+				
+				count_rst <= '0'; -- Preparing counter to count
 				if (sub_out > ten_pounds) then -- Greater than £10
 					-- NEED TO CLEAN UP WITH CONSTANTS 
 					change  <= ten_pounds(num_bits downto 0);
@@ -359,17 +366,18 @@ begin
 				change  <= "0000000000";
 				change_en <= '0';
 				end if;
-				count_rst <= '0'; -- Preparing counter to count
+				
 
 				-- Cancel state --
 			when cancel_s   =>
 				sub_in1 <= s;           -- SHOULD BE TOTAL COIN BUT THATS BROKEN NOW.
 				sub_in2 <= "000000000000"; 
                 cancel_save <= '1';
-                
+                reset_adder <= '1';
+                order_cancelled <= '1';
 				-- Printing state -- NEED TO REMOVE ALL DELAY SIGNAL, USELESS
 			when printing_s =>
-				--  printing <= '1';
+				  printing <= '1';
 				case order_save is
 					when "0000" => -- No order
 

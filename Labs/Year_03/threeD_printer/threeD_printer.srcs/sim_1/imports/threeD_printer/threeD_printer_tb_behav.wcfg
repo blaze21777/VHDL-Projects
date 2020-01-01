@@ -10,15 +10,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="137200001fs"></ZoomEndTime>
-      <Cursor1Time time="90400000fs"></Cursor1Time>
+      <ZoomStartTime time="166666666fs"></ZoomStartTime>
+      <ZoomEndTime time="1166666667fs"></ZoomEndTime>
+      <Cursor1Time time="850000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="146"></NameColumnWidth>
-      <ValueColumnWidth column_width="83"></ValueColumnWidth>
+      <ValueColumnWidth column_width="79"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="35" />
+   <WVObjectSize size="37" />
    <wvobject fp_name="/threeD_printer_tb/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -44,6 +44,10 @@
       <obj_property name="ElementShortName">cancel</obj_property>
       <obj_property name="ObjectShortName">cancel</obj_property>
    </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/UUT_printer/cancel_save" type="logic">
+      <obj_property name="ElementShortName">cancel_save</obj_property>
+      <obj_property name="ObjectShortName">cancel_save</obj_property>
+   </wvobject>
    <wvobject fp_name="/threeD_printer_tb/order_en" type="logic">
       <obj_property name="ElementShortName">order_en</obj_property>
       <obj_property name="ObjectShortName">order_en</obj_property>
@@ -51,6 +55,26 @@
    <wvobject fp_name="/threeD_printer_tb/order" type="array">
       <obj_property name="ElementShortName">order[3:0]</obj_property>
       <obj_property name="ObjectShortName">order[3:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/order_1" type="array">
+      <obj_property name="ElementShortName">order_1[0:8]</obj_property>
+      <obj_property name="ObjectShortName">order_1[0:8]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/UUT_printer/order_save" type="array">
+      <obj_property name="ElementShortName">order_save[3:0]</obj_property>
+      <obj_property name="ObjectShortName">order_save[3:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/UUT_printer/order_price" type="array">
+      <obj_property name="ElementShortName">order_price[11:0]</obj_property>
+      <obj_property name="ObjectShortName">order_price[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/UUT_printer/total_cash" type="array">
+      <obj_property name="ElementShortName">total_cash[11:0]</obj_property>
+      <obj_property name="ObjectShortName">total_cash[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/threeD_printer_tb/check_balance" type="logic">
       <obj_property name="ElementShortName">check_balance</obj_property>
@@ -91,20 +115,6 @@
       <obj_property name="ElementShortName">sub_out[11:0]</obj_property>
       <obj_property name="ObjectShortName">sub_out[11:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/threeD_printer_tb/UUT_printer/order_price" type="array">
-      <obj_property name="ElementShortName">order_price[11:0]</obj_property>
-      <obj_property name="ObjectShortName">order_price[11:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/threeD_printer_tb/order_1" type="array">
-      <obj_property name="ElementShortName">order_1[0:8]</obj_property>
-      <obj_property name="ObjectShortName">order_1[0:8]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/threeD_printer_tb/UUT_printer/order_save" type="array">
-      <obj_property name="ElementShortName">order_save[3:0]</obj_property>
-      <obj_property name="ObjectShortName">order_save[3:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/threeD_printer_tb/UUT_printer/state" type="other">
       <obj_property name="ElementShortName">state</obj_property>
