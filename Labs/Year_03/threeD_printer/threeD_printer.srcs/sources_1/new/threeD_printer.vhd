@@ -75,10 +75,9 @@ architecture Behavioral of threeD_printer is
 	signal a, b              : std_logic_vector(11 downto 0)           := (others => '0');
 	signal s                 : std_logic_vector(11 downto 0)           := (others => '0');
 	signal reset_adder       : std_logic                               := '0';
-	signal total_cash        : std_logic_vector(num_bits + 2 downto 0) := (others => '0'); -- Sum of coins inserted ALU
+	signal total_cash        : std_logic_vector(11 downto 0) := (others => '0'); -- Sum of coins inserted ALU
 
-	-- Subtraction
-	-- NEED TO FIX 12 BIT SUBTRACTION
+	-- Subtraction signals 
 	signal sub_in1           : std_logic_vector(11 downto 0)           := (others => '0');
 	signal sub_in2           : std_logic_vector(11 downto 0)           := (others => '0');
 	signal sub_out           : std_logic_vector(11 downto 0)           := (others => '0');
@@ -87,11 +86,7 @@ architecture Behavioral of threeD_printer is
 	constant two_pounds      : std_logic_vector(11 downto 0)           := "000011001000";
 	constant one_pound       : std_logic_vector(11 downto 0)           := "000001100100";
 	constant fifty_pence     : std_logic_vector(11 downto 0)           := "000000110010";
-	-- Delay signals 
-	signal valid_data        : std_logic                               := '0';
-	signal data_in, data_out : std_logic                               := '0';
-	signal d                 : integer                                 := 0; --number of clock cycles by which input should be delayed.
-
+	
 	-- Counter signals 
 	signal count_rst         : std_logic;
 	signal count_en          : std_logic;
@@ -100,8 +95,6 @@ architecture Behavioral of threeD_printer is
 begin
 
 	-- Serial adder instatiation
-	-- NEED TO CREATE EXPLICIT PORT MAPPING!
-	-- https://stackoverflow.com/questions/21163915/how-does-vhdl-deal-with-overflow
 	serial_adder : entity work.serial_adder(behav)
 		port map(
 			clk   => clk,
@@ -109,16 +102,8 @@ begin
 			a     => a,
 			b     => b,
 			s     => s);
-
-	-- dealay instatiation
-	delay : entity work.delay port map (
-		Clk        => Clk,
-		valid_data => valid_data,
-		data_in    => data_in,
-		data_out   => data_out,
-		d          => d
-		);
-
+			
+    -- Counter instantiation 
 	counter : entity work.loop_counter(Behavioral)
 		port map(
 			clk       => clk,
@@ -138,14 +123,18 @@ begin
 			end if;
 		end if;
 	end process;
-
-	-- Next state decode 
-	next_state_decode : process (order_price, sub_out, cancel, state, order_en, cash_en, d, data_out, total_cash, done) is -- NEED TO REMOVE DATA OUT!!
+	
+    ----------------------------------------------------------
+	------------------- Next state decode -------------------- 
+	----------------------------------------------------------
+	next_state_decode : process (order_price, sub_out, cancel, 
+	                             state, order_en, cash_en, 
+	                             total_cash, done,s, cancel_save) is 
 
 	begin
 
 		case state is
-				-- Reset state --
+			------------------- Reset state ---------------------- 
 			when reset_s =>
 				if (order_en = '1') then
 					next_state <= pre_order_s;
@@ -153,19 +142,19 @@ begin
 					next_state <= cancel_s;
 				end if;
 
-				-- Pre order state --
+			------------------- Pre order state -------------------
 			when pre_order_s =>
-				if (cancel = '1') then --- MIGHT BE POINTLESS 
+				if (cancel = '1') then -- 
 					next_state <= cancel_s;
 				else
 					next_state <= order_s;
 				end if;
 
-				-- Order state --
+			------------------- Order state ------------------------
 			when order_s =>
 				-- If balance => order price, then execute the order and give the change back
 				-- If balance =< order price, then cancel the order and give the current balance back
-				if (s >= order_price) then
+				if (s >= order_price) then -- s = total cash from adder
 					next_state <= subtract_s;
 				elsif (s < order_price) then -- WAS TOTAL_CASH
 					next_state <= cancel_s;
@@ -173,11 +162,11 @@ begin
 					next_state <= subtract_s;
 				end if;
 
-				-- Subtract state --
+			-------------------  Subtract state ---------------------
 			when subtract_s =>
 				next_state <= change_s;
 
-				-- Change state --
+			------------------- Change state ------------------------
 			when change_s =>
 							
 				if (sub_out > ten_pounds) then -- Greather than £10
@@ -198,34 +187,43 @@ begin
 				    end if;
 				end if;
 
-				-- Cancel state --
+			------------------- Cancel state -------------------------
 			when cancel_s =>
 
 				next_state <= subtract_s;
 
-				-- Printing state --
+			------------------- Printing state -----------------------
 			when printing_s =>
-				-- Printing test
-				if (done = '1') then
+				if (done = '1') then -- done = delay signal to simulate printing
 					next_state <= ready_s;
 				end if;
-
+			
+			------------------- Ready state --------------------------
+			when ready_s =>
+			next_state <= reset_s;
+			
+            ------------------- Check balance state ------------------
 			when check_balance_s =>
-
+            
+            ------------------- Error check state --------------------
+            -- FSM should neve make it to this state if error free
 			when others          =>
 				next_state <= reset_s;
 		end case;
 	end process;
-
-	-- Output decode
-	output_decode : process (s, sub_in1, sub_in2, sub_out, order, order_en, state, d, order_save, data_out, total_cash, cash, cash_en, order_price) is
-
+	
+    --------------------------------------------------------- 
+	------------------- Output decode -----------------------
+	--------------------------------------------------------- 
+	output_decode : process (s, sub_in1, sub_in2, sub_out, 
+	                         order, order_en, state, order_save,
+	                         cash, cash_en, order_price) is
 	begin
 		case state is
 
-				-- Reset state --
+			------------------- Reset state --------------------- 
 			when reset_s =>
-				-- Set all FSM outputs to 0
+				-- Reset FSM outputs and signal 
 				check_balance   <= '0';
 				printing        <= '0';
 				ready           <= '0';
@@ -242,31 +240,29 @@ begin
 				count_rst       <= '1'; -- Reset counter 
 				count_en        <= '0';
 				max_count       <= 0;
-
-				-- Delay signals
-				-- data_out <= '0';      
+      
 				-- Adder signals 
 				reset_adder     <= '0'; -- Reset in ready state
-				-- NEED TO ADD OVERFLOW COMPENSAION 	
+				
+				-- Adding takes place in reset as no need for extra state.
 				if (cash_en = '1') then
 					a          <= "00" & cash; -- 12-bit assignment 
-					b          <= "000000000000";
-					total_cash <= s;
+					b          <= "000000000000"; -- First assignment of adder adds 0 
+					total_cash <= s; -- TOTAL CASH NOT USED
 				else
-					a <= "000000000000";
+					a <= "000000000000"; -- REMEMBER WHAT THIS DOES!!
 
 				end if;
-
-				-- Mealy output    
+                
+                -- Next state condition 
 				if (order_en = '1') then
-					order_save <= order;
-					printing   <= '0';
+					order_save <= order; -- Save order to be used later 
 				end if;
 
-				-- Pre order state -- 
-				-- printing time should be assigned here
+		    ------------------- Pre order state ------------------- 
+		    -- Order prices are assigned in this state 
 			when pre_order_s =>
-				case order_save is
+				case order_save is -- Uses order save as order gets reset 
 					when "0000" => -- No order
 						order_price <= x"000";
 
@@ -319,25 +315,26 @@ begin
 						order_price <= x"000";
 				end case;
 
-				-- Order state --
+			------------------- Order state -----------------------
 			when order_s =>
+                -- Assign values in preperation for change calculation 
+				sub_in1 <= s;           
+				sub_in2 <= order_price; -- If bigger than s order is cancelled so no negative numbers 
 
-				sub_in1 <= s;           -- SHOULD BE TOTAL COIN BUT THATS BROKEN NOW.
-				sub_in2 <= order_price; -- ORDER PRICE HAS 12 ELEMENTS NEED TO FIX!
-
-				-- Subtract state --
+			------------------- Subtract state --------------------
 			when subtract_s =>
+			    -- Subtraction calculation 
 				sub_out <= std_logic_vector(unsigned(sub_in1) - unsigned(sub_in2));
 
-				-- Change state --     
-				-- CHANGE TAKES MULTIPLE CLOCK CYCLES, SPLIT TOTAL CASH TO 10-BIT PARTS
-				-- MULTIPLE IF STATEMETNS TO CHECK IF HIGHEST DENOMINATION CAN BE TAKEN OUT                                                                                                  
+			------------------- Change state ----------------------     
+			-- Change calculation takes multiple clock cycles as total cash needs to be 
+			-- split into 10-bit values of accepted cash                                                                                                
 			when change_s =>
-				change_en <= '1';
+				change_en <= '1'; -- Turn on when change is being calculated 
+				count_rst <= '0'; -- Allows counter to count
 				
-				count_rst <= '0'; -- Preparing counter to count
-				if (sub_out > ten_pounds) then -- Greater than £10
-					-- NEED TO CLEAN UP WITH CONSTANTS 
+				-- Keep subtracting until zero is reached
+				if (sub_out > ten_pounds) then -- Greater than £10 
 					change  <= ten_pounds(num_bits downto 0);
 					sub_in1 <= sub_out;
 					sub_in2 <= ten_pounds;
@@ -363,142 +360,95 @@ begin
 					sub_in2 <= fifty_pence;
 					
 				elsif (sub_out = "000000000000") then -- Zero
-				change  <= "0000000000";
-				change_en <= '0';
+				change  <= "0000000000"; -- Must set to zero as it keeps last value for infinte change despensing
+				change_en <= '0'; -- Change is no longer being calculated 
 				end if;
 				
 
-				-- Cancel state --
+			------------------- Cancel state ----------------------
 			when cancel_s   =>
-				sub_in1 <= s;           -- SHOULD BE TOTAL COIN BUT THATS BROKEN NOW.
-				sub_in2 <= "000000000000"; 
-                cancel_save <= '1';
+				sub_in1 <= s;           
+				sub_in2 <= "000000000000"; -- An intial value is required 
+                cancel_save <= '1'; -- Indicate cancel has been triggered 
+                order_cancelled <= '1'; -- Order has been cancelled (can't read ouputs)
                 reset_adder <= '1';
-                order_cancelled <= '1';
-				-- Printing state -- NEED TO REMOVE ALL DELAY SIGNAL, USELESS
+                
+			------------------- Printing state ---------------------
 			when printing_s =>
-				  printing <= '1';
+				  printing <= '1'; -- Printing in progress
 				case order_save is
 					when "0000" => -- No order
-
+                        -- NEED TO FIGURE OUT WHAT HAPPENS HERE
+                        
 					when "0001" => -- Gun
-						valid_data <= '1';
-						data_in    <= '1';
-						d          <= 1;
 						max_count  <= 1;
 						count_en   <= '1';
 
 					when "0010" => -- Capes or cloaks
-						valid_data <= '1';
-						data_in    <= '1';
-						d          <= 2;
 						max_count  <= 2;
 						count_en   <= '1';
 
 					when "0011" => -- Gun + cape or cloak
-						valid_data <= '1';
-						data_in    <= '1';
-						d          <= 3;
 						max_count  <= 3;
 						count_en   <= '1';
 
 					when "0100" => -- Yoda
-						valid_data <= '1';
-						data_in    <= '1';
-						d          <= 4;
 						max_count  <= 4;
 						count_en   <= '1';
 
 					when "0101" => -- Yoda + lightsaber
-						valid_data <= '1';
-						data_in    <= '1';
-						d          <= 5;
 						max_count  <= 5;
 						count_en   <= '1';
 					when "0110" => -- Yoda + cloak
-						valid_data <= '1';
-						data_in    <= '1';
-						d          <= 6;
 						max_count  <= 6;
 						count_en   <= '1';
 
 					when "0111" => -- Yoda + cloak + lightsaber
-						valid_data <= '1';
-						data_in    <= '1';
-						d          <= 7;
 						max_count  <= 7;
 						count_en   <= '1';
 
 					when "1000" => -- Leia
-						valid_data <= '1';
-						data_in    <= '1';
-						d          <= 8;
 						max_count  <= 8;
 						count_en   <= '1';
 
 					when "1001" => -- Leia + rifle
-						valid_data <= '1';
-						data_in    <= '1';
-						d          <= 9;
 						max_count  <= 9;
 						count_en   <= '1';
 
 					when "1010" => -- Leia + cape
-						valid_data <= '1';
-						data_in    <= '1';
-						d          <= 10;
 						max_count  <= 10;
 						count_en   <= '1';
 
 					when "1011" => -- Leia + cloak + lightsaber
-						valid_data <= '1';
-						data_in    <= '1';
-						d          <= 11;
 						max_count  <= 11;
 						count_en   <= '1';
 
 					when "1100" => -- Darth Vader
-						valid_data <= '1';
-						data_in    <= '1';
-						d          <= 12;
 						max_count  <= 12;
 						count_en   <= '1';
 
 					when "1101" => -- Darth Vader + lightsaber
-						valid_data <= '1';
-						data_in    <= '1';
-						d          <= 13;
 						max_count  <= 13;
 						count_en   <= '1';
 
 					when "1110" => -- Darth Vader + cloak
-						valid_data <= '1';
-						data_in    <= '1';
-						d          <= 14;
 						max_count  <= 14;
 						count_en   <= '1';
 
 					when "1111" => -- Darth Vader + lightsaber + cloak
-						valid_data <= '1';
-						data_in    <= '1';
-						d          <= 15;
 						max_count  <= 15;
 						count_en   <= '1';
 
-					when others =>
+					when others => -- Should never make it here
 
 				end case;
 
 			when ready_s =>
 				-- NEED TO CHANGE POSITION INTO PREVIOUS STATE IF TO MAKE MEALY   
-				printing    <= '0';
-				ready       <= '1';
+				printing    <= '0'; -- Printing finished 
+				ready       <= '1'; -- Product can be collected 
 				reset_adder <= '1';
-				-- Turn off delay and counter!!!!
-				valid_data  <= '1'; --POBABLY POINTLESS SIGNAL, REMOVE?
-				data_in     <= '1'; --POBABLY POINTLESS SIGNAL, REMOVE?
-				d           <= 0;
-				count_en    <= '0';
+				count_en    <= '0'; -- Stop counter from counting 
 			when others =>
 		end case;
 	end process;
