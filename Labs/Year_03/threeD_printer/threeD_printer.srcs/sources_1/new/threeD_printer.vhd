@@ -75,12 +75,13 @@ architecture Behavioral of threeD_printer is
 	signal a, b              : std_logic_vector(11 downto 0)           := (others => '0');
 	signal s                 : std_logic_vector(11 downto 0)           := (others => '0');
 	signal reset_adder       : std_logic                               := '0';
-	signal total_cash        : std_logic_vector(11 downto 0) := (others => '0'); -- Sum of coins inserted ALU
 
 	-- Subtraction signals 
 	signal sub_in1           : std_logic_vector(11 downto 0)           := (others => '0');
 	signal sub_in2           : std_logic_vector(11 downto 0)           := (others => '0');
 	signal sub_out           : std_logic_vector(11 downto 0)           := (others => '0');
+	
+	-- Constants as defined in the specfication
 	constant ten_pounds      : std_logic_vector(11 downto 0)           := "001111101000";
 	constant five_pounds     : std_logic_vector(11 downto 0)           := "000111110100";
 	constant two_pounds      : std_logic_vector(11 downto 0)           := "000011001000";
@@ -129,7 +130,7 @@ begin
 	----------------------------------------------------------
 	next_state_decode : process (order_price, sub_out, cancel, 
 	                             state, order_en, cash_en, 
-	                             total_cash, done,s, cancel_save) is 
+	                             done,s, cancel_save) is 
 
 	begin
 
@@ -194,7 +195,9 @@ begin
 
 			------------------- Printing state -----------------------
 			when printing_s =>
-				if (done = '1') then -- done = delay signal to simulate printing
+			    -- done = delay signal to simulate printing
+			    -- Extra cycle is taken to change state but printing is finished when done = 1
+				if (done = '1') then 
 					next_state <= ready_s;
 				end if;
 			
@@ -247,10 +250,9 @@ begin
 				-- Adding takes place in reset as no need for extra state.
 				if (cash_en = '1') then
 					a          <= "00" & cash; -- 12-bit assignment 
-					b          <= "000000000000"; -- First assignment of adder adds 0 
-					total_cash <= s; -- TOTAL CASH NOT USED
+					b          <= "000000000000"; -- Always zero as after first assignment output is used 
 				else
-					a <= "000000000000"; -- REMEMBER WHAT THIS DOES!!
+					a <= "000000000000"; -- Stop adding when cash_en is off
 
 				end if;
                 

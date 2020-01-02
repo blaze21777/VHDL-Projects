@@ -43,7 +43,7 @@ architecture Behavioral of loop_counter is
 	type state_type is (reset_s, count1_s);
 	signal state, next_state : state_type;
 
-	signal count_sig         : integer := 0;
+	signal count_sig         : integer := 1; -- Start at one to prevent extra clock cycle
 
 begin
 
@@ -59,18 +59,18 @@ begin
 		end if;
 	end process;
 
-    -- Countin process
+    -- Counting process
 	do_work : process (clk, count_en) is
 	begin
 		case state is
 		
-		    -- Reset State --
+		    ------------------- Reset State -------------------
 			when reset_s  =>
             next_state <= count1_s; -- Next state decode
-            count_sig <= 0;
+            count_sig <= 1; -- Start at one to prevent extra clock cycle
             done <= '0';
             
-            -- Count state --
+            ------------------- Count state -------------------
 			when count1_s =>
 			    if (count_en = '1') then 
 				if (count_sig = max_count) and rising_edge(clk) then
