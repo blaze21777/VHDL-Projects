@@ -9,6 +9,7 @@ vmap work work
 vcom threeD_printer_sources/loop_counter.vhd 
 vcom threeD_printer_sources/serial_adder.vhd
 vcom threeD_printer_sources/threeD_printer.vhd
+vcom threeD_printer_sources/threeD_printer_tb.vhd
 
 # Start simulation
 vsim work.threeD_printer_tb
@@ -18,5 +19,7 @@ set StdArithNoWarnings 1
 set StdNumericStdNoWarnigns 1
 
 echo "--COMPILATION IS OVER--"
-add wave -r *
-run 500ns
+#add wave -r *
+do wave.do
+
+run 2us
