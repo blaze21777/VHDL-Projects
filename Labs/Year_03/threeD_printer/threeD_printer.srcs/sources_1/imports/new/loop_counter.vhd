@@ -31,11 +31,11 @@ use IEEE.STD_LOGIC_1164.all;
 
 entity loop_counter is
 	port (
-		clk       : in std_logic;
-		reset     : in std_logic;
-		count_en  : in std_logic;
-		max_count : in integer;
-		done      : out std_logic);
+		clk        : in std_logic;
+		reset      : in std_logic;
+		count_en   : in std_logic;
+		max_count  : in integer;
+		count_done : out std_logic);
 end loop_counter;
 
 architecture Behavioral of loop_counter is
@@ -59,27 +59,27 @@ begin
 		end if;
 	end process;
 
-    -- Counting process
+	-- Counting process
 	do_work : process (clk, count_en) is
 	begin
 		case state is
-		
-		    ------------------- Reset State -------------------
-			when reset_s  =>
-            next_state <= count1_s; -- Next state decode
-            count_sig <= 1; -- Start at one to prevent extra clock cycle
-            done <= '0';
-            
-            ------------------- Count state -------------------
+
+			------------------- Reset State -------------------
+			when reset_s =>
+				next_state <= count1_s; -- Next state decode
+				count_sig  <= 1;        -- Start at one to prevent extra clock cycle
+				count_done <= '0';
+
+			------------------- Count state -------------------
 			when count1_s =>
-			    if (count_en = '1') then 
-				if (count_sig = max_count) and rising_edge(clk) then
-				    next_state <= reset_s; -- Next state decode
-					done <= '1';
-				elsif rising_edge(clk) then
-					count_sig  <= count_sig + 1;		
+				if (count_en = '1') then
+					if (count_sig = max_count) and rising_edge(clk) then
+						next_state <= reset_s; -- Next state decode
+						count_done <= '1';
+					elsif rising_edge(clk) then
+						count_sig <= count_sig + 1;
+					end if;
 				end if;
-                end if;
 
 			when others =>
 				next_state <= reset_s;

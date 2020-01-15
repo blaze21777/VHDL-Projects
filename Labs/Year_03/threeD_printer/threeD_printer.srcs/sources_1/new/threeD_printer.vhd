@@ -93,7 +93,7 @@ architecture Behavioral of threeD_printer is
 	signal count_rst         : std_logic;
 	signal count_en          : std_logic;
 	signal max_count         : integer;
-	signal done              : std_logic;
+	signal count_done              : std_logic;
 begin
 
 	-- Serial adder instatiation
@@ -112,7 +112,7 @@ begin
 			reset     => count_rst,
 			count_en  => count_en,
 			max_count => max_count,
-			done      => done);
+			count_done      => count_done);
 
 	-- The clock process
 	sync_proc : process (clk)
@@ -131,7 +131,7 @@ begin
 	----------------------------------------------------------
 	next_state_decode : process (order_price, sub_out, cancel, 
 	                             state, order_en, cash_en, 
-	                             done,add_out, cancel_save) is 
+	                             count_done,add_out, cancel_save) is 
 
 	begin
 
@@ -202,7 +202,7 @@ begin
 			when printing_s =>
 			    -- done = delay signal to simulate printing
 			    -- Extra cycle is taken to change state but printing is finished when done = 1
-				if (done = '1') then 
+				if (count_done = '1') then 
 					next_state <= ready_s;
 				end if;
 			

@@ -54,6 +54,7 @@ architecture Behavioral of threeD_printer is
 	-- Decalare states that can be taken
 	type state_type is (
 		reset_s,
+		add_s,
 		pre_order_s,
 		order_s,
 		cancel_s,
@@ -72,8 +73,8 @@ architecture Behavioral of threeD_printer is
 	signal cancel_save       : std_logic                               := '0';
 
 	-- Serial adder signals 
-	signal a, b              : std_logic_vector(11 downto 0)           := (others => '0');
-	signal s                 : std_logic_vector(11 downto 0)           := (others => '0');
+	signal add_in1, add_in2  : std_logic_vector(11 downto 0)           := (others => '0');
+	signal add_out           : std_logic_vector(11 downto 0)           := (others => '0');
 	signal reset_adder       : std_logic                               := '0';
 
 	-- Subtraction signals 
@@ -100,9 +101,9 @@ begin
 		port map(
 			clk   => clk,
 			reset => reset_adder,
-			a     => a,
-			b     => b,
-			s     => s);
+			add_in1  => add_in1,
+			add_in2     => add_in2,
+			add_out     => add_out);
 			
     -- Counter instantiation 
 	counter : entity work.loop_counter(Behavioral)
@@ -130,13 +131,17 @@ begin
 	----------------------------------------------------------
 	next_state_decode : process (order_price, sub_out, cancel, 
 	                             state, order_en, cash_en, 
-	                             done,s, cancel_save) is 
+	                             done,add_out, cancel_save) is 
 
 	begin
 
 		case state is
-			------------------- Reset state ---------------------- 
-			when reset_s =>
+		    ------------------- Reset state ---------------------- 
+		    when reset_s => 
+		    next_state <= add_s;
+		    
+			------------------- Add state ------------------------ 
+			when add_s =>
 				if (order_en = '1') then
 					next_state <= pre_order_s;
 				elsif (cancel = '1') then
@@ -155,9 +160,9 @@ begin
 			when order_s =>
 				-- If balance => order price, then execute the order and give the change back
 				-- If balance =< order price, then cancel the order and give the current balance back
-				if (s >= order_price) then -- s = total cash from adder
+				if (add_out >= order_price) then -- s = total cash from adder
 					next_state <= subtract_s;
-				elsif (s < order_price) then -- WAS TOTAL_CASH
+				elsif (add_out < order_price) then -- WAS TOTAL_CASH
 					next_state <= cancel_s;
 				else
 					next_state <= subtract_s;
@@ -218,7 +223,7 @@ begin
     --------------------------------------------------------- 
 	------------------- Output decode -----------------------
 	--------------------------------------------------------- 
-	output_decode : process (s, sub_in1, sub_in2, sub_out, 
+	output_decode : process (add_out, sub_in1, sub_in2, sub_out, 
 	                         order, order_en, state, order_save,
 	                         cash, cash_en, order_price) is
 	begin
@@ -247,12 +252,15 @@ begin
 				-- Adder signals 
 				reset_adder     <= '0'; -- Reset in ready state
 				
+			------------------- Add state -----------------------
+			check_balance <= '1'; -- When 1 adder output will be displayed to a display 
+			when add_s =>
 				-- Adding takes place in reset as no need for extra state.
 				if (cash_en = '1') then
-					a          <= "00" & cash; -- 12-bit assignment 
-					b          <= "000000000000"; -- Always zero as after first assignment output is used 
+					add_in1    <= "00" & cash; -- 12-bit assignment 
+					add_in2    <= "000000000000"; -- Always zero as after first assignment output is used 
 				else
-					a <= "000000000000"; -- Stop adding when cash_en is off
+					add_in1 <= "000000000000"; -- Stop adding when cash_en is off
 
 				end if;
                 
@@ -320,7 +328,7 @@ begin
 			------------------- Order state -----------------------
 			when order_s =>
                 -- Assign values in preperation for change calculation 
-				sub_in1 <= s;           
+				sub_in1 <= add_out;           
 				sub_in2 <= order_price; -- If bigger than s order is cancelled so no negative numbers 
 
 			------------------- Subtract state --------------------
@@ -369,7 +377,7 @@ begin
 
 			------------------- Cancel state ----------------------
 			when cancel_s   =>
-				sub_in1 <= s;           
+				sub_in1 <= add_out;           
 				sub_in2 <= "000000000000"; -- An intial value is required 
                 cancel_save <= '1'; -- Indicate cancel has been triggered 
                 order_cancelled <= '1'; -- Order has been cancelled (can't read ouputs)
@@ -377,6 +385,9 @@ begin
                 
 			------------------- Printing state ---------------------
 			when printing_s =>
+			      -- Check balance cannot happen at the same time as printing 
+			      -- Balance goes to zero once change has been given
+			      check_balance <= '0'; 
 				  printing <= '1'; -- Printing in progress
 				case order_save is
 					when "0000" => -- No order
