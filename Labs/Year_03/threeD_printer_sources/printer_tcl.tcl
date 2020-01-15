@@ -19,5 +19,7 @@ set StdArithNoWarnings 1
 set StdNumericStdNoWarnigns 1
 
 echo "--COMPILATION IS OVER--"
-add wave -r *
-run 500ns
+#add wave -r *
+do wave.do
+
+run 2us
