@@ -33,7 +33,7 @@ entity loop_counter is
 	port (
 		clk        : in std_logic;
 		reset      : in std_logic;
-		count_en   : in std_logic;
+		count_en   : in std_logic; -- Prevent endless counting
 		max_count  : in integer;
 		count_done : out std_logic);
 end loop_counter;

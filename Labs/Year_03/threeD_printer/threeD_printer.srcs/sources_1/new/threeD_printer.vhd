@@ -250,11 +250,13 @@ begin
 				max_count       <= 0;
 
 				-- Adder signals 
-				reset_adder     <= '0'; -- Reset in ready state
+				reset_adder     <= '1'; -- Reset in ready state
+				
 
 				------------------- Add state -----------------------
 				check_balance   <= '1'; -- When 1 adder output will be displayed to a display 
 			when add_s =>
+			reset_adder     <= '0';
 				-- Adding takes place in reset as no need for extra state.
 				if (cash_en = '1') then
 					add_in1 <= "00" & cash;    -- 12-bit assignment 
@@ -379,7 +381,7 @@ begin
 				sub_in2         <= "000000000000"; -- An intial value is required 
 				cancel_save     <= '1';            -- Indicate cancel has been triggered 
 				order_cancelled <= '1';            -- Order has been cancelled (can't read ouputs)
-				reset_adder     <= '1';
+				--reset_adder     <= '1';
 
 				------------------- Printing state ---------------------
 			when printing_s =>

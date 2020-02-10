@@ -10,18 +10,20 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="358476548fs"></ZoomEndTime>
-      <Cursor1Time time="240153000fs"></Cursor1Time>
+      <ZoomStartTime time="176767000fs"></ZoomStartTime>
+      <ZoomEndTime time="500967001fs"></ZoomEndTime>
+      <Cursor1Time time="340000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="146"></NameColumnWidth>
-      <ValueColumnWidth column_width="67"></ValueColumnWidth>
+      <NameColumnWidth column_width="137"></NameColumnWidth>
+      <ValueColumnWidth column_width="70"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="30" />
    <wvobject fp_name="/threeD_printer_tb/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
+      <obj_property name="CustomSignalColor">#FFFFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject fp_name="/threeD_printer_tb/reset" type="logic">
       <obj_property name="ElementShortName">reset</obj_property>
@@ -30,10 +32,6 @@
    <wvobject fp_name="/threeD_printer_tb/clk_period" type="other">
       <obj_property name="ElementShortName">clk_period</obj_property>
       <obj_property name="ObjectShortName">clk_period</obj_property>
-   </wvobject>
-   <wvobject fp_name="/threeD_printer_tb/cash_en" type="logic">
-      <obj_property name="ElementShortName">cash_en</obj_property>
-      <obj_property name="ObjectShortName">cash_en</obj_property>
    </wvobject>
    <wvobject fp_name="/threeD_printer_tb/cancel" type="logic">
       <obj_property name="ElementShortName">cancel</obj_property>
@@ -68,16 +66,26 @@
       <obj_property name="ElementShortName">sub_in1[11:0]</obj_property>
       <obj_property name="ObjectShortName">sub_in1[11:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#008080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject fp_name="/threeD_printer_tb/UUT_printer/sub_in2" type="array">
       <obj_property name="ElementShortName">sub_in2[11:0]</obj_property>
       <obj_property name="ObjectShortName">sub_in2[11:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#008080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject fp_name="/threeD_printer_tb/UUT_printer/sub_out" type="array">
       <obj_property name="ElementShortName">sub_out[11:0]</obj_property>
       <obj_property name="ObjectShortName">sub_out[11:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#008080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/cash_en" type="logic">
+      <obj_property name="ElementShortName">cash_en</obj_property>
+      <obj_property name="ObjectShortName">cash_en</obj_property>
    </wvobject>
    <wvobject fp_name="/threeD_printer_tb/cash" type="array">
       <obj_property name="ElementShortName">cash[9:0]</obj_property>
@@ -87,22 +95,26 @@
    <wvobject fp_name="/threeD_printer_tb/UUT_printer/serial_adder/add_in1" type="array">
       <obj_property name="ElementShortName">add_in1[11:0]</obj_property>
       <obj_property name="ObjectShortName">add_in1[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject fp_name="/threeD_printer_tb/UUT_printer/serial_adder/add_in2" type="array">
       <obj_property name="ElementShortName">add_in2[11:0]</obj_property>
       <obj_property name="ObjectShortName">add_in2[11:0]</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject fp_name="/threeD_printer_tb/UUT_printer/serial_adder/add_out" type="array">
       <obj_property name="ElementShortName">add_out[11:0]</obj_property>
       <obj_property name="ObjectShortName">add_out[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject fp_name="/threeD_printer_tb/order_en" type="logic">
       <obj_property name="ElementShortName">order_en</obj_property>
       <obj_property name="ObjectShortName">order_en</obj_property>
-   </wvobject>
-   <wvobject fp_name="/threeD_printer_tb/order_cancelled" type="logic">
-      <obj_property name="ElementShortName">order_cancelled</obj_property>
-      <obj_property name="ObjectShortName">order_cancelled</obj_property>
    </wvobject>
    <wvobject fp_name="/threeD_printer_tb/order" type="array">
       <obj_property name="ElementShortName">order[3:0]</obj_property>
@@ -114,6 +126,10 @@
       <obj_property name="ObjectShortName">order_save[3:0]</obj_property>
       <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
+   <wvobject fp_name="/threeD_printer_tb/order_cancelled" type="logic">
+      <obj_property name="ElementShortName">order_cancelled</obj_property>
+      <obj_property name="ObjectShortName">order_cancelled</obj_property>
+   </wvobject>
    <wvobject fp_name="/threeD_printer_tb/UUT_printer/order_price" type="array">
       <obj_property name="ElementShortName">order_price[11:0]</obj_property>
       <obj_property name="ObjectShortName">order_price[11:0]</obj_property>
@@ -122,10 +138,14 @@
    <wvobject fp_name="/threeD_printer_tb/UUT_printer/state" type="other">
       <obj_property name="ElementShortName">state</obj_property>
       <obj_property name="ObjectShortName">state</obj_property>
+      <obj_property name="CustomSignalColor">#FFD700</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject fp_name="/threeD_printer_tb/UUT_printer/next_state" type="other">
       <obj_property name="ElementShortName">next_state</obj_property>
       <obj_property name="ObjectShortName">next_state</obj_property>
+      <obj_property name="CustomSignalColor">#FFD700</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject fp_name="/threeD_printer_tb/UUT_printer/counter/reset" type="logic">
       <obj_property name="ElementShortName">reset</obj_property>
