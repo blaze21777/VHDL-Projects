@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 06.02.2020 12:49:22
+-- Create Date: 10.02.2020 13:42:16
 -- Design Name: 
--- Module Name: circuit01 - Behavioral
+-- Module Name: circuit02_tb - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,39 +31,30 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity circuit01 is
-port (
-        BTNC : in STD_LOGIC;
-        SW0 : in STD_LOGIC;
-        SW1 : in STD_LOGIC;
-        SW2 : in STD_LOGIC;
-        LD0 : out STD_LOGIC);
-end circuit01;
+entity circuit02_tb is
+--  Port ( );
+end circuit02_tb;
 
-architecture Behavioral of circuit01 is
-    -- Signal declaration
-    signal btn : std_logic;
-    signal a : std_logic;
-    signal b : std_logic;
-    signal c : std_logic;
-    signal d : std_logic;
-    signal btn_flag : std_logic;
+architecture Behavioral of circuit02_tb is
+    -- Declare signals 
+    signal BTNC :  STD_LOGIC;
+	signal	SW0  : STD_LOGIC;
+	signal 	SW1  : STD_LOGIC;
+	signal 	SW2  : STD_LOGIC;
+	signal	LD0  : STD_LOGIC;
 begin
- 
--- process(clk) is 
--- begin 
--- case btn_flag is 
---    when =>
--- end case;
--- end process;
- -- Mapping signals to interface
- LD0 <= a;
- btn <= BTNC;
- b <= SW0;
- c <= SW1;
- d <= SW2;
- 
- -- Circuit implementation 
-a <= (b and c) or not(d);
+
+uut: entity work.circuit02 port map (
+        BTNC => BTNC,
+		SW0  => SW0,
+		SW1  => SW1,
+		SW2  => SW2
+        );
+        
+stim_proc : process is
+    begin
+        BTNC <= '1';
+        wait;
+    end process; 
 
 end Behavioral;

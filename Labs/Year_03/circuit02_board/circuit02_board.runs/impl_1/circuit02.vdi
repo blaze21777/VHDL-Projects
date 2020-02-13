@@ -1,0 +1,496 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Mon Feb 10 13:37:06 2020
+# Process ID: 9616
+# Current directory: D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.runs/impl_1
+# Command line: vivado.exe -log circuit02.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source circuit02.tcl -notrace
+# Log file: D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.runs/impl_1/circuit02.vdi
+# Journal file: D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source circuit02.tcl -notrace
+Command: link_design -top circuit02 -part xc7z020clg484-1
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Project 1-479] Netlist was created with Vivado 2019.1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc]
+WARNING: [Vivado 12-584] No ports matched 'AC_ADR0'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:69]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:69]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'AC_ADR1'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:70]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:70]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'AC_GPIO0'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:71]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:71]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'AC_GPIO1'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:72]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:72]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'AC_GPIO2'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:73]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:73]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'AC_GPIO3'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:74]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:74]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'AC_MCLK'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:75]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:75]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'AC_SCK'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:76]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:76]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'AC_SDA'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:77]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:77]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'GCLK'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:82]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:82]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JA1'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:87]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:87]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JA10'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:88]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:88]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JA2'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:89]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:89]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JA3'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:90]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:90]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JA4'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:91]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:91]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JA7'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:92]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:92]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JA8'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:93]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:93]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JA9'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:94]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:94]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JB1'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:100]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:100]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JB10'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:101]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:101]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JB2'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:102]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:102]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JB3'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:103]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:103]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JB4'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:104]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:104]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JB7'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:105]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:105]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JB8'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:106]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:106]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JB9'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:107]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:107]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JC1_N'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:112]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:112]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JC1_P'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:113]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:113]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JC2_N'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:114]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:114]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JC2_P'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:115]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:115]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JC3_N'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:116]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:116]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JC3_P'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:117]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:117]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JC4_N'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:118]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:118]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JC4_P'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:119]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:119]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JD1_N'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:124]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:124]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JD1_P'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:125]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:125]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JD2_N'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:126]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:126]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JD2_P'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:127]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:127]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JD3_N'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:128]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:128]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JD3_P'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:129]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:129]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JD4_N'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:130]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:130]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'JD4_P'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:131]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:131]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'OLED_DC'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:136]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:136]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'OLED_RES'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:137]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:137]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'OLED_SCLK'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:138]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:138]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'OLED_SDIN'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:139]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:139]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'OLED_VBAT'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:140]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:140]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'OLED_VDD'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:141]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:141]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_CLK'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:146]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:146]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_D0'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:147]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:147]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_D1'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:148]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:148]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_D10'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:149]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:149]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_D11'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:150]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:150]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_D12'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:151]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:151]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_D13'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:152]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:152]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_D14'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:153]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:153]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HS_D15'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:154]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:154]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_D2'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:155]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:155]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_D3'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:156]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:156]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_D4'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:157]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:157]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_D5'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:158]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:158]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_D6'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:159]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:159]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_D7'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:160]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:160]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_D8'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:161]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:161]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_D9'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:162]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:162]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_DE'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:163]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:163]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_HSYNC'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:164]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:164]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_INT'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:165]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:165]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_SCL'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:166]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:166]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_SDA'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:167]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:167]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_SPDIF'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:168]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:168]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_SPDIFO'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:169]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:169]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'HD_VSYNC'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:170]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:170]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LD1'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:176]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:176]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LD2'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:177]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:177]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LD3'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:178]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:178]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LD4'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:179]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:179]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LD5'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:180]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:180]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LD6'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:181]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:181]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'LD7'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:182]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:182]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'VGA_B1'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:187]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:187]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'VGA_B2'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:188]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:188]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'VGA_B3'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:189]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:189]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'VGA_B4'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:190]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:190]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'VGA_G1'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:191]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:191]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'VGA_G2'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:192]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:192]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'VGA_G3'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:193]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:193]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'VGA_G4'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:194]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:194]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'VGA_HS'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:195]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:195]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'VGA_R1'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:196]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:196]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'VGA_R2'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:197]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:197]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'VGA_R3'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:198]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:198]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'VGA_R4'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:199]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:199]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'VGA_VS'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:200]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:200]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'BTND'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:206]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:206]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'BTNL'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:207]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:207]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'BTNR'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:208]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:208]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'BTNU'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:209]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:209]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'OTG_VBUSOC'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:214]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:214]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'XADC_GIO0'. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:219]
+INFO: [Common 17-14] Message 'Vivado 12-584' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:219]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:219]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+INFO: [Common 17-14] Message 'Common 17-55' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings. [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc:219]
+Finished Parsing XDC File [D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.srcs/constrs_1/imports/counter2_board/zedboard_master_XDC_RevC_D_v3.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 669.578 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+7 Infos, 100 Warnings, 100 Critical Warnings and 0 Errors encountered.
+link_design completed successfully
+link_design: Time (s): cpu = 00:00:10 ; elapsed = 00:00:12 . Memory (MB): peak = 673.590 ; gain = 372.496
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Project 1-461] DRC finished with 0 Errors
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.219 . Memory (MB): peak = 673.590 ; gain = 0.000
+
+Starting Cache Timing Information Task
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Ending Cache Timing Information Task | Checksum: 1a24afd57
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 1171.957 ; gain = 498.367
+
+Starting Logic Optimization Task
+
+Phase 1 Retarget
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Opt 31-49] Retargeted 0 cell(s).
+Phase 1 Retarget | Checksum: 1a24afd57
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.182 . Memory (MB): peak = 1312.711 ; gain = 0.066
+INFO: [Opt 31-389] Phase Retarget created 0 cells and removed 0 cells
+
+Phase 2 Constant propagation
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Phase 2 Constant propagation | Checksum: 1a24afd57
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.203 . Memory (MB): peak = 1312.711 ; gain = 0.066
+INFO: [Opt 31-389] Phase Constant propagation created 0 cells and removed 0 cells
+
+Phase 3 Sweep
+Phase 3 Sweep | Checksum: 1a24afd57
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.251 . Memory (MB): peak = 1312.711 ; gain = 0.066
+INFO: [Opt 31-389] Phase Sweep created 0 cells and removed 0 cells
+
+Phase 4 BUFG optimization
+Phase 4 BUFG optimization | Checksum: 1a24afd57
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.290 . Memory (MB): peak = 1312.711 ; gain = 0.066
+INFO: [Opt 31-662] Phase BUFG optimization created 0 cells of which 0 are BUFGs and removed 0 cells.
+
+Phase 5 Shift Register Optimization
+INFO: [Opt 31-1064] SRL Remap converted 0 SRLs to 0 registers and converted 0 registers of register chains to 0 SRLs
+Phase 5 Shift Register Optimization | Checksum: 1a24afd57
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.302 . Memory (MB): peak = 1312.711 ; gain = 0.066
+INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
+
+Phase 6 Post Processing Netlist
+Phase 6 Post Processing Netlist | Checksum: 1a24afd57
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.317 . Memory (MB): peak = 1312.711 ; gain = 0.066
+INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
+Opt_design Change Summary
+=========================
+
+
+-------------------------------------------------------------------------------------------------------------------------
+|  Phase                        |  #Cells created  |  #Cells Removed  |  #Constrained objects preventing optimizations  |
+-------------------------------------------------------------------------------------------------------------------------
+|  Retarget                     |               0  |               0  |                                              0  |
+|  Constant propagation         |               0  |               0  |                                              0  |
+|  Sweep                        |               0  |               0  |                                              0  |
+|  BUFG optimization            |               0  |               0  |                                              0  |
+|  Shift Register Optimization  |               0  |               0  |                                              0  |
+|  Post Processing Netlist      |               0  |               0  |                                              0  |
+-------------------------------------------------------------------------------------------------------------------------
+
+
+
+Starting Connectivity Check Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1312.711 ; gain = 0.000
+Ending Logic Optimization Task | Checksum: 1a24afd57
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.394 . Memory (MB): peak = 1312.711 ; gain = 0.066
+
+Starting Power Optimization Task
+INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
+Ending Power Optimization Task | Checksum: 1a24afd57
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.084 . Memory (MB): peak = 1312.711 ; gain = 0.000
+
+Starting Final Cleanup Task
+Ending Final Cleanup Task | Checksum: 1a24afd57
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1312.711 ; gain = 0.000
+
+Starting Netlist Obfuscation Task
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1312.711 ; gain = 0.000
+Ending Netlist Obfuscation Task | Checksum: 1a24afd57
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1312.711 ; gain = 0.000
+INFO: [Common 17-83] Releasing license: Implementation
+24 Infos, 100 Warnings, 100 Critical Warnings and 0 Errors encountered.
+opt_design completed successfully
+opt_design: Time (s): cpu = 00:00:16 ; elapsed = 00:00:18 . Memory (MB): peak = 1312.711 ; gain = 639.121
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1312.711 ; gain = 0.000
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.074 . Memory (MB): peak = 1312.711 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.runs/impl_1/circuit02_opt.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_drc -file circuit02_drc_opted.rpt -pb circuit02_drc_opted.pb -rpx circuit02_drc_opted.rpx
+Command: report_drc -file circuit02_drc_opted.rpt -pb circuit02_drc_opted.pb -rpx circuit02_drc_opted.rpx
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/V/Vivado-2019/Vivado/2019.1/data/ip'.
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Coretcl 2-168] The results of DRC are in file D:/V/VHDL-Projects/Labs/Year_03/circuit02_board/circuit02_board.runs/impl_1/circuit02_drc_opted.rpt.
+report_drc completed successfully
+Command: place_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+Running DRC as a precondition to command place_design
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+Starting Placer Task
+INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 2 CPUs
+
+Phase 1 Placer Initialization
+
+Phase 1.1 Placer Initialization Netlist Sorting
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1322.441 ; gain = 0.000
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: af016587
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.139 . Memory (MB): peak = 1322.441 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1322.441 ; gain = 0.000
+
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+ERROR: [Place 30-574] Poor placement for routing between an IO pin and BUFG. If this sub optimal condition is acceptable for this design, you may use the CLOCK_DEDICATED_ROUTE constraint in the .xdc file to demote this message to a WARNING. However, the use of this override is highly discouraged. These examples can be used directly in the .xdc file to override this clock rule.
+	< set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets BTNC_IBUF] >
+
+	BTNC_IBUF_inst (IBUF.O) is locked to IOB_X1Y52
+	BTNC_IBUF_BUFG_inst (BUFG.I) is provisionally placed by clockplacer on BUFGCTRL_X0Y18
+Resolution: Poor placement of an IO pin and a BUFG has resulted in the router using a non-dedicated path between the two.  There are several things that could trigger this DRC, each of which can cause unpredictable clock insertion delays that result in poor timing.  This DRC could be caused by any of the following: (a) a clock port was placed on a pin that is not a CCIO-pin (b)the BUFG has not been placed in the same half of the device or SLR as the CCIO-pin (c) a single ended clock has been placed on the N-Side of a differential pair CCIO-pin.
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: af016587
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 1329.645 ; gain = 7.203
+Phase 1 Placer Initialization | Checksum: af016587
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 1329.645 ; gain = 7.203
+ERROR: [Place 30-99] Placer failed with error: 'IO Clock Placer failed'
+Please review all ERROR, CRITICAL WARNING, and WARNING messages during placement to understand the cause for failure.
+Ending Placer Task | Checksum: af016587
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 1329.645 ; gain = 7.203
+INFO: [Common 17-83] Releasing license: Implementation
+42 Infos, 100 Warnings, 100 Critical Warnings and 3 Errors encountered.
+place_design failed
+ERROR: [Common 17-69] Command failed: Placer could not place all instances
+INFO: [Common 17-206] Exiting Vivado at Mon Feb 10 13:37:47 2020...
