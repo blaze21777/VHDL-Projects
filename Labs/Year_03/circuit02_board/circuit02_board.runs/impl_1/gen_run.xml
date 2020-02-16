@@ -1,69 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="impl_1" LaunchPart="xc7z020clg484-1" LaunchTime="1581341748">
-  <File Type="BITSTR-BMM" Name="circuit02_bd.bmm"/>
-  <File Type="OPT-METHODOLOGY-DRC" Name="circuit02_methodology_drc_opted.rpt"/>
-  <File Type="INIT-TIMING" Name="circuit02_timing_summary_init.rpt"/>
-  <File Type="ROUTE-PWR" Name="circuit02_power_routed.rpt"/>
   <File Type="PA-TCL" Name="circuit02.tcl"/>
-  <File Type="OPT-TIMING" Name="circuit02_timing_summary_opted.rpt"/>
-  <File Type="OPT-DCP" Name="circuit02_opt.dcp"/>
-  <File Type="ROUTE-PWR-SUM" Name="circuit02_power_summary_routed.pb"/>
+  <File Type="BITSTR-BMM" Name="circuit02_bd.bmm"/>
   <File Type="REPORTS-TCL" Name="circuit02_reports.tcl"/>
-  <File Type="OPT-DRC" Name="circuit02_drc_opted.rpt"/>
+  <File Type="OPT-DCP" Name="circuit02_opt.dcp"/>
   <File Type="OPT-HWDEF" Name="circuit02.hwdef"/>
   <File Type="PWROPT-DCP" Name="circuit02_pwropt.dcp"/>
-  <File Type="PWROPT-DRC" Name="circuit02_drc_pwropted.rpt"/>
-  <File Type="PWROPT-TIMING" Name="circuit02_timing_summary_pwropted.rpt"/>
-  <File Type="PLACE-DCP" Name="circuit02_placed.dcp"/>
-  <File Type="PLACE-IO" Name="circuit02_io_placed.rpt"/>
-  <File Type="PLACE-CLK" Name="circuit02_clock_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL" Name="circuit02_utilization_placed.rpt"/>
-  <File Type="PLACE-UTIL-PB" Name="circuit02_utilization_placed.pb"/>
-  <File Type="PLACE-CTRL" Name="circuit02_control_sets_placed.rpt"/>
-  <File Type="PLACE-SIMILARITY" Name="circuit02_incremental_reuse_placed.rpt"/>
-  <File Type="PLACE-PRE-SIMILARITY" Name="circuit02_incremental_reuse_pre_placed.rpt"/>
   <File Type="BG-BGN" Name="circuit02.bgn"/>
-  <File Type="PLACE-TIMING" Name="circuit02_timing_summary_placed.rpt"/>
+  <File Type="PLACE-DCP" Name="circuit02_placed.dcp"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="circuit02_incremental_reuse_pre_placed.rpt"/>
   <File Type="POSTPLACE-PWROPT-DCP" Name="circuit02_postplace_pwropt.dcp"/>
   <File Type="BG-BIN" Name="circuit02.bin"/>
-  <File Type="POSTPLACE-PWROPT-TIMING" Name="circuit02_timing_summary_postplace_pwropted.rpt"/>
   <File Type="PHYSOPT-DCP" Name="circuit02_physopt.dcp"/>
-  <File Type="PHYSOPT-DRC" Name="circuit02_drc_physopted.rpt"/>
   <File Type="BITSTR-MSK" Name="circuit02.msk"/>
-  <File Type="PHYSOPT-TIMING" Name="circuit02_timing_summary_physopted.rpt"/>
   <File Type="ROUTE-ERROR-DCP" Name="circuit02_routed_error.dcp"/>
   <File Type="ROUTE-DCP" Name="circuit02_routed.dcp"/>
   <File Type="ROUTE-BLACKBOX-DCP" Name="circuit02_routed_bb.dcp"/>
-  <File Type="ROUTE-DRC" Name="circuit02_drc_routed.rpt"/>
-  <File Type="ROUTE-DRC-PB" Name="circuit02_drc_routed.pb"/>
-  <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
   <File Type="BITSTR-LTX" Name="circuit02.ltx"/>
-  <File Type="ROUTE-DRC-RPX" Name="circuit02_drc_routed.rpx"/>
   <File Type="BITSTR-MMI" Name="circuit02.mmi"/>
-  <File Type="ROUTE-METHODOLOGY-DRC" Name="circuit02_methodology_drc_routed.rpt"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="circuit02_methodology_drc_routed.rpx"/>
   <File Type="BITSTR-SYSDEF" Name="circuit02.sysdef"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="circuit02_methodology_drc_routed.pb"/>
-  <File Type="ROUTE-PWR-RPX" Name="circuit02_power_routed.rpx"/>
-  <File Type="ROUTE-STATUS" Name="circuit02_route_status.rpt"/>
-  <File Type="ROUTE-STATUS-PB" Name="circuit02_route_status.pb"/>
-  <File Type="ROUTE-TIMINGSUMMARY" Name="circuit02_timing_summary_routed.rpt"/>
   <File Type="ROUTE-TIMING-PB" Name="circuit02_timing_summary_routed.pb"/>
-  <File Type="ROUTE-TIMING-RPX" Name="circuit02_timing_summary_routed.rpx"/>
-  <File Type="ROUTE-SIMILARITY" Name="circuit02_incremental_reuse_routed.rpt"/>
-  <File Type="ROUTE-CLK" Name="circuit02_clock_utilization_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW" Name="circuit02_bus_skew_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW-PB" Name="circuit02_bus_skew_routed.pb"/>
-  <File Type="ROUTE-BUS-SKEW-RPX" Name="circuit02_bus_skew_routed.rpx"/>
   <File Type="POSTROUTE-PHYSOPT-DCP" Name="circuit02_postroute_physopt.dcp"/>
   <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="circuit02_postroute_physopt_bb.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="circuit02_timing_summary_postroute_physopted.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="circuit02_timing_summary_postroute_physopted.pb"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="circuit02_timing_summary_postroute_physopted.rpx"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="circuit02_bus_skew_postroute_physopted.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="circuit02_bus_skew_postroute_physopted.pb"/>
   <File Type="BG-BIT" Name="circuit02.bit"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="circuit02_bus_skew_postroute_physopted.rpx"/>
   <File Type="BITSTR-RBT" Name="circuit02.rbt"/>
   <File Type="BITSTR-NKY" Name="circuit02.nky"/>
   <File Type="BG-DRC" Name="circuit02.drc"/>
@@ -104,9 +63,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2019">
-      <Desc>Default settings for Implementation.</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2019"/>
     <Step Id="init_design"/>
     <Step Id="opt_design"/>
     <Step Id="power_opt_design"/>

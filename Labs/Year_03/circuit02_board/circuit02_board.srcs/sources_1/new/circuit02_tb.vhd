@@ -53,8 +53,11 @@ uut: entity work.circuit02 port map (
         
 stim_proc : process is
     begin
-        BTNC <= '1';
-        wait;
+        BTNC <= '0';
+        wait for 10ns;
+        SW0 <= '0';
+        SW1 <= '0';
+        SW2 <= '1';
     end process; 
 
 end Behavioral;

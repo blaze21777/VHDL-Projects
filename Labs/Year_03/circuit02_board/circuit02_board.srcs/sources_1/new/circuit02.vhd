@@ -31,14 +31,22 @@ use IEEE.STD_LOGIC_1164.all;
 
 entity circuit02 is
 	port (
-		BTNC : in STD_LOGIC;
-		SW0  : in STD_LOGIC;
-		SW1  : in STD_LOGIC;
-		SW2  : in STD_LOGIC;
-		LD0  : out STD_LOGIC);
+		-- GCLK : in std_logic;
+		BTNC : in std_logic;
+		SW0  : in std_logic;
+		SW1  : in std_logic;
+		SW2  : in std_logic;
+		LD0  : out std_logic);
 end circuit02;
 
 architecture Behavioral of circuit02 is
+	-- Declare states that can be taken
+	type state_type is(
+		devive_01,
+		device_02
+	);
+	signal state, next_state : state_type;
+	
 	-- Signal declaration
 	--signal clk      : std_logic;
 	signal btn      : std_logic;
@@ -48,26 +56,35 @@ architecture Behavioral of circuit02 is
 	signal d        : std_logic;
 	signal btn_flag : std_logic;
 begin
-	btn <= BTNC;
+	btn_flag <= BTNC;
+	LD0 <= a;
 
 	process (btn, sw0, sw1, sw2, a, d, b, btn_flag, c) is
 	begin
-		btn_flag <= btn;
-		case btn_flag is
-			when '0' =>
+		-- btn_flag <= btn;
+		case state is
+			when devive_01 =>
+				-- Next state condtion	
+				if (btn_flag = '1') then 
+					next_state <= device_02
+				end if;
 				-- Mapping signals to interface
-				LD0 <= a;
+				-- LD0 <= a;
 				b   <= SW0;
 				c   <= SW1;
 				d   <= SW2;
 				-- Circuit implementation 
 				a   <= (b and c) or not(d);
-			when '1' =>
+			when device_02 =>
+				-- Next state condtion
+				if (btn_flag = '1') then 
+					next_state <= device_02
+				end if;
 				-- Mapping signals to interface
-				LD0 <= a;
 				b   <= SW0;
 				c   <= SW1;
 				a   <= b and c;
+				-- LD0 <= a;
             when others =>
 		end case;
 	end process;
