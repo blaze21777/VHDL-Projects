@@ -61,13 +61,19 @@ begin
     if (clk'event and clk='1') then
       if (we ='1') then 
         -- Convert 'addr' type to integer from std_logic_vector
-        ram_single_port(to_integer(unsigned(addr))) <= din; -- Write data to address 'addr'
+        -- Select the address that needs writing to
+        -- Allows use of intergers in test bench..??
+        ram_single_port(to_integer(unsigned(addr))) <= din; -- Write data to address 'addr' vector of size 2
       end if;
   end if;
   end process;
 
   -- read data from address 'addr'
   -- convert 'addr' type to integer from std_logic_vector
+  -- Expects a vector of size 3 
+  -- Address is a vector 
+  -- Change to integer to select the address location 
+  -- dout outputs the value at the address which is a vector 
   dout <= ram_single_port(to_integer(unsigned(addr)));
 
 
