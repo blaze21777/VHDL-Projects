@@ -31,7 +31,7 @@ use IEEE.STD_LOGIC_1164.all;
 
 entity circuit02 is
 	port (
-		-- GCLK : in std_logic;
+	    GCLK : in std_logic;
 		BTNC : in std_logic;
 		SW0  : in std_logic;
 		SW1  : in std_logic;
@@ -57,19 +57,26 @@ architecture Behavioral of circuit02 is
 	signal btn_flag : std_logic;
 begin
 	btn_flag <= BTNC;
-	LD0 <= a;
+	
+	sync_proc : process (GCLK)
+	begin
+		if rising_edge(GCLK) then
+			state <= next_state;
+		end if;
+	end process;
 
 	process (btn, sw0, sw1, sw2, a, d, b, btn_flag, c) is
 	begin
 		-- btn_flag <= btn;
 		case state is
+		    
 			when devive_01 =>
 				-- Next state condtion	
 				if (btn_flag = '1') then 
-					next_state <= device_02
+					next_state <= device_02;
 				end if;
 				-- Mapping signals to interface
-				-- LD0 <= a;
+				LD0 <= a;
 				b   <= SW0;
 				c   <= SW1;
 				d   <= SW2;
@@ -78,13 +85,13 @@ begin
 			when device_02 =>
 				-- Next state condtion
 				if (btn_flag = '1') then 
-					next_state <= device_02
+					next_state <= device_02;
 				end if;
 				-- Mapping signals to interface
 				b   <= SW0;
 				c   <= SW1;
 				a   <= b and c;
-				-- LD0 <= a;
+			    LD0 <= a;
             when others =>
 		end case;
 	end process;
