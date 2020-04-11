@@ -77,6 +77,18 @@ end process;
     wait for 10 ns;
     addr <= "01";
     din <= "001";
+    wait for 1 ns;
+    addr <= "10";
+    din <= "010";
+    wait for 1 ns;
+    addr <= "11";
+    din <= "011";
+    wait for 10 ns;
+    addr <= "11";
+    wait for 10 ns;
+    addr <= "10";
+    wait for 10 ns;
+    addr <= "01";
     end process;
             
 end Behavioral;
