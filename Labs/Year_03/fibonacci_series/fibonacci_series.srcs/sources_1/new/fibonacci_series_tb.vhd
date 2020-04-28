@@ -37,7 +37,7 @@ end fibonacci_series_tb;
 
 architecture Behavioral of fibonacci_series_tb is
     
-    signal clk, rst    :  bit;
+    signal clk, reset    :  bit;
 	signal fibo_series : integer;
 	constant clk_period : time := 10 ns;
 
@@ -46,7 +46,7 @@ begin
     -- Instantiate the Unit Under Test (UUT)
     uut: entity work.fibonacci_series PORT MAP (
           clk => clk,
-          rst => rst,
+          reset => reset,
           fibo_series => fibo_series
         );
         
@@ -63,9 +63,9 @@ begin
    stim_proc: process
    begin       
       wait for 10 ns;
-      rst <= '1';
+      reset <= '1';
       wait for 10 ns;
-      rst <= '0'; 
+      reset <= '0'; 
         
       wait;
    end process;
