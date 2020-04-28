@@ -40,6 +40,7 @@ architecture Behavioral of fibonacci_series_tb is
     signal clk, reset    :  bit;
 	signal fibo_series : integer;
 	constant clk_period : time := 10 ns;
+	signal output : std_logic_vector(15 downto 0);
 
 begin
 
@@ -47,7 +48,8 @@ begin
     uut: entity work.fibonacci_series PORT MAP (
           clk => clk,
           reset => reset,
-          fibo_series => fibo_series
+          fibo_series => fibo_series,
+          output => output
         );
         
    -- Clock process definitions
