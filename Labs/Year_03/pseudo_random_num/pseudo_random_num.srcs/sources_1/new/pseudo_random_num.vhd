@@ -42,15 +42,22 @@ entity pseudo_random_num is
 end pseudo_random_num;
 
 architecture Behavioral of pseudo_random_num is
-
+        -- Fibonacci sequence1 signals
+    constant N : integer := 16;
+    signal clk_fib1, reset_fib1 :  bit;
+	signal fibo_series : integer range 0 to 2 ** N - 1;
+	signal output :  std_logic_vector(N-1 downto 0); -- Output will go to memory 
+	
 begin
 
     -- Fibonacci sequence1 instatiation
---	 : entity work.serial_adder(behav)
---		port map(
---			clk     => clk,
---			reset   => reset_adder,
-
+fib	 : entity work.fibonacci_series(Behavioral)
+		port map(
+			clk => clk_fib1, 
+			reset => reset_fib1,
+		    fibo_series => fibo_series,
+            output => output);
+        
     -- Fibonacci sequence2
     
     -- PRNG algorithm A instatiation
