@@ -30,9 +30,9 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity fibonacci_series is
-	generic (N : integer := 16); ------number of bits
+	generic (N : integer := 8); ------number of bits
 	port (
-		clk, reset : in bit;
+		clk, reset : in std_logic;
 		fibo_series : out integer range 0 to 2 ** N - 1;
 		output : out std_logic_vector(N-1 downto 0) -- Output will go to memory 
 	);

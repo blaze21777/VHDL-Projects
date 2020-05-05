@@ -52,6 +52,7 @@ begin
 		  -- Do nothing?
 		  -- Exit process?
 		  -- Process currently outputs the same number each cycle after 50
+		  -- Could implement an enable to prevent endless output 
 		  else
 			c <= b;
 			b <= a;
