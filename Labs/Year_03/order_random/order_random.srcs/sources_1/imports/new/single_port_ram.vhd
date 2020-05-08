@@ -36,8 +36,8 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity single_port_ram is
     generic(
-        addr_width : integer := 2;
-        data_width : integer := 3
+        addr_width : integer;
+        data_width : integer 
     );
     Port ( 
         clk: in std_logic;

@@ -17,10 +17,8 @@
 -- Additional Comments:
 -- 
 ----------------------------------------------------------------------------------
-
-
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_1164.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -32,25 +30,46 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity order_random is
-  Port (clk : in std_logic;
-        reset : in std_logic );
+	port (
+		clk   : in std_logic;
+		reset : in std_logic);
 end order_random;
 
 architecture Behavioral of order_random is
- -- Pseduo_random signals
-   signal number : std_logic_vector(31 downto 0);  -- Has to be 32-bit output
+	-- Pseduo_random signals
+	signal number_out   : std_logic_vector(31 downto 0); -- Has to be 32-bit output
+
+	-- Memory signals 
+	constant data_width : integer := 8;
+	constant addr_width : integer := 8;
+	signal we           : std_logic;
+	signal addr         : std_logic_vector(addr_width - 1 downto 0);
+	signal din          : std_logic_vector(data_width - 1 downto 0);
+	signal dout         : std_logic_vector(data_width - 1 downto 0);
 
 begin
 
--- Pseduo_random instatiation
-	Pseduo_random : entity work.pseudo_random_num(Behavioral)
+	-- Pseduo_random instatiation
+	pseudo_random : entity work.pseudo_random_num(Behavioral)
 		port map(
-		clk => clk,
-		reset => reset,
-		number => number);
--- Memory instatiation
+			clk    => clk,
+			reset  => reset,
+			number => number_out);
 
--- Ordering instatiation
-
-
+	-- Memory instatiation
+	memory : entity work.single_port_ram(Behavioral)
+		generic map(
+			addr_width => addr_width,
+			data_width => data_width
+		)
+		port map(
+			clk  => clk,
+			we   => we,
+			addr => addr,
+			din  => din,
+			dout => dout
+		);
+		
+	-- Ordering instatiation
+	
 end Behavioral;
