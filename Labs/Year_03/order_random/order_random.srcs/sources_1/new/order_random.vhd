@@ -37,6 +37,12 @@ end order_random;
 
 architecture Behavioral of order_random is
 	-- Pseduo_random signals
+	signal fib_in1 : integer;
+    signal fib_in2 :  integer;
+    signal fib_in3 :  integer;
+    signal fib_in4 :  integer;
+    signal fib_end1 : integer;
+    signal fib_end2 : integer;
 	signal number_out   : std_logic_vector(31 downto 0); -- Has to be 32-bit output
 
 	-- Memory signals 
@@ -59,6 +65,12 @@ begin
 		port map(
 			clk    => clk,
 			reset  => reset,
+			fib_in1 => fib_in1,
+            fib_in2 => fib_in2,
+            fib_in3 => fib_in3,
+            fib_in4 => fib_in4,
+            fib_end1 => fib_end1,
+            fib_end2 => fib_end2,
 			number => number_out);
 
 	-- Memory instatiation
