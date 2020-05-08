@@ -30,10 +30,12 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity fibonacci_series is
-	generic (N : integer := 8); ------number of bits
+	generic (N : integer); -- Will be 8 
 	port (
 		clk, reset : in std_logic;
-		fibo_series : out integer range 0 to 2 ** N - 1;
+		start_a, start_b : in integer range 0 to 2 ** N - 1; -- allow change in sequence start points
+		end_point : in integer range 0 to 2 ** N - 1; -- Max number to not exceed
+		-- fibo_series : out integer range 0 to 2 ** N - 1; integer output
 		output : out std_logic_vector(N-1 downto 0) -- Output will go to memory 
 	);
 end fibonacci_series;
@@ -44,15 +46,12 @@ begin
 	process (clk, reset)
 	begin
 		if (reset = '1') then
-			b <= 1;
-			c <= 0;
+			b <= start_a;
+			c <= start_b;
 		elsif (clk'EVENT and clk = '1') then
 		-- End condition
-		  if (c > 50) then 
-		  -- Do nothing?
-		  -- Exit process?
-		  -- Process currently outputs the same number each cycle after 50
-		  -- Could implement an enable to prevent endless output 
+		  if (c > end_point) then 
+		      -- Keep counting
 		  else
 			c <= b;
 			b <= a;
@@ -60,6 +59,6 @@ begin
 		end if;
 		a <= b + c;
 	end process;
-	fibo_series <= c; -- Integer output
+	--fibo_series <= c; -- Integer output
 	output <= std_logic_vector(to_unsigned(c, output'length)); -- Vector output
 end Behavioral;
