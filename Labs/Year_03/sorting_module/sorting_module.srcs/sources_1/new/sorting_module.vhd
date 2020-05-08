@@ -17,10 +17,15 @@
 -- Additional Comments:
 -- 
 ----------------------------------------------------------------------------------
-
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+package array_type is
+    type bubble is array (0 to 15) of std_logic_vector(3 downto 0);
+end package;
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use work.array_type.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -32,12 +37,28 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity sorting_module is
---  Port ( );
+  generic(length : integer);
+  Port (
+  sort_value : in std_logic_vector(length-1 downto 0);
+  sorted_value : out std_logic_vector(length-1 downto 0));
 end sorting_module;
 
 architecture Behavioral of sorting_module is
 
-begin
+-- Bubble sort signals 
+signal clk : std_logic;
+signal reset:             std_logic;
+signal in_array:         bubble;
+signal sorted_array:     bubble;
 
+begin
+    -- Bubble sort instatiation 
+    bubble : entity work.bubble_sort(Behavioral)
+     port map (
+            clk => clk,
+            reset => reset,
+            in_array => in_array,
+            sorted_array => sorted_array
+        );
 
 end Behavioral;
