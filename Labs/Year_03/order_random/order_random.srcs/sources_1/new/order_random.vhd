@@ -47,6 +47,11 @@ architecture Behavioral of order_random is
 	signal din          : std_logic_vector(data_width - 1 downto 0);
 	signal dout         : std_logic_vector(data_width - 1 downto 0);
 
+	-- Sorting signals 
+	constant length     : integer := 32; -- 32 bit 
+	signal sort_value   : std_logic_vector(length - 1 downto 0);
+	signal sorted_value : std_logic_vector(length - 1 downto 0);
+
 begin
 
 	-- Pseduo_random instatiation
@@ -69,7 +74,15 @@ begin
 			din  => din,
 			dout => dout
 		);
-		
-	-- Ordering instatiation
-	
+
+	-- Sorting instatiation
+	sorting : entity work.sorting_module(Behavioral)
+		generic map(length => length) -- 32 bit num
+		port map(
+			clk          => clk,
+			reset        => reset,
+			sort_value   => sort_value,
+			sorted_value => sorted_value
+		);
+
 end Behavioral;
