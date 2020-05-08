@@ -19,12 +19,6 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-package array_type is
-    type bubble is array (0 to 15) of std_logic_vector(3 downto 0);
-end package;
-
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
 use work.array_type.all;
 
 -- Uncomment the following library declaration if using
@@ -37,24 +31,24 @@ use work.array_type.all;
 --use UNISIM.VComponents.all;
 
 entity sorting_module is
-  generic(length : integer);
+  generic(length : integer); -- 32 bit num
   Port (
+  clk : in std_logic;
+  reset : in std_logic;
   sort_value : in std_logic_vector(length-1 downto 0);
   sorted_value : out std_logic_vector(length-1 downto 0));
 end sorting_module;
 
 architecture Behavioral of sorting_module is
 
--- Bubble sort signals 
-signal clk : std_logic;
-signal reset:             std_logic;
-signal in_array:         bubble;
-signal sorted_array:     bubble;
+    -- Bubble sort signals 
+    signal in_array:         bubble;
+    signal sorted_array:     bubble;
 
 begin
     -- Bubble sort instatiation 
     bubble : entity work.bubble_sort(Behavioral)
-     port map (
+        port map (
             clk => clk,
             reset => reset,
             in_array => in_array,
