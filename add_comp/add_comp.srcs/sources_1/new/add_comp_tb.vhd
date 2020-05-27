@@ -38,6 +38,7 @@ end add_comp_tb;
 architecture Behavioral of add_comp_tb is
 
     signal a,b :  std_logic_vector(2 downto 0);
+    signal clk : std_logic;
     signal reg_comp : std_logic;
 	signal reg_sum  : std_logic_vector(3 downto 0);
 	
@@ -47,6 +48,7 @@ begin
           port map(
             a => a,
             b => b,
+            clk => clk,
             reg_comp => reg_comp,
             reg_sum => reg_sum
           );
@@ -54,11 +56,13 @@ begin
     process is
 	begin
 		wait for 10ns;       -- To test fail conditions 
+--		a <= "001";
+--		b <= "011";
 		for i in 0 to 3 loop -- Loop number controls how high the count is
 			a <= std_logic_vector(to_unsigned(i, a'length));
 			for i in 0 to 3 loop
 			     b <= std_logic_vector(to_unsigned(i, b'length));
-			    -- wait for 10ns;
+			     wait for 10ns;
 			end loop;
 			wait for 10ns; -- This statement is require to update signal 
 		end loop;
